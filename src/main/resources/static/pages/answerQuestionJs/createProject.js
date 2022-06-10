@@ -31,7 +31,7 @@ function createProjectRight() {
                 "projectName": projectName,
                 "projectContent": projectContent,
                 "createdBy": userName,
-                "lastUpdatedBy": userName
+                "lastUpdatedBy": userName,
             };
             commonAjaxPost(false, url, data, function(result) {
                 console.log(result)

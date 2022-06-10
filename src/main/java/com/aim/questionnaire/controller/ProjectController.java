@@ -48,22 +48,23 @@ public class ProjectController {
      * @return
      */
     @RequestMapping(value = "/deleteProjectById",method = RequestMethod.POST, headers = "Accept=application/json")
-    public HttpResponseEntity deleteProjectById(ProjectEntity projectEntity) {
+    public HttpResponseEntity deleteProjectById(@RequestBody ProjectEntity projectEntity) {
         HttpResponseEntity httpResponseEntity = new HttpResponseEntity();
         try {
             int result = projectService.deleteProjectById(projectEntity);
-            if(result == 0) {
+            if(result == -1) {
                 httpResponseEntity.setCode(Constans.EXIST_CODE);
-                httpResponseEntity.setMessage(Constans.MODEL_DELETE_FAIL);
+                httpResponseEntity.setMessage(Constans.PROJECT_EXIST_MESSAGE);
             }else {
                 httpResponseEntity.setCode(Constans.SUCCESS_CODE);
                 httpResponseEntity.setMessage(Constans.DELETE_MESSAGE);
             }
         } catch (Exception e) {
+            logger.info("deleteProjectById 删除项目>>>>>>>>>>>" + e.getLocalizedMessage());
             httpResponseEntity.setCode(Constans.EXIST_CODE);
             httpResponseEntity.setMessage(Constans.EXIST_MESSAGE);
         }
-            return httpResponseEntity;
+        return httpResponseEntity;
     }
 
     /**
@@ -76,7 +77,7 @@ public class ProjectController {
         HttpResponseEntity httpResponseEntity = new HttpResponseEntity();
         try {
             int result = projectService.addProjectInfo(projectEntity,projectEntity.getCreatedBy());
-            if(result == 0) {
+            if(result == 3) {
                 httpResponseEntity.setCode(Constans.EXIST_CODE);
                 httpResponseEntity.setMessage(Constans.EXIST_MESSAGE);
             }else {
@@ -99,7 +100,20 @@ public class ProjectController {
     @RequestMapping(value = "/modifyProjectInfo",method = RequestMethod.POST, headers = "Accept=application/json")
     public HttpResponseEntity modifyProjectInfo(@RequestBody ProjectEntity projectEntity) {
         HttpResponseEntity httpResponseEntity = new HttpResponseEntity();
-            
+        try {
+            int result = projectService.modifyProjectInfo(projectEntity,projectEntity.getCreatedBy());
+            if(result == 3) {
+                httpResponseEntity.setCode(Constans.EXIST_CODE);
+                httpResponseEntity.setMessage(Constans.EXIST_MESSAGE);
+            }else {
+                httpResponseEntity.setCode(Constans.SUCCESS_CODE);
+                httpResponseEntity.setMessage(Constans.ADD_MESSAGE);
+            }
+        } catch (Exception e) {
+            logger.info("modifyProjectInfo 修改项目的基本信息>>>>>>>>>>>" + e.getLocalizedMessage());
+            httpResponseEntity.setCode(Constans.EXIST_CODE);
+            httpResponseEntity.setMessage(Constans.EXIST_MESSAGE);
+        }
         return httpResponseEntity;
     }
 

@@ -104,6 +104,7 @@ function getProjectQuestSuccess(result) {
 
 // 删除项目
 function deleteProject(projectId) {
+    console.log(projectId);
     layer.confirm('您确认要删除此项目吗？', {
         btn: ['确定', '取消'] //按钮
     }, function() {
@@ -111,6 +112,7 @@ function deleteProject(projectId) {
         var data = {
             "id": projectId
         };
+
         commonAjaxPost(true, url, data, function(result) {
             // //console.log(result);
             if (result.code == "666") {
