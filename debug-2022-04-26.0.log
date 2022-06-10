@@ -1,0 +1,60 @@
+2022-04-26 08:40:46.255 [main] DEBUG c.a.q.d.P.queryAllPathAndPermission -==>  Preparing: SELECT per.path_id AS pathId,per.created_by as createdBy,role.role_code as rolecode FROM user_root_info role,root_permission_info per WHERE role.status = "1" AND per.status = "1" AND role.id = per.role_id ORDER BY per.last_updated_by ASC
+2022-04-26 08:40:46.255 [main] DEBUG c.a.q.d.P.queryAllPathAndPermission -==>  Preparing: SELECT per.path_id AS pathId,per.created_by as createdBy,role.role_code as rolecode FROM user_root_info role,root_permission_info per WHERE role.status = "1" AND per.status = "1" AND role.id = per.role_id ORDER BY per.last_updated_by ASC
+2022-04-26 08:40:46.283 [main] DEBUG c.a.q.d.P.queryAllPathAndPermission -==> Parameters: 
+2022-04-26 08:40:46.283 [main] DEBUG c.a.q.d.P.queryAllPathAndPermission -==> Parameters: 
+2022-04-26 08:40:46.334 [main] DEBUG c.a.q.d.P.queryAllPathAndPermission -<==      Total: 44
+2022-04-26 08:40:46.334 [main] DEBUG c.a.q.d.P.queryAllPathAndPermission -<==      Total: 44
+2022-04-26 08:51:52.219 [main] DEBUG c.a.q.d.P.queryAllPathAndPermission -==>  Preparing: SELECT per.path_id AS pathId,per.created_by as createdBy,role.role_code as rolecode FROM user_root_info role,root_permission_info per WHERE role.status = "1" AND per.status = "1" AND role.id = per.role_id ORDER BY per.last_updated_by ASC
+2022-04-26 08:51:52.219 [main] DEBUG c.a.q.d.P.queryAllPathAndPermission -==>  Preparing: SELECT per.path_id AS pathId,per.created_by as createdBy,role.role_code as rolecode FROM user_root_info role,root_permission_info per WHERE role.status = "1" AND per.status = "1" AND role.id = per.role_id ORDER BY per.last_updated_by ASC
+2022-04-26 08:51:52.246 [main] DEBUG c.a.q.d.P.queryAllPathAndPermission -==> Parameters: 
+2022-04-26 08:51:52.246 [main] DEBUG c.a.q.d.P.queryAllPathAndPermission -==> Parameters: 
+2022-04-26 08:51:52.271 [main] DEBUG c.a.q.d.P.queryAllPathAndPermission -<==      Total: 44
+2022-04-26 08:51:52.271 [main] DEBUG c.a.q.d.P.queryAllPathAndPermission -<==      Total: 44
+2022-04-26 08:52:26.604 [main] DEBUG c.a.q.d.P.queryAllPathAndPermission -==>  Preparing: SELECT per.path_id AS pathId,per.created_by as createdBy,role.role_code as rolecode FROM user_root_info role,root_permission_info per WHERE role.status = "1" AND per.status = "1" AND role.id = per.role_id ORDER BY per.last_updated_by ASC
+2022-04-26 08:52:26.604 [main] DEBUG c.a.q.d.P.queryAllPathAndPermission -==>  Preparing: SELECT per.path_id AS pathId,per.created_by as createdBy,role.role_code as rolecode FROM user_root_info role,root_permission_info per WHERE role.status = "1" AND per.status = "1" AND role.id = per.role_id ORDER BY per.last_updated_by ASC
+2022-04-26 08:52:26.630 [main] DEBUG c.a.q.d.P.queryAllPathAndPermission -==> Parameters: 
+2022-04-26 08:52:26.630 [main] DEBUG c.a.q.d.P.queryAllPathAndPermission -==> Parameters: 
+2022-04-26 08:52:26.654 [main] DEBUG c.a.q.d.P.queryAllPathAndPermission -<==      Total: 44
+2022-04-26 08:52:26.654 [main] DEBUG c.a.q.d.P.queryAllPathAndPermission -<==      Total: 44
+2022-04-26 08:53:42.151 [main] DEBUG c.a.q.d.P.queryAllPathAndPermission -==>  Preparing: SELECT per.path_id AS pathId,per.created_by as createdBy,role.role_code as rolecode FROM user_root_info role,root_permission_info per WHERE role.status = "1" AND per.status = "1" AND role.id = per.role_id ORDER BY per.last_updated_by ASC
+2022-04-26 08:53:42.151 [main] DEBUG c.a.q.d.P.queryAllPathAndPermission -==>  Preparing: SELECT per.path_id AS pathId,per.created_by as createdBy,role.role_code as rolecode FROM user_root_info role,root_permission_info per WHERE role.status = "1" AND per.status = "1" AND role.id = per.role_id ORDER BY per.last_updated_by ASC
+2022-04-26 08:53:42.176 [main] DEBUG c.a.q.d.P.queryAllPathAndPermission -==> Parameters: 
+2022-04-26 08:53:42.176 [main] DEBUG c.a.q.d.P.queryAllPathAndPermission -==> Parameters: 
+2022-04-26 08:53:42.200 [main] DEBUG c.a.q.d.P.queryAllPathAndPermission -<==      Total: 44
+2022-04-26 08:53:42.200 [main] DEBUG c.a.q.d.P.queryAllPathAndPermission -<==      Total: 44
+2022-04-26 09:18:46.443 [http-nio-8085-exec-2] DEBUG c.a.q.d.U.selectUserInfo -==>  Preparing: SELECT id,username,`password`,status FROM user_info WHERE username = ? and `password` = ? AND status = "1"
+2022-04-26 09:18:46.443 [http-nio-8085-exec-2] DEBUG c.a.q.d.U.selectUserInfo -==>  Preparing: SELECT id,username,`password`,status FROM user_info WHERE username = ? and `password` = ? AND status = "1"
+2022-04-26 09:18:46.466 [http-nio-8085-exec-2] DEBUG c.a.q.d.U.selectUserInfo -==> Parameters: admin(String), 1(String)
+2022-04-26 09:18:46.466 [http-nio-8085-exec-2] DEBUG c.a.q.d.U.selectUserInfo -==> Parameters: admin(String), 1(String)
+2022-04-26 09:18:46.485 [http-nio-8085-exec-2] DEBUG c.a.q.d.U.selectUserInfo -<==      Total: 1
+2022-04-26 09:18:46.485 [http-nio-8085-exec-2] DEBUG c.a.q.d.U.selectUserInfo -<==      Total: 1
+2022-04-26 09:18:46.700 [http-nio-8085-exec-10] DEBUG c.a.q.d.P.queryProjectList -==>  Preparing: SELECT id,project_name as projectName,project_content as projectContent,creation_date as createDate FROM project_info WHERE 1 = 1 AND created_by = ? ORDER BY creation_date DESC
+2022-04-26 09:18:46.700 [http-nio-8085-exec-10] DEBUG c.a.q.d.P.queryProjectList -==>  Preparing: SELECT id,project_name as projectName,project_content as projectContent,creation_date as createDate FROM project_info WHERE 1 = 1 AND created_by = ? ORDER BY creation_date DESC
+2022-04-26 09:18:46.701 [http-nio-8085-exec-10] DEBUG c.a.q.d.P.queryProjectList -==> Parameters: admin(String)
+2022-04-26 09:18:46.701 [http-nio-8085-exec-10] DEBUG c.a.q.d.P.queryProjectList -==> Parameters: admin(String)
+2022-04-26 09:18:46.708 [http-nio-8085-exec-10] DEBUG c.a.q.d.P.queryProjectList -<==      Total: 2
+2022-04-26 09:18:46.708 [http-nio-8085-exec-10] DEBUG c.a.q.d.P.queryProjectList -<==      Total: 2
+2022-04-26 09:18:55.344 [http-nio-8085-exec-7] DEBUG c.a.q.d.P.queryProjectList -==>  Preparing: SELECT id,project_name as projectName,project_content as projectContent,creation_date as createDate FROM project_info WHERE 1 = 1 AND id = ? ORDER BY creation_date DESC
+2022-04-26 09:18:55.344 [http-nio-8085-exec-7] DEBUG c.a.q.d.P.queryProjectList -==>  Preparing: SELECT id,project_name as projectName,project_content as projectContent,creation_date as createDate FROM project_info WHERE 1 = 1 AND id = ? ORDER BY creation_date DESC
+2022-04-26 09:18:55.346 [http-nio-8085-exec-7] DEBUG c.a.q.d.P.queryProjectList -==> Parameters: 8d797533fd3b429cbf5eeb9a38294022(String)
+2022-04-26 09:18:55.346 [http-nio-8085-exec-7] DEBUG c.a.q.d.P.queryProjectList -==> Parameters: 8d797533fd3b429cbf5eeb9a38294022(String)
+2022-04-26 09:18:55.348 [http-nio-8085-exec-7] DEBUG c.a.q.d.P.queryProjectList -<==      Total: 1
+2022-04-26 09:18:55.348 [http-nio-8085-exec-7] DEBUG c.a.q.d.P.queryProjectList -<==      Total: 1
+2022-04-26 09:19:31.059 [http-nio-8085-exec-10] DEBUG c.a.q.d.U.selectUserInfo -==>  Preparing: SELECT id,username,`password`,status FROM user_info WHERE username = ? and `password` = ? AND status = "1"
+2022-04-26 09:19:31.059 [http-nio-8085-exec-10] DEBUG c.a.q.d.U.selectUserInfo -==>  Preparing: SELECT id,username,`password`,status FROM user_info WHERE username = ? and `password` = ? AND status = "1"
+2022-04-26 09:19:31.060 [http-nio-8085-exec-10] DEBUG c.a.q.d.U.selectUserInfo -==> Parameters: admin(String), 1(String)
+2022-04-26 09:19:31.060 [http-nio-8085-exec-10] DEBUG c.a.q.d.U.selectUserInfo -==> Parameters: admin(String), 1(String)
+2022-04-26 09:19:31.061 [http-nio-8085-exec-10] DEBUG c.a.q.d.U.selectUserInfo -<==      Total: 1
+2022-04-26 09:19:31.061 [http-nio-8085-exec-10] DEBUG c.a.q.d.U.selectUserInfo -<==      Total: 1
+2022-04-26 09:19:31.127 [http-nio-8085-exec-3] DEBUG c.a.q.d.P.queryProjectList -==>  Preparing: SELECT id,project_name as projectName,project_content as projectContent,creation_date as createDate FROM project_info WHERE 1 = 1 AND created_by = ? ORDER BY creation_date DESC
+2022-04-26 09:19:31.127 [http-nio-8085-exec-3] DEBUG c.a.q.d.P.queryProjectList -==>  Preparing: SELECT id,project_name as projectName,project_content as projectContent,creation_date as createDate FROM project_info WHERE 1 = 1 AND created_by = ? ORDER BY creation_date DESC
+2022-04-26 09:19:31.128 [http-nio-8085-exec-3] DEBUG c.a.q.d.P.queryProjectList -==> Parameters: admin(String)
+2022-04-26 09:19:31.128 [http-nio-8085-exec-3] DEBUG c.a.q.d.P.queryProjectList -==> Parameters: admin(String)
+2022-04-26 09:19:31.132 [http-nio-8085-exec-3] DEBUG c.a.q.d.P.queryProjectList -<==      Total: 2
+2022-04-26 09:19:31.132 [http-nio-8085-exec-3] DEBUG c.a.q.d.P.queryProjectList -<==      Total: 2
+2022-04-26 09:19:40.223 [http-nio-8085-exec-10] DEBUG c.a.q.d.P.queryProjectList -==>  Preparing: SELECT id,project_name as projectName,project_content as projectContent,creation_date as createDate FROM project_info WHERE 1 = 1 AND id = ? ORDER BY creation_date DESC
+2022-04-26 09:19:40.223 [http-nio-8085-exec-10] DEBUG c.a.q.d.P.queryProjectList -==>  Preparing: SELECT id,project_name as projectName,project_content as projectContent,creation_date as createDate FROM project_info WHERE 1 = 1 AND id = ? ORDER BY creation_date DESC
+2022-04-26 09:19:40.224 [http-nio-8085-exec-10] DEBUG c.a.q.d.P.queryProjectList -==> Parameters: 8d797533fd3b429cbf5eeb9a38294022(String)
+2022-04-26 09:19:40.224 [http-nio-8085-exec-10] DEBUG c.a.q.d.P.queryProjectList -==> Parameters: 8d797533fd3b429cbf5eeb9a38294022(String)
+2022-04-26 09:19:40.226 [http-nio-8085-exec-10] DEBUG c.a.q.d.P.queryProjectList -<==      Total: 1
+2022-04-26 09:19:40.226 [http-nio-8085-exec-10] DEBUG c.a.q.d.P.queryProjectList -<==      Total: 1

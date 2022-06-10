@@ -1,0 +1,144 @@
+2022-05-27 18:11:01.341 [http-nio-8085-exec-4] DEBUG c.a.q.d.U.selectUserInfo -==>  Preparing: SELECT id,username,`password`,status FROM user_info WHERE username = ? and `password` = ? AND status = "1"
+2022-05-27 18:11:01.341 [http-nio-8085-exec-4] DEBUG c.a.q.d.U.selectUserInfo -==>  Preparing: SELECT id,username,`password`,status FROM user_info WHERE username = ? and `password` = ? AND status = "1"
+2022-05-27 18:11:01.357 [http-nio-8085-exec-4] DEBUG c.a.q.d.U.selectUserInfo -==> Parameters: admin(String), 1(String)
+2022-05-27 18:11:01.357 [http-nio-8085-exec-4] DEBUG c.a.q.d.U.selectUserInfo -==> Parameters: admin(String), 1(String)
+2022-05-27 18:11:01.368 [http-nio-8085-exec-4] DEBUG c.a.q.d.U.selectUserInfo -<==      Total: 1
+2022-05-27 18:11:01.368 [http-nio-8085-exec-4] DEBUG c.a.q.d.U.selectUserInfo -<==      Total: 1
+2022-05-27 18:11:03.316 [http-nio-8085-exec-9] DEBUG c.a.q.d.U.queryUserList_COUNT -==>  Preparing: SELECT count(0) FROM user_info
+2022-05-27 18:11:03.316 [http-nio-8085-exec-9] DEBUG c.a.q.d.U.queryUserList_COUNT -==>  Preparing: SELECT count(0) FROM user_info
+2022-05-27 18:11:03.317 [http-nio-8085-exec-9] DEBUG c.a.q.d.U.queryUserList_COUNT -==> Parameters: 
+2022-05-27 18:11:03.317 [http-nio-8085-exec-9] DEBUG c.a.q.d.U.queryUserList_COUNT -==> Parameters: 
+2022-05-27 18:11:03.318 [http-nio-8085-exec-9] DEBUG c.a.q.d.U.queryUserList_COUNT -<==      Total: 1
+2022-05-27 18:11:03.318 [http-nio-8085-exec-9] DEBUG c.a.q.d.U.queryUserList_COUNT -<==      Total: 1
+2022-05-27 18:11:03.319 [http-nio-8085-exec-9] DEBUG c.a.q.d.U.queryUserList -==>  Preparing: SELECT id,username,`password`,start_time as startTime,stop_time as endTime FROM user_info LIMIT 10
+2022-05-27 18:11:03.319 [http-nio-8085-exec-9] DEBUG c.a.q.d.U.queryUserList -==>  Preparing: SELECT id,username,`password`,start_time as startTime,stop_time as endTime FROM user_info LIMIT 10
+2022-05-27 18:11:03.319 [http-nio-8085-exec-9] DEBUG c.a.q.d.U.queryUserList -==> Parameters: 
+2022-05-27 18:11:03.319 [http-nio-8085-exec-9] DEBUG c.a.q.d.U.queryUserList -==> Parameters: 
+2022-05-27 18:11:03.320 [http-nio-8085-exec-9] DEBUG c.a.q.d.U.queryUserList -<==      Total: 2
+2022-05-27 18:11:03.320 [http-nio-8085-exec-9] DEBUG c.a.q.d.U.queryUserList -<==      Total: 2
+2022-05-27 18:28:53.848 [http-nio-8085-exec-1] DEBUG c.a.q.d.U.queryUserList_COUNT -==>  Preparing: SELECT count(0) FROM user_info
+2022-05-27 18:28:53.848 [http-nio-8085-exec-1] DEBUG c.a.q.d.U.queryUserList_COUNT -==>  Preparing: SELECT count(0) FROM user_info
+2022-05-27 18:28:53.849 [http-nio-8085-exec-1] DEBUG c.a.q.d.U.queryUserList_COUNT -==> Parameters: 
+2022-05-27 18:28:53.849 [http-nio-8085-exec-1] DEBUG c.a.q.d.U.queryUserList_COUNT -==> Parameters: 
+2022-05-27 18:28:53.850 [http-nio-8085-exec-1] DEBUG c.a.q.d.U.queryUserList_COUNT -<==      Total: 1
+2022-05-27 18:28:53.850 [http-nio-8085-exec-1] DEBUG c.a.q.d.U.queryUserList_COUNT -<==      Total: 1
+2022-05-27 18:28:53.850 [http-nio-8085-exec-1] DEBUG c.a.q.d.U.queryUserList -==>  Preparing: SELECT id,username,`password`,start_time as startTime,stop_time as endTime FROM user_info LIMIT 10
+2022-05-27 18:28:53.850 [http-nio-8085-exec-1] DEBUG c.a.q.d.U.queryUserList -==>  Preparing: SELECT id,username,`password`,start_time as startTime,stop_time as endTime FROM user_info LIMIT 10
+2022-05-27 18:28:53.851 [http-nio-8085-exec-1] DEBUG c.a.q.d.U.queryUserList -==> Parameters: 
+2022-05-27 18:28:53.851 [http-nio-8085-exec-1] DEBUG c.a.q.d.U.queryUserList -==> Parameters: 
+2022-05-27 18:28:53.852 [http-nio-8085-exec-1] DEBUG c.a.q.d.U.queryUserList -<==      Total: 2
+2022-05-27 18:28:53.852 [http-nio-8085-exec-1] DEBUG c.a.q.d.U.queryUserList -<==      Total: 2
+2022-05-27 18:28:54.038 [http-nio-8085-exec-4] DEBUG c.a.q.d.U.queryUserList_COUNT -==>  Preparing: SELECT count(0) FROM user_info
+2022-05-27 18:28:54.038 [http-nio-8085-exec-4] DEBUG c.a.q.d.U.queryUserList_COUNT -==>  Preparing: SELECT count(0) FROM user_info
+2022-05-27 18:28:54.039 [http-nio-8085-exec-4] DEBUG c.a.q.d.U.queryUserList_COUNT -==> Parameters: 
+2022-05-27 18:28:54.039 [http-nio-8085-exec-4] DEBUG c.a.q.d.U.queryUserList_COUNT -==> Parameters: 
+2022-05-27 18:28:54.039 [http-nio-8085-exec-4] DEBUG c.a.q.d.U.queryUserList_COUNT -<==      Total: 1
+2022-05-27 18:28:54.039 [http-nio-8085-exec-4] DEBUG c.a.q.d.U.queryUserList_COUNT -<==      Total: 1
+2022-05-27 18:28:54.040 [http-nio-8085-exec-4] DEBUG c.a.q.d.U.queryUserList -==>  Preparing: SELECT id,username,`password`,start_time as startTime,stop_time as endTime FROM user_info LIMIT 10
+2022-05-27 18:28:54.040 [http-nio-8085-exec-4] DEBUG c.a.q.d.U.queryUserList -==>  Preparing: SELECT id,username,`password`,start_time as startTime,stop_time as endTime FROM user_info LIMIT 10
+2022-05-27 18:28:54.041 [http-nio-8085-exec-4] DEBUG c.a.q.d.U.queryUserList -==> Parameters: 
+2022-05-27 18:28:54.041 [http-nio-8085-exec-4] DEBUG c.a.q.d.U.queryUserList -==> Parameters: 
+2022-05-27 18:28:54.042 [http-nio-8085-exec-4] DEBUG c.a.q.d.U.queryUserList -<==      Total: 2
+2022-05-27 18:28:54.042 [http-nio-8085-exec-4] DEBUG c.a.q.d.U.queryUserList -<==      Total: 2
+2022-05-27 18:28:54.201 [http-nio-8085-exec-2] DEBUG c.a.q.d.U.queryUserList_COUNT -==>  Preparing: SELECT count(0) FROM user_info
+2022-05-27 18:28:54.201 [http-nio-8085-exec-2] DEBUG c.a.q.d.U.queryUserList_COUNT -==>  Preparing: SELECT count(0) FROM user_info
+2022-05-27 18:28:54.201 [http-nio-8085-exec-2] DEBUG c.a.q.d.U.queryUserList_COUNT -==> Parameters: 
+2022-05-27 18:28:54.201 [http-nio-8085-exec-2] DEBUG c.a.q.d.U.queryUserList_COUNT -==> Parameters: 
+2022-05-27 18:28:54.202 [http-nio-8085-exec-2] DEBUG c.a.q.d.U.queryUserList_COUNT -<==      Total: 1
+2022-05-27 18:28:54.202 [http-nio-8085-exec-2] DEBUG c.a.q.d.U.queryUserList_COUNT -<==      Total: 1
+2022-05-27 18:28:54.203 [http-nio-8085-exec-2] DEBUG c.a.q.d.U.queryUserList -==>  Preparing: SELECT id,username,`password`,start_time as startTime,stop_time as endTime FROM user_info LIMIT 10
+2022-05-27 18:28:54.203 [http-nio-8085-exec-2] DEBUG c.a.q.d.U.queryUserList -==>  Preparing: SELECT id,username,`password`,start_time as startTime,stop_time as endTime FROM user_info LIMIT 10
+2022-05-27 18:28:54.204 [http-nio-8085-exec-2] DEBUG c.a.q.d.U.queryUserList -==> Parameters: 
+2022-05-27 18:28:54.204 [http-nio-8085-exec-2] DEBUG c.a.q.d.U.queryUserList -==> Parameters: 
+2022-05-27 18:28:54.205 [http-nio-8085-exec-2] DEBUG c.a.q.d.U.queryUserList -<==      Total: 2
+2022-05-27 18:28:54.205 [http-nio-8085-exec-2] DEBUG c.a.q.d.U.queryUserList -<==      Total: 2
+2022-05-27 18:28:59.936 [http-nio-8085-exec-1] DEBUG c.a.q.d.U.queryUserList_COUNT -==>  Preparing: SELECT count(0) FROM user_info
+2022-05-27 18:28:59.936 [http-nio-8085-exec-1] DEBUG c.a.q.d.U.queryUserList_COUNT -==>  Preparing: SELECT count(0) FROM user_info
+2022-05-27 18:28:59.937 [http-nio-8085-exec-1] DEBUG c.a.q.d.U.queryUserList_COUNT -==> Parameters: 
+2022-05-27 18:28:59.937 [http-nio-8085-exec-1] DEBUG c.a.q.d.U.queryUserList_COUNT -==> Parameters: 
+2022-05-27 18:28:59.938 [http-nio-8085-exec-1] DEBUG c.a.q.d.U.queryUserList_COUNT -<==      Total: 1
+2022-05-27 18:28:59.938 [http-nio-8085-exec-1] DEBUG c.a.q.d.U.queryUserList_COUNT -<==      Total: 1
+2022-05-27 18:28:59.938 [http-nio-8085-exec-1] DEBUG c.a.q.d.U.queryUserList -==>  Preparing: SELECT id,username,`password`,start_time as startTime,stop_time as endTime FROM user_info LIMIT 10
+2022-05-27 18:28:59.938 [http-nio-8085-exec-1] DEBUG c.a.q.d.U.queryUserList -==>  Preparing: SELECT id,username,`password`,start_time as startTime,stop_time as endTime FROM user_info LIMIT 10
+2022-05-27 18:28:59.939 [http-nio-8085-exec-1] DEBUG c.a.q.d.U.queryUserList -==> Parameters: 
+2022-05-27 18:28:59.939 [http-nio-8085-exec-1] DEBUG c.a.q.d.U.queryUserList -==> Parameters: 
+2022-05-27 18:28:59.940 [http-nio-8085-exec-1] DEBUG c.a.q.d.U.queryUserList -<==      Total: 2
+2022-05-27 18:28:59.940 [http-nio-8085-exec-1] DEBUG c.a.q.d.U.queryUserList -<==      Total: 2
+2022-05-27 18:29:04.003 [http-nio-8085-exec-10] DEBUG c.a.q.d.U.queryUserList_COUNT -==>  Preparing: SELECT count(0) FROM user_info
+2022-05-27 18:29:04.003 [http-nio-8085-exec-10] DEBUG c.a.q.d.U.queryUserList_COUNT -==>  Preparing: SELECT count(0) FROM user_info
+2022-05-27 18:29:04.003 [http-nio-8085-exec-10] DEBUG c.a.q.d.U.queryUserList_COUNT -==> Parameters: 
+2022-05-27 18:29:04.003 [http-nio-8085-exec-10] DEBUG c.a.q.d.U.queryUserList_COUNT -==> Parameters: 
+2022-05-27 18:29:04.004 [http-nio-8085-exec-10] DEBUG c.a.q.d.U.queryUserList_COUNT -<==      Total: 1
+2022-05-27 18:29:04.004 [http-nio-8085-exec-10] DEBUG c.a.q.d.U.queryUserList_COUNT -<==      Total: 1
+2022-05-27 18:29:04.005 [http-nio-8085-exec-10] DEBUG c.a.q.d.U.queryUserList -==>  Preparing: SELECT id,username,`password`,start_time as startTime,stop_time as endTime FROM user_info LIMIT 10
+2022-05-27 18:29:04.005 [http-nio-8085-exec-10] DEBUG c.a.q.d.U.queryUserList -==>  Preparing: SELECT id,username,`password`,start_time as startTime,stop_time as endTime FROM user_info LIMIT 10
+2022-05-27 18:29:04.005 [http-nio-8085-exec-10] DEBUG c.a.q.d.U.queryUserList -==> Parameters: 
+2022-05-27 18:29:04.005 [http-nio-8085-exec-10] DEBUG c.a.q.d.U.queryUserList -==> Parameters: 
+2022-05-27 18:29:04.006 [http-nio-8085-exec-10] DEBUG c.a.q.d.U.queryUserList -<==      Total: 2
+2022-05-27 18:29:04.006 [http-nio-8085-exec-10] DEBUG c.a.q.d.U.queryUserList -<==      Total: 2
+2022-05-27 18:39:28.508 [http-nio-8085-exec-2] DEBUG c.a.q.d.U.selectUserInfo -==>  Preparing: SELECT id,username,`password`,status FROM user_info WHERE username = ? and `password` = ? AND status = "1"
+2022-05-27 18:39:28.508 [http-nio-8085-exec-2] DEBUG c.a.q.d.U.selectUserInfo -==>  Preparing: SELECT id,username,`password`,status FROM user_info WHERE username = ? and `password` = ? AND status = "1"
+2022-05-27 18:39:28.523 [http-nio-8085-exec-2] DEBUG c.a.q.d.U.selectUserInfo -==> Parameters: admin(String), 1(String)
+2022-05-27 18:39:28.523 [http-nio-8085-exec-2] DEBUG c.a.q.d.U.selectUserInfo -==> Parameters: admin(String), 1(String)
+2022-05-27 18:39:28.575 [http-nio-8085-exec-2] DEBUG c.a.q.d.U.selectUserInfo -<==      Total: 1
+2022-05-27 18:39:28.575 [http-nio-8085-exec-2] DEBUG c.a.q.d.U.selectUserInfo -<==      Total: 1
+2022-05-27 18:39:31.246 [http-nio-8085-exec-5] DEBUG c.a.q.d.U.queryUserList_COUNT -==>  Preparing: SELECT count(0) FROM user_info
+2022-05-27 18:39:31.246 [http-nio-8085-exec-5] DEBUG c.a.q.d.U.queryUserList_COUNT -==>  Preparing: SELECT count(0) FROM user_info
+2022-05-27 18:39:31.247 [http-nio-8085-exec-5] DEBUG c.a.q.d.U.queryUserList_COUNT -==> Parameters: 
+2022-05-27 18:39:31.247 [http-nio-8085-exec-5] DEBUG c.a.q.d.U.queryUserList_COUNT -==> Parameters: 
+2022-05-27 18:39:31.289 [http-nio-8085-exec-5] DEBUG c.a.q.d.U.queryUserList_COUNT -<==      Total: 1
+2022-05-27 18:39:31.289 [http-nio-8085-exec-5] DEBUG c.a.q.d.U.queryUserList_COUNT -<==      Total: 1
+2022-05-27 18:39:31.290 [http-nio-8085-exec-5] DEBUG c.a.q.d.U.queryUserList -==>  Preparing: SELECT id,username,`password`,start_time as startTime,stop_time as endTime FROM user_info LIMIT 10
+2022-05-27 18:39:31.290 [http-nio-8085-exec-5] DEBUG c.a.q.d.U.queryUserList -==>  Preparing: SELECT id,username,`password`,start_time as startTime,stop_time as endTime FROM user_info LIMIT 10
+2022-05-27 18:39:31.291 [http-nio-8085-exec-5] DEBUG c.a.q.d.U.queryUserList -==> Parameters: 
+2022-05-27 18:39:31.291 [http-nio-8085-exec-5] DEBUG c.a.q.d.U.queryUserList -==> Parameters: 
+2022-05-27 18:39:31.335 [http-nio-8085-exec-5] DEBUG c.a.q.d.U.queryUserList -<==      Total: 10
+2022-05-27 18:39:31.335 [http-nio-8085-exec-5] DEBUG c.a.q.d.U.queryUserList -<==      Total: 10
+2022-05-27 18:39:59.086 [http-nio-8085-exec-7] DEBUG c.a.q.d.U.queryExistUser -==>  Preparing: SELECT count(1) FROM user_info where username = ?
+2022-05-27 18:39:59.086 [http-nio-8085-exec-7] DEBUG c.a.q.d.U.queryExistUser -==>  Preparing: SELECT count(1) FROM user_info where username = ?
+2022-05-27 18:39:59.087 [http-nio-8085-exec-7] DEBUG c.a.q.d.U.queryExistUser -==> Parameters: 2019xxxx(String)
+2022-05-27 18:39:59.087 [http-nio-8085-exec-7] DEBUG c.a.q.d.U.queryExistUser -==> Parameters: 2019xxxx(String)
+2022-05-27 18:39:59.131 [http-nio-8085-exec-7] DEBUG c.a.q.d.U.queryExistUser -<==      Total: 1
+2022-05-27 18:39:59.131 [http-nio-8085-exec-7] DEBUG c.a.q.d.U.queryExistUser -<==      Total: 1
+2022-05-27 18:39:59.135 [http-nio-8085-exec-7] DEBUG c.a.q.d.UserEntityMapper.addUserInfo -==>  Preparing: insert into user_info ( id, username, password, start_time, stop_time, status, created_by, creation_date, last_updated_by, last_update_date ) values ( ?, ?, ?, ?, ?, 1, ?, ?, ?, ? )
+2022-05-27 18:39:59.135 [http-nio-8085-exec-7] DEBUG c.a.q.d.UserEntityMapper.addUserInfo -==>  Preparing: insert into user_info ( id, username, password, start_time, stop_time, status, created_by, creation_date, last_updated_by, last_update_date ) values ( ?, ?, ?, ?, ?, 1, ?, ?, ?, ? )
+2022-05-27 18:39:59.136 [http-nio-8085-exec-7] DEBUG c.a.q.d.UserEntityMapper.addUserInfo -==> Parameters: 7de79a3ab25e4744ad31d5cacdf3c9c9(String), 2019xxxx(String), 2019xxxx(String), 2022-05-27 18:39:44.0(Timestamp), 2022-06-26 18:39:44.0(Timestamp), admin(String), 2022-05-27 18:39:59.0(Timestamp), admin(String), 2022-05-27 18:39:59.0(Timestamp)
+2022-05-27 18:39:59.136 [http-nio-8085-exec-7] DEBUG c.a.q.d.UserEntityMapper.addUserInfo -==> Parameters: 7de79a3ab25e4744ad31d5cacdf3c9c9(String), 2019xxxx(String), 2019xxxx(String), 2022-05-27 18:39:44.0(Timestamp), 2022-06-26 18:39:44.0(Timestamp), admin(String), 2022-05-27 18:39:59.0(Timestamp), admin(String), 2022-05-27 18:39:59.0(Timestamp)
+2022-05-27 18:39:59.226 [http-nio-8085-exec-7] DEBUG c.a.q.d.UserEntityMapper.addUserInfo -<==    Updates: 1
+2022-05-27 18:39:59.226 [http-nio-8085-exec-7] DEBUG c.a.q.d.UserEntityMapper.addUserInfo -<==    Updates: 1
+2022-05-27 18:40:00.376 [http-nio-8085-exec-10] DEBUG c.a.q.d.U.queryUserList_COUNT -==>  Preparing: SELECT count(0) FROM user_info
+2022-05-27 18:40:00.376 [http-nio-8085-exec-10] DEBUG c.a.q.d.U.queryUserList_COUNT -==>  Preparing: SELECT count(0) FROM user_info
+2022-05-27 18:40:00.376 [http-nio-8085-exec-10] DEBUG c.a.q.d.U.queryUserList_COUNT -==> Parameters: 
+2022-05-27 18:40:00.376 [http-nio-8085-exec-10] DEBUG c.a.q.d.U.queryUserList_COUNT -==> Parameters: 
+2022-05-27 18:40:00.419 [http-nio-8085-exec-10] DEBUG c.a.q.d.U.queryUserList_COUNT -<==      Total: 1
+2022-05-27 18:40:00.419 [http-nio-8085-exec-10] DEBUG c.a.q.d.U.queryUserList_COUNT -<==      Total: 1
+2022-05-27 18:40:00.419 [http-nio-8085-exec-10] DEBUG c.a.q.d.U.queryUserList -==>  Preparing: SELECT id,username,`password`,start_time as startTime,stop_time as endTime FROM user_info LIMIT 10
+2022-05-27 18:40:00.419 [http-nio-8085-exec-10] DEBUG c.a.q.d.U.queryUserList -==>  Preparing: SELECT id,username,`password`,start_time as startTime,stop_time as endTime FROM user_info LIMIT 10
+2022-05-27 18:40:00.420 [http-nio-8085-exec-10] DEBUG c.a.q.d.U.queryUserList -==> Parameters: 
+2022-05-27 18:40:00.420 [http-nio-8085-exec-10] DEBUG c.a.q.d.U.queryUserList -==> Parameters: 
+2022-05-27 18:40:00.466 [http-nio-8085-exec-10] DEBUG c.a.q.d.U.queryUserList -<==      Total: 10
+2022-05-27 18:40:00.466 [http-nio-8085-exec-10] DEBUG c.a.q.d.U.queryUserList -<==      Total: 10
+2022-05-27 18:41:39.909 [http-nio-8085-exec-4] DEBUG c.a.q.d.U.queryUserList_COUNT -==>  Preparing: SELECT count(0) FROM user_info
+2022-05-27 18:41:39.909 [http-nio-8085-exec-4] DEBUG c.a.q.d.U.queryUserList_COUNT -==>  Preparing: SELECT count(0) FROM user_info
+2022-05-27 18:41:39.909 [http-nio-8085-exec-4] DEBUG c.a.q.d.U.queryUserList_COUNT -==> Parameters: 
+2022-05-27 18:41:39.909 [http-nio-8085-exec-4] DEBUG c.a.q.d.U.queryUserList_COUNT -==> Parameters: 
+2022-05-27 18:41:39.956 [http-nio-8085-exec-4] DEBUG c.a.q.d.U.queryUserList_COUNT -<==      Total: 1
+2022-05-27 18:41:39.956 [http-nio-8085-exec-4] DEBUG c.a.q.d.U.queryUserList_COUNT -<==      Total: 1
+2022-05-27 18:41:39.956 [http-nio-8085-exec-4] DEBUG c.a.q.d.U.queryUserList -==>  Preparing: SELECT id,username,`password`,start_time as startTime,stop_time as endTime FROM user_info LIMIT 10
+2022-05-27 18:41:39.956 [http-nio-8085-exec-4] DEBUG c.a.q.d.U.queryUserList -==>  Preparing: SELECT id,username,`password`,start_time as startTime,stop_time as endTime FROM user_info LIMIT 10
+2022-05-27 18:41:39.957 [http-nio-8085-exec-4] DEBUG c.a.q.d.U.queryUserList -==> Parameters: 
+2022-05-27 18:41:39.957 [http-nio-8085-exec-4] DEBUG c.a.q.d.U.queryUserList -==> Parameters: 
+2022-05-27 18:41:40.001 [http-nio-8085-exec-4] DEBUG c.a.q.d.U.queryUserList -<==      Total: 10
+2022-05-27 18:41:40.001 [http-nio-8085-exec-4] DEBUG c.a.q.d.U.queryUserList -<==      Total: 10
+2022-05-27 18:41:44.315 [http-nio-8085-exec-6] DEBUG c.a.q.d.U.queryUserList_COUNT -==>  Preparing: SELECT count(0) FROM user_info
+2022-05-27 18:41:44.315 [http-nio-8085-exec-6] DEBUG c.a.q.d.U.queryUserList_COUNT -==>  Preparing: SELECT count(0) FROM user_info
+2022-05-27 18:41:44.315 [http-nio-8085-exec-6] DEBUG c.a.q.d.U.queryUserList_COUNT -==> Parameters: 
+2022-05-27 18:41:44.315 [http-nio-8085-exec-6] DEBUG c.a.q.d.U.queryUserList_COUNT -==> Parameters: 
+2022-05-27 18:41:44.358 [http-nio-8085-exec-6] DEBUG c.a.q.d.U.queryUserList_COUNT -<==      Total: 1
+2022-05-27 18:41:44.358 [http-nio-8085-exec-6] DEBUG c.a.q.d.U.queryUserList_COUNT -<==      Total: 1
+2022-05-27 18:41:44.358 [http-nio-8085-exec-6] DEBUG c.a.q.d.U.queryUserList -==>  Preparing: SELECT id,username,`password`,start_time as startTime,stop_time as endTime FROM user_info LIMIT 10
+2022-05-27 18:41:44.358 [http-nio-8085-exec-6] DEBUG c.a.q.d.U.queryUserList -==>  Preparing: SELECT id,username,`password`,start_time as startTime,stop_time as endTime FROM user_info LIMIT 10
+2022-05-27 18:41:44.358 [http-nio-8085-exec-6] DEBUG c.a.q.d.U.queryUserList -==> Parameters: 
+2022-05-27 18:41:44.358 [http-nio-8085-exec-6] DEBUG c.a.q.d.U.queryUserList -==> Parameters: 
+2022-05-27 18:41:44.406 [http-nio-8085-exec-6] DEBUG c.a.q.d.U.queryUserList -<==      Total: 10
+2022-05-27 18:41:44.406 [http-nio-8085-exec-6] DEBUG c.a.q.d.U.queryUserList -<==      Total: 10

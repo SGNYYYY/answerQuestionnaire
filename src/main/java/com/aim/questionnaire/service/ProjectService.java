@@ -52,6 +52,7 @@ public class ProjectService {
         projectEntity.setLastUpdatedBy(user);
         int result = projectEntityMapper.updateByPrimaryKeySelective(projectEntity);
         return result;
+
     }
 
     /**
@@ -61,6 +62,7 @@ public class ProjectService {
      */
     public int deleteProjectById(ProjectEntity projectEntity) {
         String projectId = projectEntity.getId();
+        System.out.println(projectId);
         int result = projectEntityMapper.deleteProjectById(projectId);
         return result;
     }
@@ -80,15 +82,17 @@ public class ProjectService {
         for(Map<String,Object> proObj : proResult) {
             resultList.add(proObj);
         }
+
         return resultList;
     }
 
-    /**
+     /**
      * 查询全部项目的名字接口
      * @return
      */
     public List<Map<String,Object>> queryAllProjectName() {
         List<Map<String,Object>> result = projectEntityMapper.queryAllProjectName();
         return result;
+
     }
 }

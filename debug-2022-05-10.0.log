@@ -1,0 +1,72 @@
+2022-05-10 10:06:46.051 [http-nio-8085-exec-7] DEBUG c.a.q.d.U.selectUserInfo -==>  Preparing: SELECT id,username,`password`,status FROM user_info WHERE username = ? and `password` = ? AND status = "1"
+2022-05-10 10:06:46.051 [http-nio-8085-exec-7] DEBUG c.a.q.d.U.selectUserInfo -==>  Preparing: SELECT id,username,`password`,status FROM user_info WHERE username = ? and `password` = ? AND status = "1"
+2022-05-10 10:06:46.079 [http-nio-8085-exec-7] DEBUG c.a.q.d.U.selectUserInfo -==> Parameters: admin(String), 1(String)
+2022-05-10 10:06:46.079 [http-nio-8085-exec-7] DEBUG c.a.q.d.U.selectUserInfo -==> Parameters: admin(String), 1(String)
+2022-05-10 10:06:46.118 [http-nio-8085-exec-7] DEBUG c.a.q.d.U.selectUserInfo -<==      Total: 1
+2022-05-10 10:06:46.118 [http-nio-8085-exec-7] DEBUG c.a.q.d.U.selectUserInfo -<==      Total: 1
+2022-05-10 10:06:46.286 [http-nio-8085-exec-8] DEBUG c.a.q.d.P.queryProjectList -==>  Preparing: SELECT id,project_name as projectName,project_content as projectContent,creation_date as createDate FROM project_info WHERE 1 = 1 AND created_by = ? ORDER BY creation_date DESC
+2022-05-10 10:06:46.286 [http-nio-8085-exec-8] DEBUG c.a.q.d.P.queryProjectList -==>  Preparing: SELECT id,project_name as projectName,project_content as projectContent,creation_date as createDate FROM project_info WHERE 1 = 1 AND created_by = ? ORDER BY creation_date DESC
+2022-05-10 10:06:46.287 [http-nio-8085-exec-8] DEBUG c.a.q.d.P.queryProjectList -==> Parameters: admin(String)
+2022-05-10 10:06:46.287 [http-nio-8085-exec-8] DEBUG c.a.q.d.P.queryProjectList -==> Parameters: admin(String)
+2022-05-10 10:06:46.296 [http-nio-8085-exec-8] DEBUG c.a.q.d.P.queryProjectList -<==      Total: 4
+2022-05-10 10:06:46.296 [http-nio-8085-exec-8] DEBUG c.a.q.d.P.queryProjectList -<==      Total: 4
+2022-05-10 10:07:06.443 [http-nio-8085-exec-2] DEBUG c.a.q.d.P.queryProjectList -==>  Preparing: SELECT id,project_name as projectName,project_content as projectContent,creation_date as createDate FROM project_info WHERE 1 = 1 AND id = ? ORDER BY creation_date DESC
+2022-05-10 10:07:06.443 [http-nio-8085-exec-2] DEBUG c.a.q.d.P.queryProjectList -==>  Preparing: SELECT id,project_name as projectName,project_content as projectContent,creation_date as createDate FROM project_info WHERE 1 = 1 AND id = ? ORDER BY creation_date DESC
+2022-05-10 10:07:06.443 [http-nio-8085-exec-2] DEBUG c.a.q.d.P.queryProjectList -==> Parameters: ca5e9362cd2f4eb5b564377b2956f72f(String)
+2022-05-10 10:07:06.443 [http-nio-8085-exec-2] DEBUG c.a.q.d.P.queryProjectList -==> Parameters: ca5e9362cd2f4eb5b564377b2956f72f(String)
+2022-05-10 10:07:06.446 [http-nio-8085-exec-2] DEBUG c.a.q.d.P.queryProjectList -<==      Total: 1
+2022-05-10 10:07:06.446 [http-nio-8085-exec-2] DEBUG c.a.q.d.P.queryProjectList -<==      Total: 1
+2022-05-10 10:21:07.428 [http-nio-8085-exec-4] DEBUG c.a.q.d.P.queryProjectList -==>  Preparing: SELECT id,project_name as projectName,project_content as projectContent,creation_date as createDate FROM project_info WHERE 1 = 1 AND created_by = ? ORDER BY creation_date DESC
+2022-05-10 10:21:07.428 [http-nio-8085-exec-4] DEBUG c.a.q.d.P.queryProjectList -==>  Preparing: SELECT id,project_name as projectName,project_content as projectContent,creation_date as createDate FROM project_info WHERE 1 = 1 AND created_by = ? ORDER BY creation_date DESC
+2022-05-10 10:21:07.429 [http-nio-8085-exec-4] DEBUG c.a.q.d.P.queryProjectList -==> Parameters: admin(String)
+2022-05-10 10:21:07.429 [http-nio-8085-exec-4] DEBUG c.a.q.d.P.queryProjectList -==> Parameters: admin(String)
+2022-05-10 10:21:07.430 [http-nio-8085-exec-4] DEBUG c.a.q.d.P.queryProjectList -<==      Total: 4
+2022-05-10 10:21:07.430 [http-nio-8085-exec-4] DEBUG c.a.q.d.P.queryProjectList -<==      Total: 4
+2022-05-10 10:23:38.035 [http-nio-8085-exec-2] DEBUG c.a.q.d.P.queryProjectList -==>  Preparing: SELECT id,project_name as projectName,project_content as projectContent,creation_date as createDate FROM project_info WHERE 1 = 1 AND created_by = ? ORDER BY creation_date DESC
+2022-05-10 10:23:38.035 [http-nio-8085-exec-2] DEBUG c.a.q.d.P.queryProjectList -==>  Preparing: SELECT id,project_name as projectName,project_content as projectContent,creation_date as createDate FROM project_info WHERE 1 = 1 AND created_by = ? ORDER BY creation_date DESC
+2022-05-10 10:23:38.063 [http-nio-8085-exec-2] DEBUG c.a.q.d.P.queryProjectList -==> Parameters: admin(String)
+2022-05-10 10:23:38.063 [http-nio-8085-exec-2] DEBUG c.a.q.d.P.queryProjectList -==> Parameters: admin(String)
+2022-05-10 10:23:38.085 [http-nio-8085-exec-2] DEBUG c.a.q.d.P.queryProjectList -<==      Total: 4
+2022-05-10 10:23:38.085 [http-nio-8085-exec-2] DEBUG c.a.q.d.P.queryProjectList -<==      Total: 4
+2022-05-10 10:23:53.437 [http-nio-8085-exec-9] DEBUG c.a.q.d.U.selectUserInfo -==>  Preparing: SELECT id,username,`password`,status FROM user_info WHERE username = ? and `password` = ? AND status = "1"
+2022-05-10 10:23:53.437 [http-nio-8085-exec-9] DEBUG c.a.q.d.U.selectUserInfo -==>  Preparing: SELECT id,username,`password`,status FROM user_info WHERE username = ? and `password` = ? AND status = "1"
+2022-05-10 10:23:53.437 [http-nio-8085-exec-9] DEBUG c.a.q.d.U.selectUserInfo -==> Parameters: admin(String), 1(String)
+2022-05-10 10:23:53.437 [http-nio-8085-exec-9] DEBUG c.a.q.d.U.selectUserInfo -==> Parameters: admin(String), 1(String)
+2022-05-10 10:23:53.439 [http-nio-8085-exec-9] DEBUG c.a.q.d.U.selectUserInfo -<==      Total: 1
+2022-05-10 10:23:53.439 [http-nio-8085-exec-9] DEBUG c.a.q.d.U.selectUserInfo -<==      Total: 1
+2022-05-10 10:23:53.497 [http-nio-8085-exec-1] DEBUG c.a.q.d.P.queryProjectList -==>  Preparing: SELECT id,project_name as projectName,project_content as projectContent,creation_date as createDate FROM project_info WHERE 1 = 1 AND created_by = ? ORDER BY creation_date DESC
+2022-05-10 10:23:53.497 [http-nio-8085-exec-1] DEBUG c.a.q.d.P.queryProjectList -==>  Preparing: SELECT id,project_name as projectName,project_content as projectContent,creation_date as createDate FROM project_info WHERE 1 = 1 AND created_by = ? ORDER BY creation_date DESC
+2022-05-10 10:23:53.498 [http-nio-8085-exec-1] DEBUG c.a.q.d.P.queryProjectList -==> Parameters: admin(String)
+2022-05-10 10:23:53.498 [http-nio-8085-exec-1] DEBUG c.a.q.d.P.queryProjectList -==> Parameters: admin(String)
+2022-05-10 10:23:53.501 [http-nio-8085-exec-1] DEBUG c.a.q.d.P.queryProjectList -<==      Total: 4
+2022-05-10 10:23:53.501 [http-nio-8085-exec-1] DEBUG c.a.q.d.P.queryProjectList -<==      Total: 4
+2022-05-10 10:25:14.677 [http-nio-8085-exec-5] DEBUG c.a.q.d.P.queryProjectList -==>  Preparing: SELECT id,project_name as projectName,project_content as projectContent,creation_date as createDate FROM project_info WHERE 1 = 1 AND created_by = ? ORDER BY creation_date DESC
+2022-05-10 10:25:14.677 [http-nio-8085-exec-5] DEBUG c.a.q.d.P.queryProjectList -==>  Preparing: SELECT id,project_name as projectName,project_content as projectContent,creation_date as createDate FROM project_info WHERE 1 = 1 AND created_by = ? ORDER BY creation_date DESC
+2022-05-10 10:25:14.702 [http-nio-8085-exec-5] DEBUG c.a.q.d.P.queryProjectList -==> Parameters: admin(String)
+2022-05-10 10:25:14.702 [http-nio-8085-exec-5] DEBUG c.a.q.d.P.queryProjectList -==> Parameters: admin(String)
+2022-05-10 10:25:14.724 [http-nio-8085-exec-5] DEBUG c.a.q.d.P.queryProjectList -<==      Total: 4
+2022-05-10 10:25:14.724 [http-nio-8085-exec-5] DEBUG c.a.q.d.P.queryProjectList -<==      Total: 4
+2022-05-10 10:25:27.798 [http-nio-8085-exec-6] DEBUG c.a.q.d.U.selectUserInfo -==>  Preparing: SELECT id,username,`password`,status FROM user_info WHERE username = ? and `password` = ? AND status = "1"
+2022-05-10 10:25:27.798 [http-nio-8085-exec-6] DEBUG c.a.q.d.U.selectUserInfo -==>  Preparing: SELECT id,username,`password`,status FROM user_info WHERE username = ? and `password` = ? AND status = "1"
+2022-05-10 10:25:27.799 [http-nio-8085-exec-6] DEBUG c.a.q.d.U.selectUserInfo -==> Parameters: admin(String), 1(String)
+2022-05-10 10:25:27.799 [http-nio-8085-exec-6] DEBUG c.a.q.d.U.selectUserInfo -==> Parameters: admin(String), 1(String)
+2022-05-10 10:25:27.801 [http-nio-8085-exec-6] DEBUG c.a.q.d.U.selectUserInfo -<==      Total: 1
+2022-05-10 10:25:27.801 [http-nio-8085-exec-6] DEBUG c.a.q.d.U.selectUserInfo -<==      Total: 1
+2022-05-10 10:25:27.865 [http-nio-8085-exec-7] DEBUG c.a.q.d.P.queryProjectList -==>  Preparing: SELECT id,project_name as projectName,project_content as projectContent,creation_date as createDate FROM project_info WHERE 1 = 1 AND created_by = ? ORDER BY creation_date DESC
+2022-05-10 10:25:27.865 [http-nio-8085-exec-7] DEBUG c.a.q.d.P.queryProjectList -==>  Preparing: SELECT id,project_name as projectName,project_content as projectContent,creation_date as createDate FROM project_info WHERE 1 = 1 AND created_by = ? ORDER BY creation_date DESC
+2022-05-10 10:25:27.866 [http-nio-8085-exec-7] DEBUG c.a.q.d.P.queryProjectList -==> Parameters: admin(String)
+2022-05-10 10:25:27.866 [http-nio-8085-exec-7] DEBUG c.a.q.d.P.queryProjectList -==> Parameters: admin(String)
+2022-05-10 10:25:27.869 [http-nio-8085-exec-7] DEBUG c.a.q.d.P.queryProjectList -<==      Total: 4
+2022-05-10 10:25:27.869 [http-nio-8085-exec-7] DEBUG c.a.q.d.P.queryProjectList -<==      Total: 4
+2022-05-10 10:26:26.431 [http-nio-8085-exec-3] DEBUG c.a.q.d.U.selectUserInfo -==>  Preparing: SELECT id,username,`password`,status FROM user_info WHERE username = ? and `password` = ? AND status = "1"
+2022-05-10 10:26:26.431 [http-nio-8085-exec-3] DEBUG c.a.q.d.U.selectUserInfo -==>  Preparing: SELECT id,username,`password`,status FROM user_info WHERE username = ? and `password` = ? AND status = "1"
+2022-05-10 10:26:26.432 [http-nio-8085-exec-3] DEBUG c.a.q.d.U.selectUserInfo -==> Parameters: admin(String), 1(String)
+2022-05-10 10:26:26.432 [http-nio-8085-exec-3] DEBUG c.a.q.d.U.selectUserInfo -==> Parameters: admin(String), 1(String)
+2022-05-10 10:26:26.433 [http-nio-8085-exec-3] DEBUG c.a.q.d.U.selectUserInfo -<==      Total: 1
+2022-05-10 10:26:26.433 [http-nio-8085-exec-3] DEBUG c.a.q.d.U.selectUserInfo -<==      Total: 1
+2022-05-10 10:26:26.483 [http-nio-8085-exec-1] DEBUG c.a.q.d.P.queryProjectList -==>  Preparing: SELECT id,project_name as projectName,project_content as projectContent,creation_date as createDate FROM project_info WHERE 1 = 1 AND created_by = ? ORDER BY creation_date DESC
+2022-05-10 10:26:26.483 [http-nio-8085-exec-1] DEBUG c.a.q.d.P.queryProjectList -==>  Preparing: SELECT id,project_name as projectName,project_content as projectContent,creation_date as createDate FROM project_info WHERE 1 = 1 AND created_by = ? ORDER BY creation_date DESC
+2022-05-10 10:26:26.484 [http-nio-8085-exec-1] DEBUG c.a.q.d.P.queryProjectList -==> Parameters: admin(String)
+2022-05-10 10:26:26.484 [http-nio-8085-exec-1] DEBUG c.a.q.d.P.queryProjectList -==> Parameters: admin(String)
+2022-05-10 10:26:26.492 [http-nio-8085-exec-1] DEBUG c.a.q.d.P.queryProjectList -<==      Total: 4
+2022-05-10 10:26:26.492 [http-nio-8085-exec-1] DEBUG c.a.q.d.P.queryProjectList -<==      Total: 4
