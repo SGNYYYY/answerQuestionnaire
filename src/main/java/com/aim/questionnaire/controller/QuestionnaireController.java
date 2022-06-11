@@ -34,8 +34,7 @@ public class QuestionnaireController {
      * @return
      */
     @RequestMapping(value = "/queryQuestionnaireList", method = RequestMethod.POST, headers = "Accept=application/json")
-    public HttpResponseEntity queryQuestionnaireList(
-            @RequestBody(required = false) QuestionnaireEntity questionnaireEntity) {
+    public HttpResponseEntity queryQuestionnaireList(@RequestBody(required = false) QuestionnaireEntity questionnaireEntity) {
         HttpResponseEntity httpResponseEntity = new HttpResponseEntity();
         return httpResponseEntity;
     }
@@ -75,23 +74,6 @@ public class QuestionnaireController {
     @RequestMapping(value = "/addQuestionnaire", method = RequestMethod.POST, headers = "Accept=application/json")
     public HttpResponseEntity addQuestionnaire(@RequestBody QuestionnaireEntity questionnaireEntity) {
         HttpResponseEntity httpResponseEntity = new HttpResponseEntity();
-        try {
-            int result = questionnaireService.addQuestionnaire(questionnaireEntity,
-                    questionnaireEntity.getCreatedBy());
-            if (result == 3) {
-                httpResponseEntity.setCode(Constans.EXIST_CODE);
-                httpResponseEntity.setMessage(Constans.EXIST_MESSAGE);
-            } else {
-                httpResponseEntity.setCode(Constans.SUCCESS_CODE);
-                httpResponseEntity.setMessage(Constans.ADD_MESSAGE);
-            }
-        } catch (Exception e) {
-            logger.info("addQuestionnaire 创建问卷的基本信息>>>>>>>>>>>" +
-                    e.getLocalizedMessage());
-            httpResponseEntity.setCode(Constans.EXIST_CODE);
-            httpResponseEntity.setMessage(Constans.EXIST_MESSAGE);
-        }
-
         return httpResponseEntity;
     }
 
