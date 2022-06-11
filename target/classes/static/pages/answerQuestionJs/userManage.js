@@ -19,7 +19,7 @@ $(document).keydown(function(event) {
 $('#userManager').on("keydown", function(event) {
     var keyCode = event.keyCode || event.which;
     if (keyCode == "13") {
-        //console.log("1111")
+        console.log("1111")
         event.preventDefault();
     }
 });
@@ -115,8 +115,8 @@ function TableInit() {
                             dataNewObj.id = userInfo[i].id;
                             dataNewObj.username = userInfo[i].username;
                             dataNewObj.password = userInfo[i].password;
-                            dataNewObj.startTime = timeFormatter(userInfo[i].startTime);
-                            dataNewObj.endTime = timeFormatter(userInfo[i].endTime);
+                            dataNewObj.startTime = timeFormat(userInfo[i].startTime);
+                            dataNewObj.endTime = timeFormat(userInfo[i].endTime);
                             dataNewObj.status = userInfo[i].status;
                             NewData.push(dataNewObj);
                         }
@@ -134,11 +134,6 @@ function TableInit() {
 
         });
     };
-    // 时间格式格式化
-    function timeFormatter(value) {
-        var res1 = value.indexOf('.');
-        return value.substr(0, res1)
-    }
     // 得到查询的参数
     function queryParams(params) {
         var userName = $("#keyWord").val();

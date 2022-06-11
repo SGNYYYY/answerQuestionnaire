@@ -2,6 +2,7 @@ package com.aim.questionnaire.service;
 
 import com.aim.questionnaire.common.utils.DateUtil;
 import com.aim.questionnaire.common.utils.UUIDUtil;
+import com.aim.questionnaire.service.ProjectService;
 import com.aim.questionnaire.dao.QuestionnaireEntityMapper;
 import com.aim.questionnaire.dao.entity.QuestionnaireEntity;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +19,10 @@ public class QuestionnaireService {
     @Autowired
     private QuestionnaireEntityMapper questionnaireEntityMapper;
 
+
+    @Autowired
+    private ProjectService projectService;
+
     /**
      * 添加项目
      * 
@@ -25,7 +30,18 @@ public class QuestionnaireService {
      * @return
      */
     public int addQuestionnaire(QuestionnaireEntity questionnaireEntity, String user) {
-        return 0;
+        String id = UUIDUtil.getOneUUID();
+        questionnaireEntity.setId(id);
+        // 获取用户信息
+        questionnaireEntity.setCreatedBy(user);
+        questionnaireEntity.setLastUpdatedBy(user);
+        // 获取当前时间
+        Date date = DateUtil.getCreateTime();
+        questionnaireEntity.setCreationDate(date);
+        questionnaireEntity.setLastUpdateDate(date);
+
+        int result = questionnaireEntityMapper.insertSelective(questionnaireEntity);
+        return result;
     }
 
     /**
@@ -53,13 +69,38 @@ public class QuestionnaireService {
     }
 
     /**
-     * 查询项目列表
+     * 查询问卷列表
      * 
      * @param questionnaireEntity
      * @return
      */
-    public List<Object> queryQuestionnaireList(QuestionnaireEntity questionnaireEntity) {
-        return null;
+    public List<Object> queryQuestionnaireList(HashMap<String, Object> map) {
+        List<Object> resultList = new ArrayList<Object>();
+        if("".equals(map.get("questionName").toString())){
+            map.put("questionName", null);
+        }
+        List<Map<String,Object>> proResult = questionnaireEntityMapper.queryQuestionnaireList(map);
+        for(Map<String,Object> proObj : proResult) {
+            String projectId = proObj.get("projectId").toString();
+            String projectName = projectService.queryProjectNameById(projectId);
+            proObj.put("projectName",projectName);
+            resultList.add(proObj);
+        }
+        return resultList;
+    }
+
+    /**
+     * 根据项目id查询此项目下的全部问卷
+     * @param projectId
+     * @return
+     */
+    public List<Object> queryQuestionListByProjectId(String projectId) {
+        List<Object> resultList = new ArrayList<Object>();
+        List<Map<String,Object>> proResult = questionnaireEntityMapper.queryQuestionListByProjectId(projectId);
+        for(Map<String,Object> proObj : proResult) {
+            resultList.add(proObj);
+        }
+        return resultList;
     }
 
 }
