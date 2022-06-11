@@ -18,37 +18,48 @@ public class QuestionnaireService {
     @Autowired
     private QuestionnaireEntityMapper questionnaireEntityMapper;
 
-
     /**
      * 添加项目
+     * 
      * @param questionnaireEntity
      * @return
      */
-    public int addQuestionnaireInfo(QuestionnaireEntity questionnaireEntity,String user) {
-    
-        return 0;
+    public int addQuestionnaire(QuestionnaireEntity questionnaireEntity, String user) {
+        String id = UUIDUtil.getOneUUID();
+        questionnaireEntity.setId(id);
+        questionnaireEntity.setProjectId("test");
+
+        int result = questionnaireEntityMapper.insertSelective(questionnaireEntity);
+        return result;
     }
 
     /**
      * 修改项目
+     * 
      * @param questionnaireEntity
      * @return
      */
-    public int modifyQuestionnaireInfo(QuestionnaireEntity questionnaireEntity,String user) {
+    public int modifyQuestionnaireInfo(QuestionnaireEntity questionnaireEntity, String user) {
         return 0;
     }
 
     /**
      * 删除项目
+     * 
      * @param questionnaireEntity
      * @return
      */
     public int deleteQuestionnaireById(QuestionnaireEntity questionnaireEntity) {
-        return 0;
+        String questionnaireId = questionnaireEntity.getId();
+        // System.out.println(questionnaireId);
+        int result = questionnaireEntityMapper.deleteByPrimaryKey(questionnaireId);
+
+        return result;
     }
 
     /**
      * 查询项目列表
+     * 
      * @param questionnaireEntity
      * @return
      */
