@@ -25,12 +25,7 @@ public class QuestionnaireService {
      * @return
      */
     public int addQuestionnaire(QuestionnaireEntity questionnaireEntity, String user) {
-        String id = UUIDUtil.getOneUUID();
-        questionnaireEntity.setId(id);
-        questionnaireEntity.setProjectId("test");
-
-        int result = questionnaireEntityMapper.insertSelective(questionnaireEntity);
-        return result;
+        return 0;
     }
 
     /**
