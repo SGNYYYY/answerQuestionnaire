@@ -72,7 +72,7 @@ function quickCreate() {
     var nowTimeInput = chooseTimeRange.split(' ~ ')[0];
     var questionendTime = chooseTimeRange.split(' ~ ')[1];
     var urlObj = GetRequest();
-
+    var userName = getCookie("userName");
     deleteCookie('questionInfo');
     var questionName = $('#questionName').val();
     var questionContent = $('#questionContent').val();
@@ -98,10 +98,12 @@ function quickCreate() {
             'endTime': dateChange(questionendTime),
             'questionStop': '5',
             'dataId': getCookie('dataId'),
+             "createdBy": userName,
+            "lastUpdatedBy": userName,
             // 'projectId': getCookie('projectIdForCreate')
         };
-        if (getCookie('TProjectId') != undefined) {    //创建问卷
-            da.projectId = getCookie('TProjectId');
+        if (getCookie('projectId') != undefined) {    //创建问卷
+            da.projectId = getCookie('projectId');
             da.questionStop = '5';
         }
         var url = '/addQuestionnaire';
@@ -118,14 +120,16 @@ function quickCreate() {
             'endTime': dateChange(questionendTime),
             'questionStop': '5',
             'dataId': getCookie('dataId'),
-            'projectId': getCookie('TProjectId')
-        };
+             'projectId': getCookie('projectId'),
+            "createdBy": userName,
+            "lastUpdatedBy": userName,
+                    };
         // deleteCookie('QuestionId');
     }
 }
 
 function addQuestionnaireSuccess(res) {
-    //console.log(res);
+    console.log(res);
     if (res.code == '666') {
         layer.msg(res.message, { icon: 1 });
         deleteCookie('dataId');

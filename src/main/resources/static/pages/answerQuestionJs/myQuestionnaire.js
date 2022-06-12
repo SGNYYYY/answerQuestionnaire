@@ -47,6 +47,7 @@ function getProjectQuestSuccess(result) {
         if (data.length) {
             for (var i = 0; i < data.length; i++) {
                 var projectInfo = data[i];
+                var questionList = data[i].questionList;
                 var projectName = projectInfo.projectName;
                 if (projectName.length >= 25) {
                     projectName = projectName.substring(0, 26) + "...";
@@ -76,7 +77,13 @@ function getProjectQuestSuccess(result) {
                 text += "             <!--Anim pariatur cliche...-->";
                 text += "";
                 text += "";
-                text += "<span style=\"color:#d9534f;font-size:16px\">暂无调查问卷或问卷已过期</span>";
+                if (questionList.length) {
+                    for (var j = 0; j < questionList.length; j++) {
+                        text += "<div style=\"color:#333333;font-size:16px\">" + questionList[j].questionName + "</div>"
+                    }
+                } else {
+                    text += "<span style=\"color:#d9534f;font-size:16px\">暂无调查问卷或问卷已过期</span>";
+                }
                 text += "         </div>";
                 text += "     </div>";
                 text += " </div>";
@@ -114,7 +121,7 @@ function deleteProject(projectId) {
         };
 
         commonAjaxPost(true, url, data, function(result) {
-            // //console.log(result);
+            // console.log(result);
             if (result.code == "666") {
                 layer.msg(result.message, { icon: 1 });
                 getProjectQuest();
@@ -156,5 +163,7 @@ function getProjectInfo(id) {
 // 为了创建问卷而获取项目id、项目名称
 function createGetProjectInfo(id, name) {
     //alert("创建问卷")
+    setCookie("projectId", id);
+    setCookie("projectName", name);
     window.location.href = "createQuestionnaire.html"
 }

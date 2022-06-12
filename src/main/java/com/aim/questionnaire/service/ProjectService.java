@@ -4,6 +4,7 @@ import com.aim.questionnaire.common.utils.DateUtil;
 import com.aim.questionnaire.common.utils.UUIDUtil;
 import com.aim.questionnaire.dao.ProjectEntityMapper;
 import com.aim.questionnaire.dao.entity.ProjectEntity;
+import com.aim.questionnaire.service.QuestionnaireService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,6 +19,8 @@ public class ProjectService {
     @Autowired
     private ProjectEntityMapper projectEntityMapper;
 
+    @Autowired
+    private QuestionnaireService questionnaireService;
 
     /**
      * 添加项目
@@ -80,6 +83,9 @@ public class ProjectService {
 
         List<Map<String,Object>> proResult = projectEntityMapper.queryProjectList(projectEntity);
         for(Map<String,Object> proObj : proResult) {
+            String id = proObj.get("id").toString();
+            List<Object> questionList = questionnaireService.queryQuestionListByProjectId(id);
+            proObj.put("questionList",questionList);
             resultList.add(proObj);
         }
 
@@ -94,5 +100,14 @@ public class ProjectService {
         List<Map<String,Object>> result = projectEntityMapper.queryAllProjectName();
         return result;
 
+    }
+    /**
+     * 根据项目id查询项目名称
+     * @param id
+     * @return
+     */
+    public String queryProjectNameById(String id) {
+        String projectName = projectEntityMapper.queryProjectNameById(id);
+        return projectName;
     }
 }

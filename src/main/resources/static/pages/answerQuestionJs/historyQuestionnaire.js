@@ -3,7 +3,7 @@
  */
 var questIdModal = '';
 
-$(function () {
+$(function() {
     isLoginFun();
     header();
     $("#ctl01_lblUserName").text(getCookie('userName'));
@@ -16,14 +16,15 @@ function getHistoryQuest() {
 
     var url = '/queryQuestionnaireList';
     var data = {
-        "questionName": keyWord
+        "questionName": keyWord,
+        "user": getCookie('userName')
     };
     commonAjaxPost(true, url, data, getHistoryQuestSuccess);
 
 }
 
 function getHistoryQuestSuccess(result) {
-    //console.log(result)
+    console.log(result)
     if (result.code == "666") {
         var questionInfo = result.data;
         $("#historyList").empty();
@@ -40,7 +41,7 @@ function getHistoryQuestSuccess(result) {
                 text += "        <span>" + questionInfo[i].projectName + "</span>";
                 text += "    </td>";
                 text += "    <td align=\"center\" style=\"width:230px;\">";
-                text += "        <span>" + questionInfo[i].endTime.replace(/-/g,'/') + "</span>";
+                text += "        <span>" + timeFormat(questionInfo[i].endTime) + "</span>";
                 text += "    </td>";
                 text += "    <td align=\"center\" style=\"width:82px;\">" + questionInfo[i].count + "</td>";
                 text += "    <td align=\"center\">";
@@ -61,12 +62,12 @@ function getHistoryQuestSuccess(result) {
             $("#noHistoryQuest").css('display', 'block');
         }
     } else if (result.code == "333") {
-        layer.msg(result.message, {icon: 2});
-        setTimeout(function () {
+        layer.msg(result.message, { icon: 2 });
+        setTimeout(function() {
             window.location.href = 'login.html';
         }, 1000)
     } else {
-        layer.msg(result.message, {icon: 2})
+        layer.msg(result.message, { icon: 2 })
     }
 }
 
@@ -74,27 +75,26 @@ function deleteHistoryQuest(id) {
     //询问框
     layer.confirm('您确认要删除此问卷吗？', {
         btn: ['确定', '取消'] //按钮
-    }, function () {
+    }, function() {
         var url = '/deleteQuestionnaireById';
         var data = {
             "id": id
         };
-        commonAjaxPost(true, url, data, function (result) {
-            //console.log(result);
+        commonAjaxPost(true, url, data, function(result) {
+            console.log(result);
             if (result.code == "666") {
-                layer.msg(result.message, {icon: 1});
+                layer.msg(result.message, { icon: 1 });
                 getHistoryQuest();
             } else if (result.code == "333") {
-                layer.msg(result.message, {icon: 2});
-                setTimeout(function () {
+                layer.msg(result.message, { icon: 2 });
+                setTimeout(function() {
                     window.location.href = 'login.html';
                 }, 1000)
             } else {
-                layer.msg(result.message, {icon: 2});
+                layer.msg(result.message, { icon: 2 });
             }
         });
-    }, function () {
-    });
+    }, function() {});
 }
 
 // 恢复运行
@@ -108,7 +108,7 @@ function recoverRun(id, i) {
 function recoverRunBtn() {
     var endTimeModal = $("#endTimeModal").val();
     if (endTimeModal == "") {
-        layer.msg("问卷结束时间不能为空", {icon: 2});
+        layer.msg("问卷结束时间不能为空", { icon: 2 });
     } else {
         var endTimeModalChan = dateChange(endTimeModal);
 
@@ -117,18 +117,18 @@ function recoverRunBtn() {
             "id": questIdModal,
             "endTime": endTimeModalChan
         }
-        commonAjaxPost(true, url, data, function (result) {
+        commonAjaxPost(true, url, data, function(result) {
             if (result.code == '666') {
                 $("#recoverRunModal").modal('hide');
-                layer.msg("问卷已恢复运行，请在我的项目中查看", {icon: 1});
+                layer.msg("问卷已恢复运行，请在我的项目中查看", { icon: 1 });
                 getHistoryQuest();
             } else if (result.code == "333") {
-                layer.msg(result.message, {icon: 2});
-                setTimeout(function () {
+                layer.msg(result.message, { icon: 2 });
+                setTimeout(function() {
                     window.location.href = 'login.html';
                 }, 1000)
             } else {
-                layer.msg(result.message, {icon: 2})
+                layer.msg(result.message, { icon: 2 })
             }
         })
 
@@ -156,7 +156,7 @@ function createDtePicker() {
             "locale": {
                 "resetLabel": "重置",
                 "format": 'YYYY/MM/DD HH:mm:ss',
-                "separator": " ~ ",//
+                "separator": " ~ ", //
                 "applyLabel": "确定",
                 "cancelLabel": "取消",
                 "fromLabel": "起始时间",
@@ -169,7 +169,7 @@ function createDtePicker() {
 
             }
         },
-        function (start, end, label) {
+        function(start, end, label) {
             beginTimeTake = start;
             if (!this.startDate) {
                 this.element.val('');
@@ -180,9 +180,8 @@ function createDtePicker() {
 }
 
 //回车事件
-$(document).keydown(function (event) {
+$(document).keydown(function(event) {
     if (event.keyCode == 13) {
         getHistoryQuest();
     }
 });
-

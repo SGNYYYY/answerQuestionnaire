@@ -55,4 +55,11 @@ public interface ProjectEntityMapper {
      */
     List<Map<String,Object>> queryAllProjectName();
 
+    /**
+     * 根据项目id查询项目名称
+     * @param id
+     * @return
+     */
+    String queryProjectNameById(String id);
+
 }

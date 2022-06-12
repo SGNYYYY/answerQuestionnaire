@@ -351,7 +351,7 @@
 
   <!--根据项目id查询此项目下的全部问卷-->
   <select id="queryQuestionListByProjectId" parameterType="java.lang.String" resultType="map">
-    SELECT id,question_name as questionName,question_content as questionContent,question_stop as questionStop,creation_date as creationDate,end_time as endTime,data_id as dataId
+    SELECT id,question_name as questionName,question_content as questionContent,question_stop as questionStop,creation_date as creationDate,end_time as endTime,data_id as dataId, release_time as releaseTime
     FROM questionnaire_info
     WHERE project_id = #{projectId,jdbcType=VARCHAR}
     AND question_stop != "4"

@@ -181,7 +181,7 @@
   <!--查询项目列表-->
   <select id="queryProjectList" parameterType="com.aim.questionnaire.dao.entity.ProjectEntity" resultType="map">
     SELECT
-    id,project_name as projectName,project_content as projectContent,creation_date as createDate
+    id,project_name as projectName,project_content as projectContent,creation_date as createDate, created_by as createdBy
     FROM project_info
     WHERE 1=1
     <if test="id!= null">

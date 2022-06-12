@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 import java.util.Map;
-
+import java.util.HashMap;
 /**
  * Created by wln on 2018\8\6 0006.
  */
@@ -34,8 +34,11 @@ public class QuestionnaireController {
      * @return
      */
     @RequestMapping(value = "/queryQuestionnaireList", method = RequestMethod.POST, headers = "Accept=application/json")
-    public HttpResponseEntity queryQuestionnaireList(@RequestBody(required = false) QuestionnaireEntity questionnaireEntity) {
+    public HttpResponseEntity queryQuestionnaireList(@RequestBody(required = false) HashMap<String, Object> map) {
         HttpResponseEntity httpResponseEntity = new HttpResponseEntity();
+        List<Object> result = questionnaireService.queryQuestionnaireList(map);
+        httpResponseEntity.setCode(Constans.SUCCESS_CODE);
+        httpResponseEntity.setData(result);
         return httpResponseEntity;
     }
 
@@ -58,7 +61,7 @@ public class QuestionnaireController {
                 httpResponseEntity.setMessage(Constans.DELETE_MESSAGE);
             }
         } catch (Exception e) {
-            logger.info("deleteQuestionnaireById 删除问卷>>>>>>>>>>>" + e.getLocalizedMessage());
+            logger.info("deleteQuestionnaireById 根据id删除问卷>>>>>>>>>>>" + e.getLocalizedMessage());
             httpResponseEntity.setCode(Constans.EXIST_CODE);
             httpResponseEntity.setMessage(Constans.EXIST_MESSAGE);
         }
@@ -74,6 +77,20 @@ public class QuestionnaireController {
     @RequestMapping(value = "/addQuestionnaire", method = RequestMethod.POST, headers = "Accept=application/json")
     public HttpResponseEntity addQuestionnaire(@RequestBody QuestionnaireEntity questionnaireEntity) {
         HttpResponseEntity httpResponseEntity = new HttpResponseEntity();
+        try {
+            int result = questionnaireService.addQuestionnaire(questionnaireEntity,questionnaireEntity.getCreatedBy());
+            if(result == 3) {
+                httpResponseEntity.setCode(Constans.EXIST_CODE);
+                httpResponseEntity.setMessage(Constans.EXIST_MESSAGE);
+            }else {
+                httpResponseEntity.setCode(Constans.SUCCESS_CODE);
+                httpResponseEntity.setMessage(Constans.ADD_MESSAGE);
+            }
+        } catch (Exception e) {
+            logger.info("addQuestionnaire 创建问卷的基本信息>>>>>>>>>>>" + e.getLocalizedMessage());
+            httpResponseEntity.setCode(Constans.EXIST_CODE);
+            httpResponseEntity.setMessage(Constans.EXIST_MESSAGE);
+        }
         return httpResponseEntity;
     }
 
@@ -86,8 +103,23 @@ public class QuestionnaireController {
     @RequestMapping(value = "/modifyQuestionnaireInfo", method = RequestMethod.POST, headers = "Accept=application/json")
     public HttpResponseEntity modifyQuestionnaireInfo(@RequestBody QuestionnaireEntity questionnaireEntity) {
         HttpResponseEntity httpResponseEntity = new HttpResponseEntity();
-
+        try {
+            int result = questionnaireService.modifyQuestionnaireInfo(questionnaireEntity, questionnaireEntity.getCreatedBy());
+            if (result == 3) {
+                httpResponseEntity.setCode(Constans.EXIST_CODE);
+                httpResponseEntity.setMessage(Constans.EXIST_MESSAGE);
+            } else {
+                httpResponseEntity.setCode(Constans.SUCCESS_CODE);
+                httpResponseEntity.setMessage(Constans.UPDATE_MESSAGE);
+            }
+        } catch (Exception e) {
+            logger.info("modifyQuestionnaire 修改问卷的基本信息>>>>>>>>>>>" + e.getLocalizedMessage());
+            httpResponseEntity.setCode(Constans.EXIST_CODE);
+            httpResponseEntity.setMessage(Constans.EXIST_MESSAGE);
+        }
         return httpResponseEntity;
     }
+
+    
 
 }
