@@ -103,7 +103,20 @@ public class QuestionnaireController {
     @RequestMapping(value = "/modifyQuestionnaireInfo", method = RequestMethod.POST, headers = "Accept=application/json")
     public HttpResponseEntity modifyQuestionnaireInfo(@RequestBody QuestionnaireEntity questionnaireEntity) {
         HttpResponseEntity httpResponseEntity = new HttpResponseEntity();
-
+        try {
+            int result = questionnaireService.modifyQuestionnaireInfo(questionnaireEntity, questionnaireEntity.getCreatedBy());
+            if (result == 3) {
+                httpResponseEntity.setCode(Constans.EXIST_CODE);
+                httpResponseEntity.setMessage(Constans.EXIST_MESSAGE);
+            } else {
+                httpResponseEntity.setCode(Constans.SUCCESS_CODE);
+                httpResponseEntity.setMessage(Constans.UPDATE_MESSAGE);
+            }
+        } catch (Exception e) {
+            logger.info("modifyQuestionnaire 修改问卷的基本信息>>>>>>>>>>>" + e.getLocalizedMessage());
+            httpResponseEntity.setCode(Constans.EXIST_CODE);
+            httpResponseEntity.setMessage(Constans.EXIST_MESSAGE);
+        }
         return httpResponseEntity;
     }
     /**
