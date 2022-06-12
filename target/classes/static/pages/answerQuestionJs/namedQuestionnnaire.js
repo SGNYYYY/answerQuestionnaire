@@ -4,7 +4,7 @@
 var question = '';
 var questionTitle = '';
 var da1 = {};
-$(function() {
+$(function () {
     isLoginFun();
     header();
     $("#ctl01_lblUserName").text(getCookie('userName'));
@@ -21,7 +21,7 @@ function createDtePicker() {
     var nowTime = getFormatDateSecond();
     var startTime = GetDateStr(1);
     var date = new Date();
-    var milliseconds = date.getTime() + 1000 * 60 * 60 * 24 * 8; //n代表天数,加号表示未来n天的此刻时间,减号表示过去n天的此刻时间   n:7
+    var milliseconds = date.getTime() + 1000 * 60 * 60 * 24 * 8;                                    //n代表天数,加号表示未来n天的此刻时间,减号表示过去n天的此刻时间   n:7
     //getTime()方法返回Date对象的毫秒数,但是这个毫秒数不再是Date类型了,而是number类型,所以需要重新转换为Date对象,方便格式化
     var newDate = new Date(milliseconds);
     var dateAfterNow = timeFormat(newDate);
@@ -35,7 +35,7 @@ function createDtePicker() {
         "locale": {
             "resetLabel": "重置",
             "format": 'YYYY/MM/DD HH:mm:ss',
-            "separator": " ~ ", //
+            "separator": " ~ ",//
             "applyLabel": "确定",
             "cancelLabel": "取消",
             "fromLabel": "起始时间",
@@ -46,7 +46,7 @@ function createDtePicker() {
             "monthNames": ["一月", "二月", "三月", "四月", "五月", "六月", "七月", "八月", "九月", "十月", "十一月", "十二月"],
             "firstDay": 1
         },
-    }, function(start, end, label) {
+    }, function (start, end, label) {
         // //console.log('New date range selected: ' + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD') + ' (predefined range: ' + label + ')');
     });
 }
@@ -55,10 +55,10 @@ function GetRequest() {
     //url例子：www.bicycle.com?id="123456"&Name="bicycle"；
     var url = decodeURI(location.search); //?id="123456"&Name="bicycle";
     var object = {};
-    if (url.indexOf("?") != -1) //url中存在问号，也就说有参数。
+    if (url.indexOf("?") != -1)//url中存在问号，也就说有参数。
     {
-        var str = url.substr(1); //得到?后面的字符串
-        var strs = str.split("&"); //将得到的参数分隔成数组[id="123456",Name="bicycle"];
+        var str = url.substr(1);  //得到?后面的字符串
+        var strs = str.split("&");  //将得到的参数分隔成数组[id="123456",Name="bicycle"];
         for (var i = 0; i < strs.length; i++) {
             object[strs[i].split("=")[0]] = strs[i].split("=")[1]
         }
@@ -98,11 +98,11 @@ function quickCreate() {
             'endTime': dateChange(questionendTime),
             'questionStop': '5',
             'dataId': getCookie('dataId'),
-            "createdBy": userName,
+             "createdBy": userName,
             "lastUpdatedBy": userName,
             // 'projectId': getCookie('projectIdForCreate')
         };
-        if (getCookie('projectId') != undefined) { //创建问卷
+        if (getCookie('projectId') != undefined) {    //创建问卷
             da.projectId = getCookie('projectId');
             da.questionStop = '5';
         }
@@ -120,10 +120,10 @@ function quickCreate() {
             'endTime': dateChange(questionendTime),
             'questionStop': '5',
             'dataId': getCookie('dataId'),
-            'projectId': getCookie('projectId'),
+             'projectId': getCookie('projectId'),
             "createdBy": userName,
             "lastUpdatedBy": userName,
-        };
+                    };
         // deleteCookie('QuestionId');
     }
 }
@@ -136,7 +136,7 @@ function addQuestionnaireSuccess(res) {
         window.location.href = 'myQuestionnaires.html'
     } else if (res.code == "333") {
         layer.msg(res.message, { icon: 2 });
-        setTimeout(function() {
+        setTimeout(function () {
             window.location.href = 'login.html';
         }, 1000)
     } else {

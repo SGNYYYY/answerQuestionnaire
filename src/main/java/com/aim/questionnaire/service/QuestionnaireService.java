@@ -45,13 +45,19 @@ public class QuestionnaireService {
     }
 
     /**
-     * 修改项目
+     * 修改问卷基本信息
      * 
      * @param questionnaireEntity
      * @return
      */
     public int modifyQuestionnaireInfo(QuestionnaireEntity questionnaireEntity, String user) {
-        return 0;
+        // 获取用户信息
+        questionnaireEntity.setLastUpdatedBy(user);
+        // 获取当前时间
+        Date date = DateUtil.getCreateTime();
+        questionnaireEntity.setLastUpdateDate(date);
+        int result = questionnaireEntityMapper.modifyQuestionnaireInfo(questionnaireEntity);
+        return result;
     }
 
     /**
