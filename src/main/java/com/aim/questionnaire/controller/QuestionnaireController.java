@@ -154,6 +154,20 @@ public class QuestionnaireController {
     }
 
     /**
+     * 根据问卷id查询问卷的详细信息
+     * 
+     * @param questionnaireEntity
+     * @return
+     */
+    @RequestMapping(value = "/queryQuestionnaireById", method = RequestMethod.POST, headers = "Accept=application/json")
+    public HttpResponseEntity queryQuestionnaireById(@RequestBody(required = false) HashMap<String, Object> map) {
+        HttpResponseEntity httpResponseEntity = new HttpResponseEntity();
+        Map<String, String> result = questionnaireService.queryQuestionnaireById(map);
+        httpResponseEntity.setCode(Constans.SUCCESS_CODE);
+        httpResponseEntity.setData(result);
+        return httpResponseEntity;
+    }
+    /**
      * 查询全部历史问卷
      * 
      * @param questionnaireEntity

@@ -983,7 +983,7 @@ function editFinish() {
 function previewQuestion() {
     //判断有没有问卷id 没有就提示先保存
     // console.log(getCookie('previewId'));
-    var idQ = getCookie('previewId');
+    var idQ = questionId;
     if (idQ == undefined) {
         layer.alert('请保存之后再预览', {
             skin: 'layui-layer-lan',

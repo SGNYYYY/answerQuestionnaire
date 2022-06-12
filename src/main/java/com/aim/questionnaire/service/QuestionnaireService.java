@@ -76,6 +76,16 @@ public class QuestionnaireService {
     }
 
     /**
+     * 根据问卷id查询问卷的详细信息
+     * 
+     * @param map
+     * @return
+     */
+    public Map<String, String> queryQuestionnaireById(HashMap<String, Object> map) {
+        Map<String, String> result = questionnaireEntityMapper.queryQuestionnaireById(map);
+        return result;
+    }
+    /**
      * 删除项目
      * 
      * @param questionnaireEntity
@@ -121,16 +131,7 @@ public class QuestionnaireService {
         return Result;
     }
 
-    /**
-     * 根据问卷id查询问卷的详细信息
-     * 
-     * @param map
-     * @return
-     */
-    public Map<String, String> queryQuestionnaireById(HashMap<String, Object> map) {
-        Map<String, String> result = questionnaireEntityMapper.queryQuestionnaireById(map);
-        return result;
-    }
+ 
     /**
      * 根据项目id查询此项目下的全部问卷
      * @param projectId
