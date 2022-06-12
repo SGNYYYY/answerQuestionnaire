@@ -42,6 +42,23 @@ public class QuestionnaireController {
         return httpResponseEntity;
     }
 
+
+    /**
+     * 查询问卷的題
+     * 
+     * @param questionnaireEntity
+     * @return
+     */
+    @RequestMapping(value = "/queryQuestionnaireAll", method = RequestMethod.POST, headers = "Accept=application/json")
+    public HttpResponseEntity queryQuestionnaireAll(@RequestBody(required = false) String id) {
+        HttpResponseEntity httpResponseEntity = new HttpResponseEntity();
+        QuestionnaireEntity result = questionnaireService.queryQuestionnaireAll(id);
+        httpResponseEntity.setCode(Constans.SUCCESS_CODE);
+        httpResponseEntity.setData(result.toString());
+        return httpResponseEntity;
+    }
+
+
     /**
      * 根据id删除问卷
      * 
