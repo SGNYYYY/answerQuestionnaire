@@ -30,9 +30,9 @@ $(function() {
 //铺调查类型
 function queryAllDataType() {
     var url = '/admin/queryAllDataType';
-    var da = {'parentId': '1'};
-    commonAjaxPost(true, url, da, function (result) {
-        console.log(result);
+    var da = { 'parentId': '1' };
+    commonAjaxPost(true, url, da, function(result) {
+        //console.log(result);
         if (result.code == "666") {
             var belongType = document.getElementById('belongType');
             belongType.options.length = 0;
@@ -131,7 +131,7 @@ function createTimePicker() {
         "locale": {
             "resetLabel": "重置",
             "format": 'YYYY/MM/DD HH:mm:ss',
-            "separator": " ~ ",
+            "separator": " ~ ", //
             "applyLabel": "确定",
             "cancelLabel": "取消",
             "fromLabel": "起始时间",

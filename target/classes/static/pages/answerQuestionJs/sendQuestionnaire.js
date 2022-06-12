@@ -1,7 +1,7 @@
 var persons = []; //传入调查人员信息
 var sendTime = "";
 var questionId = getCookie("questionId");
-var dataId = getCookie("dataId");  // 在校生：2；毕业生：3；教师：4；用人单位：5
+var dataId = getCookie("dataId"); // 在校生：2；毕业生：3；教师：4；用人单位：5
 var nameOfQuestionnaire = getCookie("nameOfQuestionnaire");
 
 document.getElementById("questPeople").innerText = "调查人员信息 — " + nameOfQuestionnaire;
@@ -12,32 +12,32 @@ var shortMessageGetTime = '0';
 //按钮事件
 window.operateEvents = {
     //删除
-    'click #Tbtn_delete': function (e, value, row, index) {
+    'click #Tbtn_delete': function(e, value, row, index) {
         id = row.no;
         // //console.log(id);
         layer.confirm('您确认要删除此条人员信息吗？', {
             btn: ['确定', '取消'] //按钮
-        }, function () {
+        }, function() {
             _$("#userInfoTable").bootstrapTable('removeByUniqueId', row.no);
-            layer.msg("删除成功", {icon: 1});
+            layer.msg("删除成功", { icon: 1 });
         });
     }
 };
 
 //不是用人单位的列名
-var columnsForCompany =[{
-    checkbox: true,
-    visible: false
-}, {
-    field: 'no',
-    title: '序号',
-    align: 'center',
-}, {
-    field: 'answerNum',
-    title: '答题人编号',
-    align: 'center',
-    width: '200px'
-},
+var columnsForCompany = [{
+        checkbox: true,
+        visible: false
+    }, {
+        field: 'no',
+        title: '序号',
+        align: 'center',
+    }, {
+        field: 'answerNum',
+        title: '答题人编号',
+        align: 'center',
+        width: '200px'
+    },
     {
         field: 'answerName',
         title: '姓名',
@@ -59,9 +59,10 @@ var columnsForCompany =[{
         field: 'operation',
         title: '操作',
         align: 'center',
-        events: operateEvents,//给按钮注册事件
-        formatter: addFunctionAlty//表格中增加按钮
-    }]
+        events: operateEvents, //给按钮注册事件
+        formatter: addFunctionAlty //表格中增加按钮
+    }
+]
 
 
 if (dataId == "2") {
@@ -73,18 +74,18 @@ if (dataId == "2") {
 } else if (dataId == "5") {
     $("#getDownLoadBtn").prepend("<a style=\"margin-right: 20px;\" href=\"../用人单位上传数据模板.xlsx\" class=\"add__batches pull-left\">下载模板</a>");
     columnsForCompany = [{
-        checkbox: true,
-        visible: false
-    }, {
-        field: 'no',
-        title: '序号',
-        align: 'center',
-    }, {
-        field: 'answerNum',
-        title: '答题人编号',
-        align: 'center',
-        width: '200px'
-    },
+            checkbox: true,
+            visible: false
+        }, {
+            field: 'no',
+            title: '序号',
+            align: 'center',
+        }, {
+            field: 'answerNum',
+            title: '答题人编号',
+            align: 'center',
+            width: '200px'
+        },
         {
             field: 'answerName',
             title: '用人单位',
@@ -106,9 +107,10 @@ if (dataId == "2") {
             field: 'operation',
             title: '操作',
             align: 'center',
-            events: operateEvents,//给按钮注册事件
-            formatter: addFunctionAlty//表格中增加按钮
-        }]
+            events: operateEvents, //给按钮注册事件
+            formatter: addFunctionAlty //表格中增加按钮
+        }
+    ]
 }
 
 // 发送方式，短信：0； 邮件：1； 链接：2；
@@ -118,7 +120,7 @@ var previewUrl = '';
 var objLength;
 var objLength1;
 //默认顶部导航栏的显示
-if(getCookie("changeTableType") == "shortMessageSend"){   //从已发问卷页面点击进入的问卷发布页面
+if (getCookie("changeTableType") == "shortMessageSend") { //从已发问卷页面点击进入的问卷发布页面
     deleteCookie("changeTableType");
     document.getElementById('linkSendA').style.backgroundColor = "#fff";
     document.getElementById('linkSendA').removeAttribute("class", "inside-wrapper nav-show nav-items clicked linkCode-icon");
@@ -136,7 +138,7 @@ if(getCookie("changeTableType") == "shortMessageSend"){   //从已发问卷页�
         wordStatic(msg);
     }
 
-}else{ //正常进入
+} else { //正常进入
     document.getElementById('linkSendA').style.backgroundColor = "#1ea0fa";
     document.getElementById('linkSendA').removeAttribute("class", "inside-wrapper nav-show nav-items linkCode-icon");
     document.getElementById('linkSendA').setAttribute("class", "inside-wrapper nav-show nav-items clicked linkCode-icon");
@@ -155,27 +157,27 @@ function TableInit() {
 
     var oTableInit = new Object();
     //初始化Table
-    oTableInit.Init = function () {
+    oTableInit.Init = function() {
         $('#userInfoTable').bootstrapTable({
-            url: '',         //请求后台的URL（*）
-            striped: true,                      //是否显示行间隔色
-            pagination: true,                   //是否显示分页（*）
-            sortOrder: "asc",                   //排序方式
+            url: '', //请求后台的URL（*）
+            striped: true, //是否显示行间隔色
+            pagination: true, //是否显示分页（*）
+            sortOrder: "asc", //排序方式
             queryParamsType: '',
             dataType: 'json',
             paginationShowPageGo: true,
             showJumpto: true,
             pageNumber: 1, //初始化加载第一页，默认第一页
-            queryParams: queryParams,//请求服务器时所传的参数
+            queryParams: queryParams, //请求服务器时所传的参数
             sidePagination: 'client',
-            pageSize: 10,//单页记录数
-            pageList: [10, 20, 30, 40],//分页步进值
+            pageSize: 10, //单页记录数
+            pageList: [10, 20, 30, 40], //分页步进值
             search: false, //是否显示表格搜索，此搜索是客户端搜索，不会进服务端，所以，个人感觉意义不大
             silent: true,
-            showRefresh: false,                  //是否显示刷新按钮
+            showRefresh: false, //是否显示刷新按钮
             showToggle: false,
-            minimumCountColumns: 2,             //最少允许的列数
-            uniqueId: "no",                     //每一行的唯一标识，一般为主键列
+            minimumCountColumns: 2, //最少允许的列数
+            uniqueId: "no", //每一行的唯一标识，一般为主键列
             columns: columnsForCompany
         });
     };
@@ -184,7 +186,7 @@ function TableInit() {
     function queryParams(params) {
         var userName = $("#keyWord").val();
         // //console.log(userName);
-        var temp = {   //这里的键的名字和控制器的变量名必须一直，这边改动，控制器也需要改成一样的
+        var temp = { //这里的键的名字和控制器的变量名必须一直，这边改动，控制器也需要改成一样的
             pageNum: params.pageNumber,
             pageSize: params.pageSize,
             username: userName
@@ -248,9 +250,9 @@ function send(value) {
         }
         //    邮箱方式隐藏
         document.getElementById('sendMailContent').style.display = 'none'
-        //    链接方式隐藏
+            //    链接方式隐藏
         document.getElementById('sendUrlContent').style.display = 'none'
-        //    发送按钮
+            //    发送按钮
         document.getElementById('sendButton').style.display = 'block'
 
         document.getElementById('myLittleTip').style.display = 'none';
@@ -261,11 +263,11 @@ function send(value) {
         document.getElementById('sendKind').style.display = 'none'
         document.getElementById('sendContent').style.display = 'none'
         document.getElementById('sendTimeChoose').style.display = 'none'
-        //    邮箱方式显示
+            //    邮箱方式显示
         document.getElementById('sendMailContent').style.display = 'block'
-        //    链接方式隐藏
+            //    链接方式隐藏
         document.getElementById('sendUrlContent').style.display = 'none'
-        //    发送按钮
+            //    发送按钮
         document.getElementById('sendButton').style.display = 'block'
         document.getElementById('myLittleTip').style.display = 'none';
         document.getElementById('ctl02_ContentPlaceHolder1_btnSend').style.display = '';
@@ -275,11 +277,11 @@ function send(value) {
         document.getElementById('sendKind').style.display = 'none'
         document.getElementById('sendContent').style.display = 'none'
         document.getElementById('sendTimeChoose').style.display = 'none'
-        //    邮箱方式隐藏
+            //    邮箱方式隐藏
         document.getElementById('sendMailContent').style.display = 'none'
-        //    链接方式显示
+            //    链接方式显示
         document.getElementById('sendUrlContent').style.display = 'block'
-        //调用生成二维码方法
+            //调用生成二维码方法
         getQrcode();
         //    发送按钮
         document.getElementById('sendButton').style.display = 'block'
@@ -296,7 +298,7 @@ function test(value) {
         document.getElementById('sendTimeChoose').style.display = 'block'
         document.getElementById("scheduledEndTime").value = getFormatDate(); //将currentdate赋值给页面id为kc_rksjStart的input输入框
         sendTime = document.getElementById("scheduledEndTime").valueOf()
-        // //console.log(sendTime)
+            // //console.log(sendTime)
     } else {
         shortMessageGetTime = '0';
         document.getElementById('sendTimeChoose').style.display = 'none'
@@ -320,7 +322,7 @@ function getQuestionInfo() {
         data: JSON.stringify(da),
         dataType: "json",
         contentType: "application/json",
-        success: function (res) {
+        success: function(res) {
             // //console.log(res);
             if (!res.data) {
 
@@ -332,23 +334,22 @@ function getQuestionInfo() {
             objLength1 = 38 - objLength;
             document.getElementById('Lnum').innerText = objLength1
         },
-        error: function (jqXHR, textStatus, errorThrown) {
+        error: function(jqXHR, textStatus, errorThrown) {
             // alert(jqXHR);
         }
     });
 }
 
 //读取上传的excel表格中的内容
-$('#image').change(function (e) {
-    debugger;
+$('#image').change(function(e) {
     var files = e.target.files;
     var fileReader = new FileReader();
-    fileReader.onload = function (ev) {
+    fileReader.onload = function(ev) {
         try {
             var data = ev.target.result,
                 workbook = XLSX.read(data, {
                     type: 'binary'
-                })// 以二进制流方式读取得到整份excel表格对象
+                }) // 以二进制流方式读取得到整份excel表格对象
             persons = []; // 存储获取到的数据
         } catch (e) {
             layer.msg('文件类型不正确');
@@ -364,6 +365,7 @@ $('#image').change(function (e) {
                 break; // 如果只取第一张表，就取消注释这行
             }
         }
+        console.log(persons)
         if (persons.length != 0) {
             if (!persons[0].no || !persons[0].answerNum || !persons[0].answerName || !persons[0].answerBelong || !persons[0].answerPhone || !persons[0].answerEmail) {
                 layer.msg('数据模板不正确');
@@ -372,8 +374,9 @@ $('#image').change(function (e) {
             }
             _$("#userInfoTable").bootstrapTable('removeAll');
             //传入参数
+
             for (var i = 0; i < persons.length; i++) {
-                _$("#userInfoTable").bootstrapTable('insertRow', {index: i, row: persons[i]});
+                _$("#userInfoTable").bootstrapTable('insertRow', { index: i, row: persons[i] });
                 if (i == persons.length - 1) {
                     if (files) {
                         document.getElementById('image').value = '';
@@ -405,39 +408,39 @@ function layOutSend() {
         var endContent = document.getElementById("tipT").value;
 
         if (persons.length == 0) {
-            layer.msg("请添加调查人员信息", {icon: 2});
+            layer.msg("请添加调查人员信息", { icon: 2 });
         } else if (endContent == "") {
-            layer.msg("请添加答题结束语", {icon: 2});
+            layer.msg("请添加答题结束语", { icon: 2 });
         } else if (sendContent == "") {
-            layer.msg("请添加短信内容", {icon: 2});
+            layer.msg("请添加短信内容", { icon: 2 });
         } else {
-            layer.load(2, {time: 2 * 1000});
+            layer.load(2, { time: 2 * 1000 });
             jQuery.ajax({
                 type: "POST",
-                url: httpRequestUrl + "/selSum",    //查短信条数
+                url: httpRequestUrl + "/selSum", //查短信条数
                 dataType: 'json',
                 contentType: "application/json",
-                success: function (result) {
+                success: function(result) {
                     //console.log(result);
                     //判断短信条数和上传的人数
                     if (persons > result) {
-                        layer.msg("余额不足，无法发布", {icon: 2});
+                        layer.msg("余额不足，无法发布", { icon: 2 });
                         layer.closeAll('loading');
                     } else {
                         var url = '/addSendQuestionnaire';
                         var personsData = _$('#userInfoTable').bootstrapTable('getData');
                         //短信发送问卷
                         var data = {
-                            "questionId": questionId,           //问卷id
-                            "dataId": dataId,                    //问卷类型
-                            "releaseTime": sendTime,            //发送时间
-                            "sendType": sendType,                //发送类别，0短信，1邮件
-                            "context": sendContent,                 //短信内容
-                            "questionEndContent": endContent,        //答卷结束语
-                            "sendInfo": personsData                     //人员信息
+                            "questionId": questionId, //问卷id
+                            "dataId": dataId, //问卷类型
+                            "releaseTime": sendTime, //发送时间
+                            "sendType": sendType, //发送类别，0短信，1邮件
+                            "context": sendContent, //短信内容
+                            "questionEndContent": endContent, //答卷结束语
+                            "sendInfo": personsData //人员信息
                         };
-                        setTimeout(function () {
-                            layer.msg("发送成功", {icon: 1});
+                        setTimeout(function() {
+                            layer.msg("发送成功", { icon: 1 });
                         }, 2000);
                         jQuery.ajax({
                             "async": true,
@@ -446,10 +449,10 @@ function layOutSend() {
                             "data": JSON.stringify(data),
                             "dataType": "json",
                             "contentType": "application/json",
-                            success: function (result) {
+                            success: function(result) {
                                 //console.log(result);
                             },
-                            error: function (jqXHR, textStatus, errorThrown) {
+                            error: function(jqXHR, textStatus, errorThrown) {
                                 //console.log(jqXHR);
                                 //console.log(textStatus);
                                 //console.log(errorThrown);
@@ -460,7 +463,7 @@ function layOutSend() {
                 }
             });
         }
-    } else if (sendType == '1') {   //邮箱发送方式
+    } else if (sendType == '1') { //邮箱发送方式
         //邮件标题
         var emailTitle = document.getElementById("ctl02_ContentPlaceHolder1_txtEmailTitle").value;
         //邮件发送富文本内容
@@ -476,31 +479,31 @@ function layOutSend() {
                 icon: 2
             });
         } else if (endContent == "") {
-            layer.msg("请添加答卷结束语", {icon: 2});
+            layer.msg("请添加答卷结束语", { icon: 2 });
         } else if (emailTitle == "") {
-            layer.msg("请添加邮件标题", {icon: 2});
+            layer.msg("请添加邮件标题", { icon: 2 });
         } else if (emailContent == "") {
-            layer.msg("请添加邮件内容", {icon: 2});
+            layer.msg("请添加邮件内容", { icon: 2 });
         } else if (emailContent.search("【联系人姓名】") == -1 || emailContent.search("【填写问卷地址】") == -1) {
-            layer.msg("请不要修改'【】'里的内容，系统将会根据问卷自动进行替换！", {icon: 2});
+            layer.msg("请不要修改'【】'里的内容，系统将会根据问卷自动进行替换！", { icon: 2 });
         } else {
-            layer.load(2, {time: 2 * 1000});
+            layer.load(2, { time: 2 * 1000 });
             var url = '/addSendQuestionnaire';
             var personsData = _$('#userInfoTable').bootstrapTable('getData');
             //邮件发送问卷
             var data = {
-                "questionId": questionId,           //问卷id
-                "dataId": dataId,                    //问卷类型
-                "releaseTime": "",            //发送时间
-                "sendType": sendType,                //发送类别，0短信，1邮件
-                "emailTitle": emailTitle,                //邮件标题
-                "context": emailContent,                 //邮件内容
-                "questionEndContent": endContent,        //答卷结束语
-                "sendInfo": personsData                     //人员信息
+                "questionId": questionId, //问卷id
+                "dataId": dataId, //问卷类型
+                "releaseTime": "", //发送时间
+                "sendType": sendType, //发送类别，0短信，1邮件
+                "emailTitle": emailTitle, //邮件标题
+                "context": emailContent, //邮件内容
+                "questionEndContent": endContent, //答卷结束语
+                "sendInfo": personsData //人员信息
             };
             // layer.closeAll('loading');
-            setTimeout(function () {
-                layer.msg("发送成功", {icon: 1});
+            setTimeout(function() {
+                layer.msg("发送成功", { icon: 1 });
             }, 2000);
             jQuery.ajax({
                 "async": true,
@@ -509,17 +512,17 @@ function layOutSend() {
                 "data": JSON.stringify(data),
                 "dataType": "json",
                 "contentType": "application/json",
-                success: function (result) {
+                success: function(result) {
                     //console.log(result);
-                   if (result.code == "333") {
+                    if (result.code == "333") {
                         layer.closeAll('loading');
-                        layer.msg(result.message, {icon: 2});
-                        setTimeout(function () {
+                        layer.msg(result.message, { icon: 2 });
+                        setTimeout(function() {
                             window.location.href = 'login.html';
                         }, 1000)
                     }
                 },
-                error: function (jqXHR, textStatus, errorThrown) {
+                error: function(jqXHR, textStatus, errorThrown) {
                     //console.log(jqXHR);
                     //console.log(textStatus);
                     //console.log(errorThrown);
@@ -543,16 +546,16 @@ function layOutHold(falg) {
         var sendContent = document.getElementById("msg").value;
 
         data = {
-            "questionId": questionId,           //问卷id
-            "dataId": dataId,                    //问卷类型
-            "releaseTime": "",            //发送时间
-            "sendType": sendType,                //发送类别，0短信，1邮件
-            "context": sendContent,                 //短信内容
-            "questionEndContent": endContent,        //答卷结束语
-            "sendInfo": null                     //人员信息
+            "questionId": questionId, //问卷id
+            "dataId": dataId, //问卷类型
+            "releaseTime": "", //发送时间
+            "sendType": sendType, //发送类别，0短信，1邮件
+            "context": sendContent, //短信内容
+            "questionEndContent": endContent, //答卷结束语
+            "sendInfo": null //人员信息
         };
 
-    } else if (sendType == "1") {     //邮件
+    } else if (sendType == "1") { //邮件
         //邮件标题
         var emailTitle = document.getElementById("ctl02_ContentPlaceHolder1_txtEmailTitle").value;
         //邮件发送富文本内容
@@ -560,23 +563,23 @@ function layOutHold(falg) {
         emailContent = emailContent.value;
         //发送问卷答题结束语
         data = {
-            "questionId": questionId,           //问卷id
-            "dataId": dataId,                    //问卷类型
-            "releaseTime": "",            //发送时间
-            "sendType": sendType,                //发送类别，0短信，1邮件
-            "emailTitle": emailTitle,                //邮件标题
+            "questionId": questionId, //问卷id
+            "dataId": dataId, //问卷类型
+            "releaseTime": "", //发送时间
+            "sendType": sendType, //发送类别，0短信，1邮件
+            "emailTitle": emailTitle, //邮件标题
             // "context": emailContent,                 //邮件内容
-            "questionEndContent": endContent,        //答卷结束语
-            "sendInfo": null                     //人员信息
+            "questionEndContent": endContent, //答卷结束语
+            "sendInfo": null //人员信息
         };
 
     } else if (sendType == "2") {
         data = {
-            "questionId": questionId,           //问卷id
-            "releaseTime": "",            //发送时间
-            "sendType": sendType,                //发送类别，0短信，1邮件
-            "questionEndContent": endContent,        //答卷结束语
-            "sendInfo": null                     //人员信息
+            "questionId": questionId, //问卷id
+            "releaseTime": "", //发送时间
+            "sendType": sendType, //发送类别，0短信，1邮件
+            "questionEndContent": endContent, //答卷结束语
+            "sendInfo": null //人员信息
         };
 
     }
@@ -587,19 +590,19 @@ function layOutHold(falg) {
         "data": JSON.stringify(data),
         "dataType": "json",
         "contentType": "application/json",
-        success: function (result) {
+        success: function(result) {
             if (result.code == "666") {
                 if (falg == "true") {
                     layer.msg("保存成功！")
                 }
 
             } else if (result.code == "333") {
-                layer.msg(result.message, {icon: 2});
-                setTimeout(function () {
+                layer.msg(result.message, { icon: 2 });
+                setTimeout(function() {
                     window.location.href = 'login.html';
                 }, 1000)
             } else {
-                layer.msg(result.message, {icon: 2})
+                layer.msg(result.message, { icon: 2 })
             }
         }
     })
@@ -621,7 +624,7 @@ function getQrcode() {
         data: JSON.stringify(da),
         dataType: "json",
         contentType: "application/json",
-        success: function (res) {
+        success: function(res) {
             // //console.log(res);
             var resData = JSON.parse(res.data);
             shortUrl = resData.tinyurl;
@@ -630,10 +633,10 @@ function getQrcode() {
             _$("#ctl02_ContentPlaceHolder1_imgQrcode").qrcode({
                 width: 100, //宽度
                 height: 100, //高度
-                text: shortUrl    //任意内容
+                text: shortUrl //任意内容
             })
         },
-        error: function (jqXHR, textStatus, errorThrown) {
+        error: function(jqXHR, textStatus, errorThrown) {
             // alert(jqXHR);
         },
     });
@@ -658,7 +661,7 @@ function createDtePicker() {
         "locale": {
             "resetLabel": "重置",
             "format": 'YYYY/MM/DD HH:mm:ss',
-            "separator": " ~ ",//
+            "separator": " ~ ", //
             "applyLabel": "确定",
             "cancelLabel": "取消",
             "fromLabel": "起始时间",
@@ -670,7 +673,7 @@ function createDtePicker() {
             "firstDay": 1
 
         }
-    }, function (start, end, label) {
+    }, function(start, end, label) {
         // //console.log('New date range selected: ' + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD') + ' (predefined range: ' + label + ')');
     });
 }
@@ -679,7 +682,7 @@ function createDtePicker() {
 function designQuestionnaire() {
     var ifDesignQuestionnaire = _$.cookie("ifDesignQuestionnaire");
     if (ifDesignQuestionnaire == "false") {
-        layer.msg("问卷处于运行状态或问卷已发布，不可设计问卷", {icon: 2})
+        layer.msg("问卷处于运行状态或问卷已发布，不可设计问卷", { icon: 2 })
     } else {
         _$.cookie("QuestionId", questionId);
         window.open('designQuestionnaire.html')
@@ -687,7 +690,7 @@ function designQuestionnaire() {
 }
 
 //预览问卷
-$('#ctl02_hrefView').click(function () {
+$('#ctl02_hrefView').click(function() {
     window.open('previewQuestionnaire.html?=' + questionId)
 });
 
@@ -723,6 +726,5 @@ function copyUrl2() {
     var Url2 = document.getElementById("ctl02_ContentPlaceHolder1_txtLink");
     Url2.select(); // 选择对象
     document.execCommand("Copy"); // 执行浏览器复制命令
-    layer.msg("已复制好，可贴粘。", {icon: 1, time: 1000});
+    layer.msg("已复制好，可贴粘。", { icon: 1, time: 1000 });
 }
-
