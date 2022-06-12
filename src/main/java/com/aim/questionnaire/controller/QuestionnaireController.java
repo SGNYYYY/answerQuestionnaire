@@ -119,6 +119,22 @@ public class QuestionnaireController {
         }
         return httpResponseEntity;
     }
+
+    /**
+     * 根据问卷id设计问卷
+     * 
+     * @param questionnaireEntity
+     * @return
+     */
+    @RequestMapping(value = "/modifyQuestionnaire", method = RequestMethod.POST, headers = "Accept=application/json")
+    public HttpResponseEntity modifyQuestionnaire(@RequestBody(required = false) HashMap<String, Object> map) {
+        HttpResponseEntity httpResponseEntity = new HttpResponseEntity();
+        int result = questionnaireService.modifyQuestionnaire(map);
+        httpResponseEntity.setCode(Constans.SUCCESS_CODE);
+        httpResponseEntity.setMessage(Constans.UPDATE_MESSAGE);
+        httpResponseEntity.setData(result);
+        return httpResponseEntity;
+    }
     /**
      * 查询全部历史问卷
      * 

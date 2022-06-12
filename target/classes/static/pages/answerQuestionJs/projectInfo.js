@@ -47,6 +47,9 @@ function getProjectInfoSuccess(result) {
                 text += "    <td style=\"text-align: center;color: #333333\" colspan=\"1\">" +
                     "<a href=\"javascript:void(0)\" onclick=\"editQuest(" + "'" + questionList[i].id + "'," + "'" + questionList[i].questionName + "'," + "'" + questionList[i].questionContent + "'," + "'" + questionList[i].endTime + "'," + "'" + questionList[i].creationDate + "'," + "'" + questionList[i].dataId + "'" + ")\">" +
                     "编辑" +
+                    "</a> | " +
+                     "<a href=\"javascript:void(0)\" onclick=\"designQuest(" + "'" + questionList[i].id  +  "'" +")\">" +
+                    "设计" +
                     "</a>" +
                     "</td>";
                 text += "</tr>"
@@ -68,6 +71,14 @@ function getProjectInfoSuccess(result) {
     } else {
         layer.msg(result.message, { icon: 2 })
     }
+}
+
+
+//设计问卷
+function designQuest(questionId) {
+    var url = "designQuestionnaire.html?qId=" + questionId; //此处拼接内容
+    // window.location.href = url;
+    window.open(url)
 }
 
 //编辑问卷

@@ -61,6 +61,19 @@ public class QuestionnaireService {
     }
 
     /**
+     * 修改问卷基本设计
+     * 
+     * @param questionnaireEntity
+     * @return
+     */
+    public int modifyQuestionnaire(HashMap<String, Object> map) {
+        Date date = DateUtil.getCreateTime();
+        map.put("endTime", date);
+        int result =questionnaireEntityMapper.modifyQuestionnaire(map);
+        return result;
+    }
+
+    /**
      * 删除项目
      * 
      * @param questionnaireEntity

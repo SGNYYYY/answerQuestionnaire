@@ -31,12 +31,13 @@ $(function () {
         var i = urlObj.i;
         var qIdStr = "";
         if (qId != undefined) {
-            qIdStr = $.base64.decode(qId);
+            // qIdStr = $.base64.decode(qId);
+            qIdStr=qId;
             setCookie('QuestionId', qIdStr);
             //如果为编辑模板就不清空QuestionId
             setCookie('isEdit', '1');
         } else if (i != undefined) {
-            qIdStr = $.base64.decode(i);
+            // qIdStr = $.base64.decode(i);
             setCookie('QuestionId', qIdStr);
         }
         questionId = qIdStr;
