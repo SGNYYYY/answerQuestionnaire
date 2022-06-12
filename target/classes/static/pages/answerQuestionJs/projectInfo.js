@@ -37,10 +37,14 @@ function getProjectInfoSuccess(result) {
         if (questionList.length) {
             for (var i = 0; i < questionList.length; i++) {
                 text += "<tr>"
-                text += "    <td style=\"text-align: center;color: #d9534f\" colspan=\"1\">" + (i + 1) + "</td>";
-                text += "    <td style=\"text-align: center;color: #d9534f\" colspan=\"1\">" + questionList[i].questionName + "</td>";
-                text += "    <td style=\"text-align: center;color: #d9534f\" colspan=\"1\">" + timeFormat(questionList[i].releaseTime) + "</td>"; //发布时间
-                text += "    <td style=\"text-align: center;color: #d9534f\" colspan=\"1\">" +
+                text += "    <td style=\"text-align: center;color: #333333\" colspan=\"1\">" + (i + 1) + "</td>";
+                text += "    <td style=\"text-align: center;color: #333333\" colspan=\"1\">" + questionList[i].questionName + "</td>";
+                if (questionList[i].releaseTime == null) {
+                    text += "    <td style=\"text-align: center;color: #333333\" colspan=\"1\">" + "暂未发布" + "</td>"; //发布时间
+                } else {
+                    text += "    <td style=\"text-align: center;color: #333333\" colspan=\"1\">" + timeFormat(questionList[i].releaseTime) + "</td>"; //发布时间
+                }
+                text += "    <td style=\"text-align: center;color: #333333\" colspan=\"1\">" +
                     "<a href=\"javascript:void(0)\" onclick=\"editQuest(" + "'" + questionList[i].id + "'," + "'" + questionList[i].name + "'," + "'" + questionList[i].content + "'," + "'" + questionList[i].endTime + "'," + "'" + questionList[i].creationDate + "'," + "'" + questionList[i].dataId + "'" + ")\">" +
                     "编辑" +
                     "</a>" +
