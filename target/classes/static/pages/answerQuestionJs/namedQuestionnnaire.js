@@ -71,17 +71,16 @@ function quickCreate() {
     var chooseTimeRange = $("#config-demo").val();
     var nowTimeInput = chooseTimeRange.split(' ~ ')[0];
     var questionendTime = chooseTimeRange.split(' ~ ')[1];
-    debugger
     var urlObj = GetRequest();
 
     deleteCookie('questionInfo');
     var questionName = $('#questionName').val();
     var questionContent = $('#questionContent').val();
     if (questionName == '') {
-        layer.msg("调查名称不能为空!", {icon: 2});
+        layer.msg("调查名称不能为空!", { icon: 2 });
         return
     } else if (questionContent == '') {
-        layer.msg("调查说明不能为空!", {icon: 2});
+        layer.msg("调查说明不能为空!", { icon: 2 });
         return
     }
     var questionInfo = '';
@@ -90,7 +89,6 @@ function quickCreate() {
     }
     //console.log(getCookie('projectIdForCreate'));
     //console.log(getCookie('QuestionId'));
-    debugger;
     //直接创建问卷
     if (urlObj.i == "") {
         var da = {
@@ -111,7 +109,7 @@ function quickCreate() {
     } else {
         //导入问卷
         var url = '/queryQuestionnaireAll';
-        var da = {'id': getCookie('QuestionId')};
+        var da = { 'id': getCookie('QuestionId') };
         commonAjaxPost(true, url, da, queryQuestionnaireAllSuccess);
         da1 = {
             'questionName': questionName,
@@ -129,16 +127,16 @@ function quickCreate() {
 function addQuestionnaireSuccess(res) {
     //console.log(res);
     if (res.code == '666') {
-        layer.msg(res.message, {icon: 1});
+        layer.msg(res.message, { icon: 1 });
         deleteCookie('dataId');
         window.location.href = 'myQuestionnaires.html'
     } else if (res.code == "333") {
-        layer.msg(res.message, {icon: 2});
+        layer.msg(res.message, { icon: 2 });
         setTimeout(function () {
             window.location.href = 'login.html';
         }, 1000)
     } else {
-        layer.msg(res.message, {icon: 2});
+        layer.msg(res.message, { icon: 2 });
     }
 }
 
@@ -151,6 +149,6 @@ function queryQuestionnaireAllSuccess(res) {
         var url = '/addQuestionnaire';
         commonAjaxPost(true, url, da1, addQuestionnaireSuccess);
     } else {
-        layer.msg(res.message, {icon: 2});
+        layer.msg(res.message, { icon: 2 });
     }
 }
