@@ -69,13 +69,22 @@ public class QuestionnaireService {
     public int modifyQuestionnaire(HashMap<String, Object> map) {
         Date date = DateUtil.getCreateTime();
         map.put("endTime", date);
-        String question=map.get("questionList").toString();
-        map.put("questionList", question);
+        //map.put("questionList", map.get("questionList"));
         int result =questionnaireEntityMapper.modifyQuestionnaire(map);
         System.out.print(result);
         return result;
     }
 
+    /**
+     * 根据问卷id查询问卷的详细信息
+     * 
+     * @param map
+     * @return
+     */
+    public Map<String, String> queryQuestionnaireById(HashMap<String, Object> map) {
+        Map<String, String> result = questionnaireEntityMapper.queryQuestionnaireById(map);
+        return result;
+    }
     /**
      * 删除项目
      * 
@@ -122,6 +131,7 @@ public class QuestionnaireService {
         return Result;
     }
 
+ 
     /**
      * 根据项目id查询此项目下的全部问卷
      * @param projectId

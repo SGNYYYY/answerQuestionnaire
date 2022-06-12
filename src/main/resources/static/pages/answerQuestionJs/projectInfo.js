@@ -174,5 +174,5 @@ function designQuest(id, name, content, endTime, creationDate, dataId) {
     setCookie("endTime", endTime);
     setCookie("creationDate", creationDate);
     setCookie("dataId", dataId);
-    window.location.href = 'designQuestionnaire.html' + '?qId=' + id
+    window.location.href ='designQuestionnaire.html'+'?qId='+id;
 }

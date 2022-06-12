@@ -43,20 +43,6 @@ public class QuestionnaireController {
     }
 
 
-    /**
-     * 查询问卷的題
-     * 
-     * @param questionnaireEntity
-     * @return
-     */
-    @RequestMapping(value = "/queryQuestionnaireAll", method = RequestMethod.POST, headers = "Accept=application/json")
-    public HttpResponseEntity queryQuestionnaireAll(@RequestBody(required = false) String id) {
-        HttpResponseEntity httpResponseEntity = new HttpResponseEntity();
-        QuestionnaireEntity result = questionnaireService.queryQuestionnaireAll(id);
-        httpResponseEntity.setCode(Constans.SUCCESS_CODE);
-        httpResponseEntity.setData(result.toString());
-        return httpResponseEntity;
-    }
 
 
     /**
@@ -168,6 +154,20 @@ public class QuestionnaireController {
     }
 
     /**
+     * 根据问卷id查询问卷的详细信息
+     * 
+     * @param questionnaireEntity
+     * @return
+     */
+    @RequestMapping(value = "/queryQuestionnaireById", method = RequestMethod.POST, headers = "Accept=application/json")
+    public HttpResponseEntity queryQuestionnaireById(@RequestBody(required = false) HashMap<String, Object> map) {
+        HttpResponseEntity httpResponseEntity = new HttpResponseEntity();
+        Map<String, String> result = questionnaireService.queryQuestionnaireById(map);
+        httpResponseEntity.setCode(Constans.SUCCESS_CODE);
+        httpResponseEntity.setData(result);
+        return httpResponseEntity;
+    }
+    /**
      * 查询全部历史问卷
      * 
      * @param questionnaireEntity
@@ -192,6 +192,21 @@ public class QuestionnaireController {
     public HttpResponseEntity queryQuestionnaireMould(@RequestBody QuestionnaireEntity questionnaireEntity) {
         HttpResponseEntity httpResponseEntity = new HttpResponseEntity();
         List<Map<String,Object>> result= questionnaireService.queryQuestionnaireMould(questionnaireEntity.getDataId());
+        httpResponseEntity.setCode(Constans.SUCCESS_CODE);
+        httpResponseEntity.setData(result);
+        return httpResponseEntity;
+    }
+
+    /**
+     * 根据问卷id查询问卷的详细信息
+     * 
+     * @param questionnaireEntity
+     * @return
+     */
+    @RequestMapping(value = "/queryQuestionnaireAll", method = RequestMethod.POST, headers = "Accept=application/json")
+    public HttpResponseEntity queryQuestionnaireAll(@RequestBody QuestionnaireEntity questionnaireEntity) {
+        HttpResponseEntity httpResponseEntity = new HttpResponseEntity();
+        QuestionnaireEntity result = questionnaireService.queryQuestionnaireAll(questionnaireEntity.getId());
         httpResponseEntity.setCode(Constans.SUCCESS_CODE);
         httpResponseEntity.setData(result);
         return httpResponseEntity;
