@@ -61,6 +61,19 @@ public class QuestionnaireService {
     }
 
     /**
+     * 修改问卷基本设计
+     * 
+     * @param questionnaireEntity
+     * @return
+     */
+    public int modifyQuestionnaire(HashMap<String, Object> map) {
+        Date date = DateUtil.getCreateTime();
+        map.put("endTime", date);
+        int result =questionnaireEntityMapper.modifyQuestionnaire(map);
+        return result;
+    }
+
+    /**
      * 删除项目
      * 
      * @param questionnaireEntity
@@ -143,5 +156,17 @@ public class QuestionnaireService {
         List<Map<String,Object>> proResult = questionnaireEntityMapper.queryQuestionnaireMould(dataId);
         return proResult;
     }
-
+    /**
+     * 查询问卷模板
+     * @param dataId
+     * @return
+     */
+    public List<Object> queryAllQuestionnaireByCreated(Map<String,Object> map) {
+        List<Object> resultList = new ArrayList<Object>();
+        List<Map<String,Object>> proResult = questionnaireEntityMapper.queryAllQuestionnaireByCreated(map);
+        for(Map<String,Object> proObj : proResult) {
+            resultList.add(proObj);
+        }
+        return resultList;
+    }
 }

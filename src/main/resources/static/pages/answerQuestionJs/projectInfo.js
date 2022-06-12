@@ -76,6 +76,14 @@ function getProjectInfoSuccess(result) {
     }
 }
 
+
+// //设计问卷
+// function designQuest(questionId) {
+//     var url = "designQuestionnaire.html?qId=" + questionId; //此处拼接内容
+//     // window.location.href = url;
+//     window.open(url)
+// }
+
 //编辑问卷
 function editQuest(id, name, content, endTime, creationDate, dataId) {
     var data = {
@@ -160,7 +168,7 @@ function designQuest(id, name, content, endTime, creationDate, dataId) {
     deleteCookie("questionName");
     deleteCookie("questionContent");
     deleteCookie("endTime");
-    setCookie("questionId", id);
+    setCookie("QuestionId", id);
     setCookie("nameOfQuestionnaire", name);
     setCookie("questionContent", content);
     setCookie("endTime", endTime);
