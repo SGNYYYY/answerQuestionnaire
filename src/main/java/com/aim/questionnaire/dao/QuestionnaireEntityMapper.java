@@ -114,7 +114,7 @@ public interface QuestionnaireEntityMapper {
      * @param map
      * @return
      */
-    Map<String,String> queryQuestionnaireById(HashMap<String, Object> map);
+    HashMap<String, Object> queryQuestionnaireById(HashMap<String, Object> map);
 
     /**
      * 添加发送问卷方式

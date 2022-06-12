@@ -45,7 +45,7 @@ $(function () {
     }
 
     var url = '/queryQuestionnaireAll';
-    //commonAjaxPost(true, url, da, queryQuestionnaireAllSuccess);
+    commonAjaxPost(true, url, da, queryQuestionnaireAllSuccess);
 
 });
 
@@ -1195,7 +1195,7 @@ function queryQuestionnaireAllSuccess(res) {
     console.log(res);
     deleteCookie('questionList');
     if (res.code == '666') {
-        // alert("查询问卷详情成功");
+        //alert("查询问卷详情成功");
         //查询的是历史问卷
         questionIdForChange = res.data.id;
         dataId = res.data.dataId;
