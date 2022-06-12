@@ -193,7 +193,6 @@ public class QuestionnaireController {
         httpResponseEntity.setData(result);
         return httpResponseEntity;
     }
-
     /**
      * 查询当前用户创建的所有问卷
      * 
