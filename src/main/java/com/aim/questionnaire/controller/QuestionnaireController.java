@@ -135,4 +135,19 @@ public class QuestionnaireController {
         httpResponseEntity.setData(questionStop);
         return httpResponseEntity;
     }
+
+    /**
+     * 查询问卷模板
+     * 
+     * @param questionnaireEntity
+     * @return
+     */
+    @RequestMapping(value = "/queryQuestionnaireMould", method = RequestMethod.POST, headers = "Accept=application/json")
+    public HttpResponseEntity queryQuestionnaireMould(@RequestBody QuestionnaireEntity questionnaireEntity) {
+        HttpResponseEntity httpResponseEntity = new HttpResponseEntity();
+        List<Map<String,Object>> result= questionnaireService.queryQuestionnaireMould(questionnaireEntity.getDataId());
+        httpResponseEntity.setCode(Constans.SUCCESS_CODE);
+        httpResponseEntity.setData(result);
+        return httpResponseEntity;
+    }
 }

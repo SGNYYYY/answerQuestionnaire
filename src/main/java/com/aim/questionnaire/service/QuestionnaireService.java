@@ -126,4 +126,16 @@ public class QuestionnaireService {
         String questionStop = questionnaireEntityMapper.queryQuestionnaireIsStopStatus(questionId);
         return questionStop;
     }
+
+    /**
+     * 查询问卷模板
+     * @param dataId
+     * @return
+     */
+    public List<Map<String,Object>> queryQuestionnaireMould(String dataId) {
+        //List<Object> resultList = new ArrayList<Object>();
+        List<Map<String,Object>> proResult = questionnaireEntityMapper.queryQuestionnaireMould(dataId);
+        return proResult;
+    }
+
 }
