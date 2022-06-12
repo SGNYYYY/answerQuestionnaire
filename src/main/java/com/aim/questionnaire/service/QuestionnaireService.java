@@ -156,5 +156,17 @@ public class QuestionnaireService {
         List<Map<String,Object>> proResult = questionnaireEntityMapper.queryQuestionnaireMould(dataId);
         return proResult;
     }
-
+    /**
+     * 查询问卷模板
+     * @param dataId
+     * @return
+     */
+    public List<Object> queryAllQuestionnaireByCreated(Map<String,Object> map) {
+        List<Object> resultList = new ArrayList<Object>();
+        List<Map<String,Object>> proResult = questionnaireEntityMapper.queryAllQuestionnaireByCreated(map);
+        for(Map<String,Object> proObj : proResult) {
+            resultList.add(proObj);
+        }
+        return resultList;
+    }
 }

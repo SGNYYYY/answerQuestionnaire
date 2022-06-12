@@ -48,8 +48,11 @@ function getProjectInfoSuccess(result) {
                     "<a href=\"javascript:void(0)\" onclick=\"editQuest(" + "'" + questionList[i].id + "'," + "'" + questionList[i].questionName + "'," + "'" + questionList[i].questionContent + "'," + "'" + questionList[i].endTime + "'," + "'" + questionList[i].creationDate + "'," + "'" + questionList[i].dataId + "'" + ")\">" +
                     "编辑" +
                     "</a> | " +
-                     "<a href=\"javascript:void(0)\" onclick=\"designQuest(" + "'" + questionList[i].id  +  "'" +")\">" +
+                    "<a href=\"javascript:void(0)\" onclick=\"designQuest(" + "'" + questionList[i].id + "'," + "'" + questionList[i].questionName + "'," + "'" + questionList[i].questionContent + "'," + "'" + questionList[i].endTime + "'," + "'" + questionList[i].creationDate + "'," + "'" + questionList[i].dataId + "'" + ")\">" +
                     "设计" +
+                    "</a> | " +
+                    "<a href=\"javascript:void(0)\" onclick=\"sendQuest(" + "'" + questionList[i].id + "'," + "'" + questionList[i].questionName + "'," + "'" + questionList[i].questionContent + "'," + "'" + questionList[i].endTime + "'," + "'" + questionList[i].creationDate + "'," + "'" + questionList[i].dataId + "'" + ")\">" +
+                    "发布" +
                     "</a>" +
                     "</td>";
                 text += "</tr>"
@@ -74,12 +77,12 @@ function getProjectInfoSuccess(result) {
 }
 
 
-//设计问卷
-function designQuest(questionId) {
-    var url = "designQuestionnaire.html?qId=" + questionId; //此处拼接内容
-    // window.location.href = url;
-    window.open(url)
-}
+// //设计问卷
+// function designQuest(questionId) {
+//     var url = "designQuestionnaire.html?qId=" + questionId; //此处拼接内容
+//     // window.location.href = url;
+//     window.open(url)
+// }
 
 //编辑问卷
 function editQuest(id, name, content, endTime, creationDate, dataId) {
@@ -143,4 +146,33 @@ function editQuest(id, name, content, endTime, creationDate, dataId) {
             layer.msg(result.message, { icon: 2 })
         }
     });
+}
+
+//发布问卷
+function sendQuest(id, name, content, endTime, creationDate, dataId) {
+    deleteCookie("questionId");
+    deleteCookie("questionName");
+    deleteCookie("questionContent");
+    deleteCookie("endTime");
+    setCookie("questionId", id);
+    setCookie("nameOfQuestionnaire", name);
+    setCookie("questionContent", content);
+    setCookie("endTime", endTime);
+    setCookie("creationDate", creationDate);
+    setCookie("dataId", dataId);
+    window.location.href = 'sendQuestionnaire.html'
+}
+//设计问卷
+function designQuest(id, name, content, endTime, creationDate, dataId) {
+    deleteCookie("QuestionId");
+    deleteCookie("questionName");
+    deleteCookie("questionContent");
+    deleteCookie("endTime");
+    setCookie("QuestionId", id);
+    setCookie("nameOfQuestionnaire", name);
+    setCookie("questionContent", content);
+    setCookie("endTime", endTime);
+    setCookie("creationDate", creationDate);
+    setCookie("dataId", dataId);
+    window.location.href = 'designQuestionnaire.html'
 }
