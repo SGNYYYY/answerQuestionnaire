@@ -106,5 +106,33 @@ public class QuestionnaireController {
 
         return httpResponseEntity;
     }
+    /**
+     * 查询全部历史问卷
+     * 
+     * @param questionnaireEntity
+     * @return
+     */
+    @RequestMapping(value = "/queryHistoryQuestionnaire", method = RequestMethod.POST, headers = "Accept=application/json")
+    public HttpResponseEntity queryHistoryQuestionnaire(@RequestBody(required = false) HashMap<String, Object> map) {
+        HttpResponseEntity httpResponseEntity = new HttpResponseEntity();
+        List<Object> result = questionnaireService.queryHistoryQuestionnaire(map);
+        httpResponseEntity.setCode(Constans.SUCCESS_CODE);
+        httpResponseEntity.setData(result);
+        return httpResponseEntity;
+    }
 
+    /**
+     * 查询全部历史问卷
+     * 
+     * @param questionnaireEntity
+     * @return
+     */
+    @RequestMapping(value = "/selectQuestionnaireStatus", method = RequestMethod.POST, headers = "Accept=application/json")
+    public HttpResponseEntity selectQuestionnaireStatus(@RequestBody QuestionnaireEntity questionnaireEntity) {
+        HttpResponseEntity httpResponseEntity = new HttpResponseEntity();
+        String questionStop = questionnaireService.queryQuestionnaireIsStopStatus(questionnaireEntity.getId());
+        httpResponseEntity.setCode(Constans.SUCCESS_CODE);
+        httpResponseEntity.setData(questionStop);
+        return httpResponseEntity;
+    }
 }

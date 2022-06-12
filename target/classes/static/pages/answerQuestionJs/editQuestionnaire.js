@@ -5,14 +5,14 @@
 var questionName = getCookie('questionName');
 var questionContent = getCookie('questionContent');
 var questionId = getCookie('questionId');
-var endTime = getCookie('endTime').replace(/-/g, '/');
-var startTime = getCookie('creationDate').replace(/-/g, '/');
+var endTime = timeFormat(getCookie('endTime'));
+var startTime = timeFormat(getCookie('creationDate'));
 var dataId = getCookie('dataId');
 
 var ifEditQuestType = getCookie('ifEditQuestType');
 //console.log(ifEditQuestType);
 
-$(function () {
+$(function() {
     isLoginFun();
     header();
     $("#ctl01_lblUserName").text(getCookie('userName'));
@@ -23,15 +23,15 @@ $(function () {
     queryAllDataType();
     $("#questionStartEndTime").val(startTime + " ~ " + endTime);
 
-    $("#ifRemand").css('display','none');
+    $("#ifRemand").css('display', 'none');
 });
 
 
 //铺调查类型
 function queryAllDataType() {
     var url = '/admin/queryAllDataType';
-    var da = {'parentId': '1'};
-    commonAjaxPost(true, url, da, function (result) {
+    var da = { 'parentId': '1' };
+    commonAjaxPost(true, url, da, function(result) {
         //console.log(result);
         if (result.code == "666") {
             var belongType = document.getElementById('belongType');
@@ -45,16 +45,16 @@ function queryAllDataType() {
             }
             if (ifEditQuestType == "false") {
                 $("#belongType").attr("disabled", "disabled");
-                $("#ifRemand").css('display','block');
+                $("#ifRemand").css('display', 'block');
             }
 
         } else if (result.code == "333") {
-            layer.msg(result.message, {icon: 2});
-            setTimeout(function () {
+            layer.msg(result.message, { icon: 2 });
+            setTimeout(function() {
                 window.location.href = 'login.html';
             }, 1000)
         } else {
-            layer.msg(result.message, {icon: 2})
+            layer.msg(result.message, { icon: 2 })
         }
     });
 }
@@ -91,17 +91,17 @@ function modifyQuest() {
 //修改问卷信息成功
 function modifyQuestSuccess(result) {
     if (result.code == '666') {
-        layer.msg('修改成功', {icon: 1});
-        setTimeout(function () {
+        layer.msg('修改成功', { icon: 1 });
+        setTimeout(function() {
             window.location.href = 'myQuestionnaires.html';
         }, 1000);
     } else if (result.code == "333") {
-        layer.msg(result.message, {icon: 2});
-        setTimeout(function () {
+        layer.msg(result.message, { icon: 2 });
+        setTimeout(function() {
             window.location.href = 'login.html';
         }, 1000)
     } else {
-        layer.msg(result.message, {icon: 2});
+        layer.msg(result.message, { icon: 2 });
     }
 }
 
@@ -131,7 +131,7 @@ function createTimePicker() {
         "locale": {
             "resetLabel": "重置",
             "format": 'YYYY/MM/DD HH:mm:ss',
-            "separator": " ~ ",//
+            "separator": " ~ ", //
             "applyLabel": "确定",
             "cancelLabel": "取消",
             "fromLabel": "起始时间",
@@ -142,7 +142,7 @@ function createTimePicker() {
             "monthNames": ["一月", "二月", "三月", "四月", "五月", "六月", "七月", "八月", "九月", "十月", "十一月", "十二月"],
             "firstDay": 1
         },
-    }, function (start, end, label) {
+    }, function(start, end, label) {
         //console.log(start)
         //console.log(end)
         // beginTimeStore = start;

@@ -75,12 +75,11 @@ function importQuestion(type) {
     if (type == 1) {
         var url = '/queryHistoryQuestionnaire';
         var da = {
-            'projectId': getCookie('projectIdForCreate'),
+            'projectId': getCookie('projectId'),
             'dataId': dataId
         };
-        //console.log(getCookie('projectIdForCreate'));
-        //commonAjaxPost(true, url, da, queryHistoryQuestionnaireSuccess);
-        queryHistoryQuestionnaireSuccess();
+        console.log(getCookie('projectId'));
+        commonAjaxPost(true, url, da, queryHistoryQuestionnaireSuccess);
     } else {
         var urlModal = '/queryQuestionnaireMould';
         var da1 = {
@@ -118,53 +117,53 @@ function viewModal(questionId) {
 //查询历史模板的成功回调
 function queryHistoryQuestionnaireSuccess(res) {
     //console.log(res);
-    //if (res.code == "666") {
-    $("#typeQuestion").css("display", "none");
-    //   if (res.data.length == 0) {
-    //       layer.msg("暂无历史问卷", {icon: 2});
-    //      return
-    //   }
-    $("#line").css("display", "block");
-    $("#historyQuestion").css("display", "block");
-    $('#historyQuestion').empty();
-    //for (var i = 0; i < res.data.length; i++) {
-    // var historyModal_div = '   <div class="figure">' +
-    //     '                    <div class="pic-box icon survey-icon pull-left"></div>' +
-    //     '                    <div class="details-wrapper pull-left">' +
-    //     '                        <div class="details-title">' +
-    //     '                            //<span class="pull-left">' + res.data[i].questionName + '</span>' +
-    //     '                            <span class="pull-left">页面测试数据</span>' +
-    //     '                        </div>' +
-    //     // '                        <div class="details-info">丰富题型，强大逻辑</div>' +
-    //     // '                        <div class="details-info">问卷密码，红包抽奖</div>' +
-    //     '                    </div>' +
-    //     '                    <div class="clear dotted-line--solid"></div>\n' +
-    //     '                    <a href="#" class="btn btn-blue-frame main__btn--new" onclick=\'importModal(' + '"' + res.data[i].id + '"' + ',' + '"' + res.data[i].questionName + '"' + ',' + '"' + res.data[i].questionContent + '"' +')\'>导入</a>' +
-    //     '                </div>';
-    // $("#historyQuestion").append(historyModal_div);
-    var historyModal_div = '   <div class="figure">' +
-        '                    <div class="pic-box icon survey-icon pull-left"></div>' +
-        '                    <div class="details-wrapper pull-left">' +
-        '                        <div class="details-title">' +
-        '                            //<span class="pull-left">测试</span>' +
-        '                            <span class="pull-left">页面测试数据</span>' +
-        '                        </div>' +
-        // '                        <div class="details-info">丰富题型，强大逻辑</div>' +
-        // '                        <div class="details-info">问卷密码，红包抽奖</div>' +
-        '                    </div>' +
-        '                    <div class="clear dotted-line--solid"></div>\n' +
-        '                    <a href="#" class="btn btn-blue-frame main__btn--new" onclick=\'importModal(' + '"' + 1 + '"' + ',' + '测试' + ',' + '测试' + ')\'>导入</a>' +
-        '                </div>';
-    $("#historyQuestion").append(historyModal_div);
-    //}
-    // } else if (res.code == "333") {
-    //    layer.msg(res.message, {icon: 2});
-    //    setTimeout(function () {
-    //       window.location.href = 'login.html';
-    //   }, 1000)
-    //} else {
-    //    layer.msg(res.message, {icon: 2})
-    // }
+    if (res.code == "666") {
+        $("#typeQuestion").css("display", "none");
+        if (res.data.length == 0) {
+            layer.msg("暂无历史问卷", { icon: 2 });
+            return
+        }
+        $("#line").css("display", "block");
+        $("#historyQuestion").css("display", "block");
+        $('#historyQuestion').empty();
+        for (var i = 0; i < res.data.length; i++) {
+            var historyModal_div = '   <div class="figure">' +
+                '                    <div class="pic-box icon survey-icon pull-left"></div>' +
+                '                    <div class="details-wrapper pull-left">' +
+                '                        <div class="details-title">' +
+                '                            //<span class="pull-left">' + res.data[i].questionName + '</span>' +
+                '                            <span class="pull-left">页面测试数据</span>' +
+                '                        </div>' +
+                // '                        <div class="details-info">丰富题型，强大逻辑</div>' +
+                // '                        <div class="details-info">问卷密码，红包抽奖</div>' +
+                '                    </div>' +
+                '                    <div class="clear dotted-line--solid"></div>\n' +
+                '                    <a href="#" class="btn btn-blue-frame main__btn--new" onclick=\'importModal(' + '"' + res.data[i].id + '"' + ',' + '"' + res.data[i].questionName + '"' + ',' + '"' + res.data[i].questionContent + '"' + ')\'>导入</a>' +
+                '                </div>';
+            $("#historyQuestion").append(historyModal_div);
+            // var historyModal_div = '   <div class="figure">' +
+            //     '                    <div class="pic-box icon survey-icon pull-left"></div>' +
+            //     '                    <div class="details-wrapper pull-left">' +
+            //     '                        <div class="details-title">' +
+            //     '                            //<span class="pull-left">测试</span>' +
+            //     '                            <span class="pull-left">页面测试数据</span>' +
+            //     '                        </div>' +
+            //     // '                        <div class="details-info">丰富题型，强大逻辑</div>' +
+            //     // '                        <div class="details-info">问卷密码，红包抽奖</div>' +
+            //     '                    </div>' +
+            //     '                    <div class="clear dotted-line--solid"></div>\n' +
+            //     '                    <a href="#" class="btn btn-blue-frame main__btn--new" onclick=\'importModal(' + '"' + 1 + '"' + ',' + '测试' + ',' + '测试' + ')\'>导入</a>' +
+            //     '                </div>';
+            //$("#historyQuestion").append(historyModal_div);
+        }
+    } else if (res.code == "333") {
+        layer.msg(res.message, { icon: 2 });
+        setTimeout(function() {
+            window.location.href = 'login.html';
+        }, 1000)
+    } else {
+        layer.msg(res.message, { icon: 2 })
+    }
 }
 
 //查询问卷模板的成功回调
