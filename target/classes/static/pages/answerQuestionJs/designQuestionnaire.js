@@ -1221,7 +1221,8 @@ function queryQuestionnaireAllSuccess(res) {
             questionStop = res.data.questionStop;
         }
         questionList = JSON.parse(res.data.question);
-        // var question = res.data.question;
+        console.log(questionList)
+            // var question = res.data.question;
         var question = questionList;
         setCookie('questionList', question);
         if (question != null) {
