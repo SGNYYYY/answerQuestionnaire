@@ -69,7 +69,10 @@ public class QuestionnaireService {
     public int modifyQuestionnaire(HashMap<String, Object> map) {
         Date date = DateUtil.getCreateTime();
         map.put("endTime", date);
+        String question=map.get("questionList").toString();
+        map.put("questionList", question);
         int result =questionnaireEntityMapper.modifyQuestionnaire(map);
+        System.out.print(result);
         return result;
     }
 
@@ -106,6 +109,17 @@ public class QuestionnaireService {
             resultList.add(proObj);
         }
         return resultList;
+    }
+
+    /**
+     * 查询问卷列表
+     * 
+     * @param questionnaireEntity
+     * @return
+     */
+    public QuestionnaireEntity queryQuestionnaireAll(String id) {
+        QuestionnaireEntity Result = questionnaireEntityMapper.selectByPrimaryKey(id);
+        return Result;
     }
 
     /**
