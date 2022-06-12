@@ -64,9 +64,9 @@ spring:
     # password: lying
     # driver-class-name: com.mysql.jdbc.Driver
     #连接本地mysql5数据库
-    url: jdbc:mysql://127.0.0.1:3306/questionnaire?useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull&useSSL=false
+    url: jdbc:mysql://127.0.0.1:3305/questionnaire?useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull&useSSL=false
     username: root
-    password: 100708007sM
+    password: wSY0316@
     driver-class-name: com.mysql.jdbc.Driver
     #连接mysql8数据库
     # url: jdbc:mysql://127.0.0.1:3306/questionnaire?useUnicode=true&characterEncoding=utf-8&useSSL=false

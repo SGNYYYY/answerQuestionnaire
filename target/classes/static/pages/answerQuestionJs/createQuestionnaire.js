@@ -101,11 +101,10 @@ function deleteModal(that, modalId) {
         var da = {
             'id': modalId
         };
-        //commonAjaxPost(true, url, da, deleteQuestionnaireByIdSuccess);
-        deleteQuestionnaireByIdSuccess();
+        commonAjaxPost(true, url, da, deleteQuestionnaireByIdSuccess);
         var div = $(that).parent('.figure');
         div.css("display", "none");
-        // layer.msg('删除成功', {icon: 1});
+        layer.msg('删除成功', { icon: 1 });
     }, function() {});
 }
 

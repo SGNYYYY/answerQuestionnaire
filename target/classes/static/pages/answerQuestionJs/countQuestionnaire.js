@@ -11,9 +11,13 @@ $(function() {
 
     //        添加下拉选择问卷
     var selectContent = ''; //下拉选择内容
+    var data = {
+        "user": getCookie("userName"),
+    };
     jQuery.ajax({
         type: "POST",
         url: httpRequestUrl + "/queryAllQuestionnaireByCreated",
+        data: JSON.stringify(data),
         dataType: 'json',
         contentType: "application/json",
         success: function(result) {
