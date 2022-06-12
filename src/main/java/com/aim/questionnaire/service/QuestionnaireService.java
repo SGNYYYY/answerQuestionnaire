@@ -69,7 +69,9 @@ public class QuestionnaireService {
     public int modifyQuestionnaire(HashMap<String, Object> map) {
         Date date = DateUtil.getCreateTime();
         map.put("endTime", date);
+        //map.put("questionList", map.get("questionList"));
         int result =questionnaireEntityMapper.modifyQuestionnaire(map);
+        System.out.print(result);
         return result;
     }
 
@@ -108,6 +110,27 @@ public class QuestionnaireService {
         return resultList;
     }
 
+    /**
+     * 查询问卷列表
+     * 
+     * @param questionnaireEntity
+     * @return
+     */
+    public QuestionnaireEntity queryQuestionnaireAll(String id) {
+        QuestionnaireEntity Result = questionnaireEntityMapper.selectByPrimaryKey(id);
+        return Result;
+    }
+
+    /**
+     * 根据问卷id查询问卷的详细信息
+     * 
+     * @param map
+     * @return
+     */
+    public Map<String, String> queryQuestionnaireById(HashMap<String, Object> map) {
+        Map<String, String> result = questionnaireEntityMapper.queryQuestionnaireById(map);
+        return result;
+    }
     /**
      * 根据项目id查询此项目下的全部问卷
      * @param projectId

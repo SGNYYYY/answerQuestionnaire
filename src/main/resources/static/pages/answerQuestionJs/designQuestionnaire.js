@@ -47,9 +47,11 @@ $(function() {
     }
 
     var url = '/queryQuestionnaireAll';
-    //commonAjaxPost(true, url, da, queryQuestionnaireAllSuccess);
+    commonAjaxPost(true, url, da, queryQuestionnaireAllSuccess);
 
 });
+
+
 
 
 function GetRequest() {
@@ -964,7 +966,7 @@ function editFinish() {
         var da = '';
         var url = '';
         da = {
-            'questionList': questionList,
+            'questionList': JSON.stringify(questionList),
             'questionTitle': questionTitles, //所有的题目
             'questionId': questionId,
             'dataId': dataId,
@@ -1199,7 +1201,7 @@ function queryQuestionnaireAllSuccess(res) {
     console.log(res);
     deleteCookie('questionList');
     if (res.code == '666') {
-        // alert("查询问卷详情成功");
+        //alert("查询问卷详情成功");
         //查询的是历史问卷
         questionIdForChange = res.data.id;
         dataId = res.data.dataId;
@@ -1218,7 +1220,9 @@ function queryQuestionnaireAllSuccess(res) {
             startTime = res.data.startTime;
             questionStop = res.data.questionStop;
         }
-        var question = res.data.question;
+        questionList = JSON.parse(res.data.question);
+        // var question = res.data.question;
+        var question = questionList;
         setCookie('questionList', question);
         if (question != null) {
             for (var i = 0; i < question.length; i++) {
