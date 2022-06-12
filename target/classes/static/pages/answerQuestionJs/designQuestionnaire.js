@@ -52,6 +52,8 @@ $(function() {
 });
 
 
+
+
 function GetRequest() {
     //url例子：www.bicycle.com?id="123456"&Name="bicycle"；
     var url = decodeURI(location.search); //?id="123456"&Name="bicycle";
@@ -964,7 +966,7 @@ function editFinish() {
         var da = '';
         var url = '';
         da = {
-            'questionList': questionList,
+            'questionList': JSON.stringify(questionList),
             'questionTitle': questionTitles, //所有的题目
             'questionId': questionId,
             'dataId': dataId,
@@ -1218,7 +1220,9 @@ function queryQuestionnaireAllSuccess(res) {
             startTime = res.data.startTime;
             questionStop = res.data.questionStop;
         }
-        var question = res.data.question;
+        questionList = JSON.parse(res.data.question);
+        // var question = res.data.question;
+        var question = questionList;
         setCookie('questionList', question);
         if (question != null) {
             for (var i = 0; i < question.length; i++) {
