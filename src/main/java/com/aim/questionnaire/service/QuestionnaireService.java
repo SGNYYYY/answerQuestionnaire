@@ -108,5 +108,28 @@ public class QuestionnaireService {
         }
         return resultList;
     }
-
+    /**
+     * 查询历史问卷
+     * 
+     * @param questionnaireEntity
+     * @return
+     */
+    public List<Object> queryHistoryQuestionnaire(HashMap<String, Object> map) {
+        List<Object> resultList = new ArrayList<Object>();
+        List<Map<String,Object>> proResult = questionnaireEntityMapper.queryHistoryQuestionnaire(map);
+        for(Map<String,Object> proObj : proResult) {
+            resultList.add(proObj);
+        }
+        return resultList;
+    }
+    /**
+     * 查询问卷状态
+     * 
+     * @param questionnaireEntity
+     * @return
+     */
+    public String queryQuestionnaireIsStopStatus(String questionId) {
+        String questionStop = questionnaireEntityMapper.queryQuestionnaireIsStopStatus(questionId);
+        return questionStop;
+    }
 }

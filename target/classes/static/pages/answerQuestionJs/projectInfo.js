@@ -78,12 +78,13 @@ function editQuest(id, name, content, endTime, creationDate, dataId) {
     commonAjaxPost(true, '/selectQuestionnaireStatus', data, function(result) {
         if (result.code == "666") {
             if (result.data != "5") {
-                layer.msg('问卷已发布，不可修改', {icon: 2});
+                layer.msg('问卷已发布，不可修改', { icon: 2 });
             } else if (result.data == "5") {
                 deleteCookie("questionId");
                 deleteCookie("questionName");
                 deleteCookie("questionContent");
                 deleteCookie("endTime");
+                console.log(dataId)
                 setCookie("questionId", id);
                 setCookie("questionName", name);
                 setCookie("questionContent", content);
@@ -98,29 +99,29 @@ function editQuest(id, name, content, endTime, creationDate, dataId) {
                 if ($("#operationAll" + m + n).children("a:first-child").text() == '开启') {
                     judgeIfChangeStatus(m, n);
                 }
-                layer.msg('问卷运行中，不可修改', {icon: 2});
+                layer.msg('问卷运行中，不可修改', { icon: 2 });
             } else
 
             if (result.data != "1") {
-            commonAjaxPost(true, '/selectQuestSendStatus', { id: id }, function(result) {
-                //发送过问卷
-                if (result.code == "40003") {
-                    setCookie("ifEditQuestType", "false");
-                } else if (result.code == "666") { //未发送过问卷
-                    setCookie("ifEditQuestType", "true");
-                }
-            });
-            deleteCookie("questionId");
-            deleteCookie("questionName");
-            deleteCookie("questionContent");
-            deleteCookie("endTime");
-            setCookie("questionId", id);
-            setCookie("questionName", name);
-            setCookie("questionContent", content);
-            setCookie("endTime", endTime);
-            setCookie("creationDate", creationDate);
-            setCookie("dataId", dataId);
-            window.location.href = 'editQuestionnaire.html'
+                commonAjaxPost(true, '/selectQuestSendStatus', { id: id }, function(result) {
+                    //发送过问卷
+                    if (result.code == "40003") {
+                        setCookie("ifEditQuestType", "false");
+                    } else if (result.code == "666") { //未发送过问卷
+                        setCookie("ifEditQuestType", "true");
+                    }
+                });
+                deleteCookie("questionId");
+                deleteCookie("questionName");
+                deleteCookie("questionContent");
+                deleteCookie("endTime");
+                setCookie("questionId", id);
+                setCookie("questionName", name);
+                setCookie("questionContent", content);
+                setCookie("endTime", endTime);
+                setCookie("creationDate", creationDate);
+                setCookie("dataId", dataId);
+                window.location.href = 'editQuestionnaire.html'
             }
         } else if (result.code == "333") {
             layer.msg(result.message, { icon: 2 });

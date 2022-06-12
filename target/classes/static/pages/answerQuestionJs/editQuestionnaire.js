@@ -5,25 +5,25 @@
 var questionName = getCookie('questionName');
 var questionContent = getCookie('questionContent');
 var questionId = getCookie('questionId');
-var endTime = getCookie('endTime');
-var startTime = getCookie('creationDate');
-console.log(endTime);
-
+var endTime = timeFormat(getCookie('endTime'));
+var startTime = timeFormat(getCookie('creationDate'));
 var dataId = getCookie('dataId');
 
 var ifEditQuestType = getCookie('ifEditQuestType');
 console.log(ifEditQuestType);
 
-$(function () {
+$(function() {
     isLoginFun();
     header();
     $("#ctl01_lblUserName").text(getCookie('userName'));
     createTimePicker();
     $("#questionName").val(questionName);
     $("#questionContent").val(questionContent);
+
     queryAllDataType();
     $("#questionStartEndTime").val(startTime + " ~ " + endTime);
-    $("#ifRemand").css('display','none');
+
+    $("#ifRemand").css('display', 'none');
 });
 
 
@@ -45,16 +45,16 @@ function queryAllDataType() {
             }
             if (ifEditQuestType == "false") {
                 $("#belongType").attr("disabled", "disabled");
-                $("#ifRemand").css('display','block');
+                $("#ifRemand").css('display', 'block');
             }
 
         } else if (result.code == "333") {
-            layer.msg(result.message, {icon: 2});
-            setTimeout(function () {
+            layer.msg(result.message, { icon: 2 });
+            setTimeout(function() {
                 window.location.href = 'login.html';
             }, 1000)
         } else {
-            layer.msg(result.message, {icon: 2})
+            layer.msg(result.message, { icon: 2 })
         }
     });
 }
@@ -91,62 +91,69 @@ function modifyQuest() {
 //修改问卷信息成功
 function modifyQuestSuccess(result) {
     if (result.code == '666') {
-        layer.msg('修改成功', {icon: 1});
-        setTimeout(function () {
+        layer.msg('修改成功', { icon: 1 });
+        setTimeout(function() {
             window.location.href = 'myQuestionnaires.html';
         }, 1000);
     } else if (result.code == "333") {
-        layer.msg(result.message, {icon: 2});
-        setTimeout(function () {
+        layer.msg(result.message, { icon: 2 });
+        setTimeout(function() {
             window.location.href = 'login.html';
         }, 1000)
     } else {
-        layer.msg(result.message, {icon: 2});
+        layer.msg(result.message, { icon: 2 });
     }
 }
 
 // 创建时间区域选择
- function createTimePicker() {
-     var beginTimeStore = '';
-     var endTimeStore = '';
-     var nowTime = getFormatDateSecond();
-     var date = new Date();
-     var milliseconds = date.getTime() + 1000 * 60 * 60 * 24 * 30;                                    //n代表天数,加号表示未来n天的此刻时间,减号表示过去n天的此刻时间   n:7
-     var newDate = new Date(milliseconds);
-     var dateAfterNow = timeFormat(newDate);
- 
-     $('#config-demo').daterangepicker({
-         "minDate": nowTime,
-         "startDate": nowTime,
-         "endDate": dateAfterNow,
-         "timePicker": true,
-         "timePicker24Hour": true,
-         "linkedCalendars": false,
-         // "autoUpdateInput": false,
-         "locale": {
-             "resetLabel": "重置",
-             "format": 'YYYY/MM/DD HH:mm:ss',
-             "separator": " ~ ",//
-             "applyLabel": "确定",
-             "cancelLabel": "取消",
-             "fromLabel": "起始时间",
-             "toLabel": "结束时间'",
-             "customRangeLabel": "自定义",
-             "weekLabel": "W",
-             "daysOfWeek": ["日", "一", "二", "三", "四", "五", "六"],
-             "monthNames": ["一月", "二月", "三月", "四月", "五月", "六月", "七月", "八月", "九月", "十月", "十一月", "十二月"],
-             "firstDay": 1
-         },
-     }, function (start, end, label) {
-         // beginTimeStore = start;
-         // endTimeStore = end;
-         // //console.log(this.startDate.format(this.locale.format));
-         // //console.log(this.endDate.format(this.locale.format));
-         // if (!this.startDate) {
-         //     this.element.val('');
-         // } else {
-         //     this.element.val(this.startDate.format(this.locale.format) + this.locale.separator + this.endDate.format(this.locale.format));
-         // }
-     });
- 
+function createTimePicker() {
+    var beginTimeStore = '';
+    var endTimeStore = '';
+    var nowTime = getFormatDateSecond();
+
+    var start1 = startTime;
+    console.log(start1)
+    console.log(nowTime);
+
+    var date = new Date();
+    var milliseconds = date.getTime() + 1000 * 60 * 60 * 24 * 30;  //n代表天数,加号表示未来n天的此刻时间,减号表示过去n天的此刻时间   n:7
+    var newDate = new Date(milliseconds);
+    var dateAfterNow = timeFormat(newDate);
+
+    $('#questionStartEndTime').daterangepicker({
+        "minDate": nowTime,
+        "startDate": startTime,
+        "endDate": endTime,
+        "timePicker": true,
+        "timePicker12Hour": true,
+        "linkedCalendars": false,
+        "autoUpdateInput": false,
+        "locale": {
+            "resetLabel": "重置",
+            "format": 'YYYY/MM/DD HH:mm:ss',
+            "separator": " ~ ",
+            "applyLabel": "确定",
+            "cancelLabel": "取消",
+            "fromLabel": "起始时间",
+            "toLabel": "结束时间'",
+            "customRangeLabel": "自定义",
+            "weekLabel": "W",
+            "daysOfWeek": ["日", "一", "二", "三", "四", "五", "六"],
+            "monthNames": ["一月", "二月", "三月", "四月", "五月", "六月", "七月", "八月", "九月", "十月", "十一月", "十二月"],
+            "firstDay": 1
+        },
+    }, function(start, end, label) {
+        //console.log(start)
+        //console.log(end)
+        // beginTimeStore = start;
+        // endTimeStore = end;
+        // //console.log(this.startDate.format(this.locale.format));
+        // //console.log(this.endDate.format(this.locale.format));
+        // if (!this.startDate) {
+        //     this.element.val('');
+        // } else {
+        //     this.element.val(this.startDate.format(this.locale.format) + this.locale.separator + this.endDate.format(this.locale.format));
+        // }
+    });
+
 }
