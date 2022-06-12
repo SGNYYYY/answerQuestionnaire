@@ -45,8 +45,8 @@ function getProjectInfoSuccess(result) {
                     text += "    <td style=\"text-align: center;color: #333333\" colspan=\"1\">" + timeFormat(questionList[i].releaseTime) + "</td>"; //发布时间
                 }
                 text += "    <td style=\"text-align: center;color: #333333\" colspan=\"1\">" +
-                    "<a href=\"editQuestionnaire.html\" onclick=\"editQuest(" + "'" + questionList[i].id + "'," + "'" + questionList[i].name + "'," + "'" + questionList[i].content + "'," + "'" + questionList[i].endTime + "'," + "'" + questionList[i].creationDate + "'," + "'" + questionList[i].dataId + "'" + ")\">" +
-                   "编辑"+
+                    "<a href=\"javascript:void(0)\" onclick=\"editQuest(" + "'" + questionList[i].id + "'," + "'" + questionList[i].questionName + "'," + "'" + questionList[i].questionContent + "'," + "'" + questionList[i].endTime + "'," + "'" + questionList[i].creationDate + "'," + "'" + questionList[i].dataId + "'" + ")\">" +
+                    "编辑" +
                     "</a>" +
                     "</td>";
                 text += "</tr>"
@@ -131,6 +131,5 @@ function editQuest(id, name, content, endTime, creationDate, dataId) {
         } else {
             layer.msg(result.message, { icon: 2 })
         }
-        
     });
 }
