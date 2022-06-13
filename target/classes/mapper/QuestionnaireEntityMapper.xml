@@ -370,7 +370,7 @@
 
   <!--查询历史问卷/模糊搜索-->
   <select id="queryQuestionnaireList" resultType="java.util.Map">
-    SELECT id,project_id as projectId,question_name as questionName, end_time as endTime
+    SELECT id,project_id as projectId,question_name as questionName, end_time as endTime,answer_total as answerTotal
     FROM questionnaire_info que
     WHERE question_stop = "4"
     AND created_by = #{user,jdbcType=CHAR}
