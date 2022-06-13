@@ -5,6 +5,8 @@ import com.aim.questionnaire.common.utils.UUIDUtil;
 import com.aim.questionnaire.service.ProjectService;
 import com.aim.questionnaire.dao.QuestionnaireEntityMapper;
 import com.aim.questionnaire.dao.entity.QuestionnaireEntity;
+
+import org.jsoup.helper.DataUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -68,7 +70,7 @@ public class QuestionnaireService {
      */
     public int modifyQuestionnaire(HashMap<String, Object> map) {
         Date date = DateUtil.getCreateTime();
-        map.put("endTime", date);
+        //map.put("endTime", date);
         //map.put("questionList", map.get("questionList"));
         int result =questionnaireEntityMapper.modifyQuestionnaire(map);
         System.out.print(result);
@@ -222,6 +224,17 @@ public class QuestionnaireService {
         map.put("lastUpdateDate",date);
         map.put("releaseTime",date);
         int result = questionnaireEntityMapper.addSendQuestionnaire(map);
+        return result;
+    }
+    /**
+     * 
+     */
+    public int modifyHistoryQuestionnaireStatus(HashMap<String, Object> map){
+        map.put("questionStop","1");
+        String endTimeStr = map.get("endTime").toString();
+        Date endTime = DateUtil.getMyTime(endTimeStr);
+        map.put("endTime",endTime);
+        int result = questionnaireEntityMapper.modifyHistoryQuestionnaireStatus(map);
         return result;
     }
 }

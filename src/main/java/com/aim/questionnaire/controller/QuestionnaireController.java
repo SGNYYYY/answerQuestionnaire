@@ -295,4 +295,13 @@ public class QuestionnaireController {
         httpResponseEntity.setData(result);
         return httpResponseEntity;
     }
+
+    @RequestMapping(value = "/modifyHistoryQuestionnaireStatus", method = RequestMethod.POST, headers = "Accept=application/json")
+    public HttpResponseEntity modifyHistoryQuestionnaireStatus(@RequestBody HashMap<String, Object> map) {
+        HttpResponseEntity httpResponseEntity = new HttpResponseEntity();
+        int result= questionnaireService.modifyHistoryQuestionnaireStatus(map);
+        httpResponseEntity.setCode(Constans.SUCCESS_CODE);
+        httpResponseEntity.setData(result);
+        return httpResponseEntity;
+    }
 }
