@@ -68,13 +68,23 @@ public class QuestionnaireService {
      */
     public int modifyQuestionnaire(HashMap<String, Object> map) {
         Date date = DateUtil.getCreateTime();
-        map.put("endTime", date);
+        map.put("lastUpdatedTime", date);
         //map.put("questionList", map.get("questionList"));
         int result =questionnaireEntityMapper.modifyQuestionnaire(map);
         System.out.print(result);
         return result;
     }
 
+    /**
+     * 根据问卷id查询问卷的详细信息
+     * 
+     * @param map
+     * @return
+     */
+    public Map<String, String> queryQuestionnaireById(HashMap<String, Object> map) {
+        Map<String, String> result = questionnaireEntityMapper.queryQuestionnaireById(map);
+        return result;
+    }
     /**
      * 删除项目
      * 
@@ -121,16 +131,7 @@ public class QuestionnaireService {
         return Result;
     }
 
-    /**
-     * 根据问卷id查询问卷的详细信息
-     * 
-     * @param map
-     * @return
-     */
-    public Map<String, String> queryQuestionnaireById(HashMap<String, Object> map) {
-        Map<String, String> result = questionnaireEntityMapper.queryQuestionnaireById(map);
-        return result;
-    }
+ 
     /**
      * 根据项目id查询此项目下的全部问卷
      * @param projectId
@@ -180,7 +181,7 @@ public class QuestionnaireService {
         return proResult;
     }
     /**
-     * 查询问卷模板
+     * 查询当前用户创建的问卷
      * @param dataId
      * @return
      */
@@ -191,5 +192,28 @@ public class QuestionnaireService {
             resultList.add(proObj);
         }
         return resultList;
+    }
+    /**
+     * 获取答题结束提示语、和短信内容
+     * @param id
+     * @return
+     */
+    public QuestionnaireEntity queryQuestContextEnd(String id){
+        QuestionnaireEntity questionnaireEntity = questionnaireEntityMapper.queryQuestContextEnd(id);
+        return questionnaireEntity;
+    }
+    /**
+     * 添加发送问卷方式
+     * @param map
+     * @return
+     */
+    public int addSendQuestionnaire(HashMap<String, Object> map){
+        map.put("questionStop","1");
+        // 获取当前时间
+        Date date = DateUtil.getCreateTime();
+        map.put("lastUpdateDate",date);
+        map.put("releaseTime",date);
+        int result = questionnaireEntityMapper.addSendQuestionnaire(map);
+        return result;
     }
 }

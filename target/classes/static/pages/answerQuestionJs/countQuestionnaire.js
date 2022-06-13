@@ -238,7 +238,7 @@ function designQuestionnaire() {
         layer.msg("问卷处于运行状态或问卷已发布，不可设计问卷", { icon: 2 })
     } else {
         $.cookie("QuestionId", getCookie("questionId"));
-        window.open('designQuestionnaire.html?=' + getCookie("questionId"))
+        window.open('designQuestionnaire.html?qId=' + getCookie("questionId"))
     }
 }
 
