@@ -113,28 +113,55 @@ function getProjectQuestSuccess(result) {
 function deleteProject(projectId) {
     console.log(projectId);
     layer.confirm('您确认要删除此项目吗？', {
-        btn: ['确定', '取消'] //按钮
-    }, function() {
-        var url = '/deleteProjectById';
-        var data = {
-            "id": projectId
-        };
+            btn: ['确定', '取消'] //按钮
+        }, function() {
+            var da1 = {
+                "projectId": projectId
+            };
+            var questionnaire = ""
+            commonAjaxPost(true, '/queryQuestionListByProjectId', da1, function(result) {
+                console.log(result)
+                if (result.code == "666") {
+                    questionnaire = result.data;
+                    deleteCookie("isQuestionnaireRunning")
+                    setCookie("isQuestionnaireRunning", "false")
+                    if (questionnaire.length) {
+                        setCookie("isQuestionnaireRunning", "false")
+                        for (var i = 0; i < questionnaire.length; i++) {
+                            if (questionnaire[i].questionStop == "1") {
 
-        commonAjaxPost(true, url, data, function(result) {
-            // console.log(result);
-            if (result.code == "666") {
-                layer.msg(result.message, { icon: 1 });
-                getProjectQuest();
-            } else if (result.code == "333") {
-                layer.msg(result.message, { icon: 2 });
-                setTimeout(function() {
-                    window.location.href = 'login.html';
-                }, 1000);
+                                setCookie("isQuestionnaireRunning", "true")
+                            }
+                        }
+                    }
+                }
+            })
+            if (getCookie("isQuestionnaireRunning") == "true") {
+                layer.msg('该项目有问卷正在进行，不可删除', { icon: 2 });
+                return
             } else {
-                layer.msg(result.message, { icon: 2 });
+
+                var url = '/deleteProjectById';
+                var data = {
+                    "id": projectId
+                };
+                commonAjaxPost(true, url, data, function(result) {
+                    // console.log(result);
+                    if (result.code == "666") {
+                        layer.msg(result.message, { icon: 1 });
+                        getProjectQuest();
+                    } else if (result.code == "333") {
+                        layer.msg(result.message, { icon: 2 });
+                        setTimeout(function() {
+                            window.location.href = 'login.html';
+                        }, 1000);
+                    } else {
+                        layer.msg(result.message, { icon: 2 });
+                    }
+                });
             }
-        });
-    }, function() {});
+        },
+        function() {});
 }
 
 

@@ -256,10 +256,24 @@ public class QuestionnaireController {
         return httpResponseEntity;
     }
 
+    /**
+     * 添加发送问卷信息
+     * @param map
+     * @return
+     */
     @RequestMapping(value = "/addSendQuestionnaire", method = RequestMethod.POST, headers = "Accept=application/json")
     public HttpResponseEntity addSendQuestionnaire(@RequestBody HashMap<String, Object> map) {
         HttpResponseEntity httpResponseEntity = new HttpResponseEntity();
         int result = questionnaireService.addSendQuestionnaire(map);
+        httpResponseEntity.setCode(Constans.SUCCESS_CODE);
+        httpResponseEntity.setData(result);
+        return httpResponseEntity;
+    }
+
+    @RequestMapping(value = "/queryQuestionListByProjectId", method = RequestMethod.POST, headers = "Accept=application/json")
+    public HttpResponseEntity queryQuestionListByProjectId(@RequestBody QuestionnaireEntity questionnaireEntity) {
+        HttpResponseEntity httpResponseEntity = new HttpResponseEntity();
+        List<Object> result= questionnaireService.queryQuestionListByProjectId(questionnaireEntity.getProjectId());
         httpResponseEntity.setCode(Constans.SUCCESS_CODE);
         httpResponseEntity.setData(result);
         return httpResponseEntity;

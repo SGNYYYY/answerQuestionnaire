@@ -43,7 +43,7 @@ function getHistoryQuestSuccess(result) {
                 text += "    <td align=\"center\" style=\"width:230px;\">";
                 text += "        <span>" + timeFormat(questionInfo[i].endTime) + "</span>";
                 text += "    </td>";
-                text += "    <td align=\"center\" style=\"width:82px;\">" + questionInfo[i].count + "</td>";
+                text += "    <td align=\"center\" style=\"width:82px;\">" + questionInfo[i].answerTotal + "</td>";
                 text += "    <td align=\"center\">";
                 text += "        <a id=\"btnSend\" href=\"javascript:void(0)\" onclick=\"previewQuest(" + "'" + questionInfo[i].id + "'" + ")\">查看</a>";
                 text += "    </td>";

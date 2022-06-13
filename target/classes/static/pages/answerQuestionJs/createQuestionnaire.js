@@ -271,7 +271,7 @@ function deleteQuestionnaireByIdSuccess(res) {
 
 //编辑模板
 function editModal(questionId) {
-    var qId = $.base64.encode(questionId);
+    var qId = questionId
     var url = "designQuestionnaire.html?qId=" + qId; //此处拼接内容
     // window.location.href = url;
     window.open(url)
