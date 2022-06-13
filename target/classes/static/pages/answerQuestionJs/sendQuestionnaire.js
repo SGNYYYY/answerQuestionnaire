@@ -429,7 +429,8 @@ function layOutSend() {
                     } else {
                         var url = '/addSendQuestionnaire';
                         var personsData = _$('#userInfoTable').bootstrapTable('getData');
-                        //短信发送问卷
+                        console.log(personsData)
+                            //短信发送问卷
                         var data = {
                             "questionId": questionId, //问卷id
                             "dataId": dataId, //问卷类型
@@ -437,7 +438,8 @@ function layOutSend() {
                             "sendType": sendType, //发送类别，0短信，1邮件
                             "context": sendContent, //短信内容
                             "questionEndContent": endContent, //答卷结束语
-                            "sendInfo": personsData //人员信息
+                            "sendInfo": personsData, //人员信息
+                            "answerTotal": personsData.length
                         };
                         setTimeout(function() {
                             layer.msg("发送成功", { icon: 1 });
@@ -499,7 +501,9 @@ function layOutSend() {
                 "emailTitle": emailTitle, //邮件标题
                 "context": emailContent, //邮件内容
                 "questionEndContent": endContent, //答卷结束语
-                "sendInfo": personsData //人员信息
+                "sendInfo": personsData, //人员信息
+                "answerTotal": personsData.length,
+                "lastUpdatedBy": getCookie("userName")
             };
             // layer.closeAll('loading');
             setTimeout(function() {
@@ -552,7 +556,8 @@ function layOutHold(falg) {
             "sendType": sendType, //发送类别，0短信，1邮件
             "context": sendContent, //短信内容
             "questionEndContent": endContent, //答卷结束语
-            "sendInfo": null //人员信息
+            "sendInfo": null, //人员信息
+            "answerTotal": 0
         };
 
     } else if (sendType == "1") { //邮件

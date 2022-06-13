@@ -2,6 +2,7 @@ package com.aim.questionnaire.controller;
 
 import com.aim.questionnaire.beans.HttpResponseEntity;
 import com.aim.questionnaire.common.Constans;
+import com.aim.questionnaire.dao.QuestionnaireEntityMapper;
 import com.aim.questionnaire.dao.entity.QuestionnaireEntity;
 import com.aim.questionnaire.service.QuestionnaireService;
 
@@ -221,6 +222,44 @@ public class QuestionnaireController {
     public HttpResponseEntity queryAllQuestionnaireByCreated(@RequestBody Map<String, Object> map) {
         HttpResponseEntity httpResponseEntity = new HttpResponseEntity();
         List<Object> result= questionnaireService.queryAllQuestionnaireByCreated(map);
+        httpResponseEntity.setCode(Constans.SUCCESS_CODE);
+        httpResponseEntity.setData(result);
+        return httpResponseEntity;
+    }
+    
+    /**
+     * 查询当前用户创建的所有问卷
+     * 
+     * @param questionnaireEntity
+     * @return
+     */
+    @RequestMapping(value = "/queryQuestContextEnd", method = RequestMethod.POST, headers = "Accept=application/json")
+    public HttpResponseEntity queryQuestContextEnd(@RequestBody QuestionnaireEntity questionnaireEntity) {
+        HttpResponseEntity httpResponseEntity = new HttpResponseEntity();
+        QuestionnaireEntity result = questionnaireService.queryQuestContextEnd(questionnaireEntity.getId());
+        httpResponseEntity.setCode(Constans.SUCCESS_CODE);
+        httpResponseEntity.setData(result);
+        return httpResponseEntity;
+    }
+
+    /**
+     * 查询短信条数
+     * 
+     * @param questionnaireEntity
+     * @return
+     */
+    @RequestMapping(value = "/selSum", method = RequestMethod.POST, headers = "Accept=application/json")
+    public HttpResponseEntity selSum() {
+        HttpResponseEntity httpResponseEntity = new HttpResponseEntity();
+        httpResponseEntity.setCode(Constans.SUCCESS_CODE);
+        httpResponseEntity.setData(100);
+        return httpResponseEntity;
+    }
+
+    @RequestMapping(value = "/addSendQuestionnaire", method = RequestMethod.POST, headers = "Accept=application/json")
+    public HttpResponseEntity addSendQuestionnaire(@RequestBody HashMap<String, Object> map) {
+        HttpResponseEntity httpResponseEntity = new HttpResponseEntity();
+        int result = questionnaireService.addSendQuestionnaire(map);
         httpResponseEntity.setCode(Constans.SUCCESS_CODE);
         httpResponseEntity.setData(result);
         return httpResponseEntity;
