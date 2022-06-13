@@ -68,10 +68,18 @@ public class QuestionnaireService {
      */
     public int modifyQuestionnaire(HashMap<String, Object> map) {
         Date date = DateUtil.getCreateTime();
-        map.put("lastUpdatedTime", date);
+        map.put("endTime", date);
         //map.put("questionList", map.get("questionList"));
         int result =questionnaireEntityMapper.modifyQuestionnaire(map);
         System.out.print(result);
+        return result;
+    }
+
+    /**
+     * 修改问卷状态
+     */
+    public int modifyQuestionnaireStatus(HashMap<String, Object> map) {
+        int result = questionnaireEntityMapper.modifyQuestionnaireStatus(map);
         return result;
     }
 

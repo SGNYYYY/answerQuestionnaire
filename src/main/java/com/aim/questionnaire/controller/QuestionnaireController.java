@@ -139,6 +139,23 @@ public class QuestionnaireController {
         httpResponseEntity.setData(result);
         return httpResponseEntity;
     }
+    
+    /**
+     * 根据问卷id停止问卷
+     * 
+     * @param questionnaireEntity
+     * @return
+     */
+    @RequestMapping(value = "/modifyQuestionnaireStatus", method = RequestMethod.POST, headers = "Accept=application/json")
+    public HttpResponseEntity modifyQuestionnaireStatus(@RequestBody(required = false) HashMap<String, Object> map) {
+        HttpResponseEntity httpResponseEntity = new HttpResponseEntity();
+        int result = questionnaireService.modifyQuestionnaireStatus(map);
+        httpResponseEntity.setCode(Constans.SUCCESS_CODE);
+        httpResponseEntity.setMessage(Constans.UPDATE_MESSAGE);
+        httpResponseEntity.setData(result);
+        return httpResponseEntity;
+    }
+
     /**
      * 查询全部历史问卷
      * 

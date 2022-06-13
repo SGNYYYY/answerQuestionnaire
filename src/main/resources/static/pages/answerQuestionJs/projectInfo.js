@@ -53,7 +53,10 @@ function getProjectInfoSuccess(result) {
                     "</a>" + '&nbsp;&nbsp;|&nbsp;&nbsp;' +
                     "<a href=\"javascript:void(0)\" onclick=\"designQuest(" + "'" + questionList[i].id + "'," + "'" + questionList[i].questionName + "'," + "'" + questionList[i].questionContent + "'," + "'" + questionList[i].endTime + "'," + "'" + questionList[i].creationDate + "'," + "'" + questionList[i].dataId + "'" + ")\">" +
                     "设计" +
-                    "</a>" +
+                    "</a>" +'&nbsp;&nbsp;|&nbsp;&nbsp;' +
+                    "<a href=\"javascript:void(0)\" onclick=\"stopQuest(" + "'" + questionList[i].id + "'," + "'" + questionList[i].questionName + "'," + "'" + questionList[i].questionContent + "'," + "'" + questionList[i].endTime + "'," + "'" + questionList[i].creationDate + "'," + "'" + questionList[i].dataId + "'" + ")\">" +
+                    "停止" +
+                    "</a>" +          
                     "</td>";
                 text += "</tr>"
             }
@@ -77,12 +80,6 @@ function getProjectInfoSuccess(result) {
 }
 
 
-// //设计问卷
-// function designQuest(questionId) {
-//     var url = "designQuestionnaire.html?qId=" + questionId; //此处拼接内容
-//     // window.location.href = url;
-//     window.open(url)
-// }
 
 //编辑问卷
 function editQuest(id, name, content, endTime, creationDate, dataId) {
@@ -175,4 +172,26 @@ function designQuest(id, name, content, endTime, creationDate, dataId) {
     setCookie("creationDate", creationDate);
     setCookie("dataId", dataId);
     window.location.href ='designQuestionnaire.html'+'?qId='+id;
+}
+//停止问卷
+function stopQuest(id, name, content, endTime, creationDate, dataId) {
+    var data = {
+        "id": id,
+        "questionStop":4
+        };
+    commonAjaxPost(true, '/modifyQuestionnaireStatus', data, function(result) {
+        if (result.code == "666") {
+                layer.msg('问卷已停止', { icon: 1 });
+                setTimeout(function() {
+                window.location.href = 'projectInfo.html';
+            }, 1000)
+        } else if (result.code == "333") {
+            layer.msg(result.message, { icon: 2 });
+            setTimeout(function() {
+                window.location.href = 'login.html';
+            }, 1000)
+        } else {
+            layer.msg(result.message, { icon: 2 })
+        }
+    });
 }
