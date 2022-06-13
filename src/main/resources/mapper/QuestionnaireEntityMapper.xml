@@ -595,12 +595,6 @@
       <if test="endTime != null">
         end_time = #{endTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="lastUpdatedBy != null">
-        last_updated_by = #{lastUpdatedBy,jdbcType=CHAR},
-      </if>
-      <if test="lastUpdateDate != null">
-        last_update_date = #{lastUpdateDate,jdbcType=TIMESTAMP},
-      </if>
       <if test="questionList != null">
         question = #{questionList,jdbcType=LONGVARCHAR},
       </if>
