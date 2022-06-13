@@ -111,55 +111,50 @@ function getProjectQuestSuccess(result) {
 
 // 删除项目
 function deleteProject(projectId) {
+    var da1 = {
+        "projectId": projectId
+    };
+    commonAjaxPost(true, '/queryQuestionListByProjectId', da1, function(result) {
+        console.log(result)
+        if (result.code == "666") {
+            var questionnaire = result.data;
+            deleteCookie("isQuestionnaireRunning")
+            setCookie("isQuestionnaireRunning", "false")
+            if (questionnaire.length) {
+                setCookie("isQuestionnaireRunning", "false")
+                for (var i = 0; i < questionnaire.length; i++) {
+                    if (questionnaire[i].questionStop == "1") {
+                        setCookie("isQuestionnaireRunning", "true")
+                        layer.msg('该项目有问卷正在进行，不可删除', { icon: 2 });
+                        return;
+                    }
+                }
+            }
+        }
+    })
     console.log(projectId);
     layer.confirm('您确认要删除此项目吗？', {
             btn: ['确定', '取消'] //按钮
         }, function() {
-            var da1 = {
-                "projectId": projectId
+            var url = '/deleteProjectById';
+            var data = {
+                "id": projectId
             };
-            var questionnaire = ""
-            commonAjaxPost(true, '/queryQuestionListByProjectId', da1, function(result) {
-                console.log(result)
+            commonAjaxPost(true, url, data, function(result) {
+                // console.log(result);
                 if (result.code == "666") {
-                    questionnaire = result.data;
-                    deleteCookie("isQuestionnaireRunning")
-                    setCookie("isQuestionnaireRunning", "false")
-                    if (questionnaire.length) {
-                        setCookie("isQuestionnaireRunning", "false")
-                        for (var i = 0; i < questionnaire.length; i++) {
-                            if (questionnaire[i].questionStop == "1") {
-
-                                setCookie("isQuestionnaireRunning", "true")
-                            }
-                        }
-                    }
+                    layer.msg(result.message, { icon: 1 });
+                    getProjectQuest();
+                } else if (result.code == "333") {
+                    layer.msg(result.message, { icon: 2 });
+                    setTimeout(function() {
+                        window.location.href = 'login.html';
+                    }, 1000);
+                } else {
+                    layer.msg(result.message, { icon: 2 });
                 }
-            })
-            if (getCookie("isQuestionnaireRunning") == "true") {
-                layer.msg('该项目有问卷正在进行，不可删除', { icon: 2 });
-                return
-            } else {
-
-                var url = '/deleteProjectById';
-                var data = {
-                    "id": projectId
-                };
-                commonAjaxPost(true, url, data, function(result) {
-                    // console.log(result);
-                    if (result.code == "666") {
-                        layer.msg(result.message, { icon: 1 });
-                        getProjectQuest();
-                    } else if (result.code == "333") {
-                        layer.msg(result.message, { icon: 2 });
-                        setTimeout(function() {
-                            window.location.href = 'login.html';
-                        }, 1000);
-                    } else {
-                        layer.msg(result.message, { icon: 2 });
-                    }
-                });
-            }
+            });
+            // }
         },
         function() {});
 }

@@ -96,10 +96,13 @@ public class ProjectService {
      * 查询全部项目的名字接口
      * @return
      */
-    public List<Map<String,Object>> queryAllProjectName() {
-        List<Map<String,Object>> result = projectEntityMapper.queryAllProjectName();
-        return result;
-
+    public List<Object> queryAllProjectName() {
+        List<Object> resultList = new ArrayList<Object>();
+        List<Map<String,Object>> proResult = projectEntityMapper.queryAllProjectName();
+        for(Map<String,Object> proObj : proResult) {
+            resultList.add(proObj);
+        }
+        return resultList;
     }
     /**
      * 根据项目id查询项目名称

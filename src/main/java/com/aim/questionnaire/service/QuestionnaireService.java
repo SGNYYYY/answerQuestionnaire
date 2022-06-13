@@ -70,7 +70,7 @@ public class QuestionnaireService {
      */
     public int modifyQuestionnaire(HashMap<String, Object> map) {
         Date date = DateUtil.getCreateTime();
-        //map.put("endTime", date);
+        map.put("endTime", date);
         //map.put("questionList", map.get("questionList"));
         int result =questionnaireEntityMapper.modifyQuestionnaire(map);
         System.out.print(result);

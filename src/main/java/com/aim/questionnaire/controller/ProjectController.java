@@ -126,7 +126,9 @@ public class ProjectController {
     @RequestMapping(value = "/queryAllProjectName",method = RequestMethod.POST, headers = "Accept=application/json")
     public HttpResponseEntity queryAllProjectName() {
         HttpResponseEntity httpResponseEntity = new HttpResponseEntity();
-        
+        List<Object> result = projectService.queryAllProjectName();
+        httpResponseEntity.setCode(Constans.SUCCESS_CODE);
+        httpResponseEntity.setData(result);
         return httpResponseEntity;
     }
 }
