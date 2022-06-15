@@ -17,6 +17,16 @@ import javax.annotation.Resource;
 public class RedisUtil {
     @Resource
     private RedisTemplate<String, Object> redisTemplate;
+
+    /**
+     * 获取所有的key
+     */
+    public Set<String> getListKey(String prefix) {
+        Set<String> keys = redisTemplate.keys("*");
+        return keys;
+    }
+
+
     /**
      * 给一个指定的 key 值附加过期时间
      *

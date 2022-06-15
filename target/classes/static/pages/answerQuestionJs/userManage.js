@@ -34,7 +34,7 @@ function TableInit() {
     //初始化Table
     oTableInit.Init = function() {
         $('#userTable').bootstrapTable({
-            url: httpRequestUrl + '/admin/queryUserList', //请求后台的URL（*）
+            url: httpRequestUrl + '/redis/queryUserList', //请求后台的URL（*）
             method: 'POST', //请求方式（*）
             striped: true, //是否显示行间隔色
             cache: false, //是否使用缓存，默认为true，所以一般情况下需要设置一下这个属性（*）
@@ -116,7 +116,7 @@ function TableInit() {
                             dataNewObj.username = userInfo[i].username;
                             dataNewObj.password = userInfo[i].password;
                             dataNewObj.startTime = timeFormat(userInfo[i].startTime);
-                            dataNewObj.endTime = timeFormat(userInfo[i].endTime);
+                            dataNewObj.endTime = timeFormat(userInfo[i].stopTime);
                             dataNewObj.status = userInfo[i].status;
                             NewData.push(dataNewObj);
                         }

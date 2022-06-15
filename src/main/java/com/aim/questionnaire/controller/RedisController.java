@@ -7,6 +7,7 @@ import com.aim.questionnaire.dao.entity.ProjectEntity;
 import com.aim.questionnaire.service.ProjectService;
 import com.aim.questionnaire.service.UserService;
 import com.fasterxml.jackson.annotation.OptBoolean;
+import com.github.pagehelper.PageInfo;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -21,11 +22,13 @@ import com.aim.questionnaire.common.utils.RedisUtil;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import javax.annotation.Resource;
 import javax.swing.text.DefaultStyledDocument.ElementSpec;
@@ -64,17 +67,24 @@ public class RedisController {
             UserEntity resultUserEntity = userService.selectAllByName(username);
             Map<String,String> map = new HashMap<String,String>();
             DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+            if(resultUserEntity == null){
+                httpResponseEntity.setCode(Constans.EXIST_CODE);
+                httpResponseEntity.setData(null);
+                httpResponseEntity.setMessage(Constans.LOGIN_USERNAME_PASSWORD_MESSAGE);
+                return httpResponseEntity;
+            }
             map.put("id",resultUserEntity.getId());
             map.put("password",resultUserEntity.getPassword());
-            map.put("start_time",dateFormat.format(resultUserEntity.getStartTime()));
+            map.put("startTime",dateFormat.format(resultUserEntity.getStartTime()));
             dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
-            map.put("stop_time",dateFormat.format(resultUserEntity.getStopTime()));
-            map.put("created_by",resultUserEntity.getCreatedBy());
+            map.put("stopTime",dateFormat.format(resultUserEntity.getStopTime()));
+            map.put("createdBy",resultUserEntity.getCreatedBy());
             dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
-            map.put("creation_date",dateFormat.format(resultUserEntity.getCreationDate()));
-            map.put("last_updated_by",resultUserEntity.getLastUpdatedBy());
+            map.put("creationDate",dateFormat.format(resultUserEntity.getCreationDate()));
+            map.put("lastUpdatedBy",resultUserEntity.getLastUpdatedBy());
             dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
-            map.put("last_update_date",dateFormat.format(resultUserEntity.getLastUpdateDate()));
+            map.put("lastUpdateDate",dateFormat.format(resultUserEntity.getLastUpdateDate()));
+            map.put("status",resultUserEntity.getStatus());
             redisUtil.add(username, map);
         }
         //String result2 = redisUtil.getMapString("admin","password").toString();
@@ -93,4 +103,26 @@ public class RedisController {
         return httpResponseEntity;
     }
 
+
+    /**
+     * 查询用户列表（模糊搜索）
+     * @param map
+     * @return
+     */
+    @RequestMapping(value="/queryUserList",method= RequestMethod.POST, headers = "Accept=application/json")
+    public HttpResponseEntity queryUserList(){
+        HttpResponseEntity httpResponseEntity = new HttpResponseEntity();
+        Set<String> keySet = redisUtil.getListKey("");
+        List<Map<Object,Object>> userList = new ArrayList<Map<Object,Object>>();
+        for (String key : keySet) {
+            Map<Object,Object> map = redisUtil.getHashEntries(key);
+            map.put("username",key);
+            userList.add(map);
+        }
+        PageInfo<Map<Object,Object>> pageInfo = new PageInfo<Map<Object,Object>>(userList);
+        httpResponseEntity.setCode(Constans.SUCCESS_CODE);
+        httpResponseEntity.setData(pageInfo);
+        httpResponseEntity.setMessage(Constans.STATUS_MESSAGE);
+        return httpResponseEntity;
+    }
 }

@@ -68,7 +68,7 @@
   <!--根据用户名查找用户信息-->
   <select id="selectAllByName" parameterType="java.lang.String" resultType="com.aim.questionnaire.dao.entity.UserEntity">
     SELECT id,`password`,start_time as startTime,stop_time as stopTime,created_by as createdBy, creation_date as creationDate,
-        last_updated_by as lastUpdatedBy, last_update_date as lastUpdateDate
+        last_updated_by as lastUpdatedBy, last_update_date as lastUpdateDate ,status
     FROM user_info
     WHERE username = #{username,jdbcType=VARCHAR} 
     AND status = "1"
