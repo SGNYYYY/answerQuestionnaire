@@ -116,6 +116,15 @@ public class UserService {
     }
 
     /**
+     * 根据用户名查找用户信息
+     * @param username
+     * @return
+     */
+    public UserEntity selectAllByName(String username) {
+        UserEntity userEntity = userEntityMapper.selectAllByName(username);
+        return userEntity;
+    }
+    /**
      * 删除用户信息
      * @param userEntity
      * @return

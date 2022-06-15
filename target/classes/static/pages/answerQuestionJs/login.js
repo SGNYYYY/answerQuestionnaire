@@ -24,12 +24,13 @@ function login() {
         "username": UserNameText,
         "password": PasswordTest
     };
-    commonAjaxPost(true, "/admin/userLogin", da, loginSuccess)
+    commonAjaxPost(true, "/redis/userLogin", da, loginSuccess)
         //commonAjaxPost(true, "/admin/userLogins", da, loginSuccess)
 }
 
 //登录成功回调
 function loginSuccess(result) {
+    console.log(result)
     if (result.code == '666') {
         layer.msg(result.message, { icon: 1 });
         setCookie('isLogin', '1');
