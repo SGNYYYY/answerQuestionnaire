@@ -17,8 +17,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.xml.ws.Action;
+
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -52,35 +57,21 @@ public class UserService {
      * 创建用户的基本信息
      * @param map
      * @return
+     * @throws ParseException
      */
-    public int addUserInfo(Map<String,Object> map) {
-
-        if(map.get("username") != null) {
-            int userResult = userEntityMapper.queryExistUser(map);
-            if(userResult != 0) {
-                //用户名已经存在
-                return 3;
-            }
-        }
-
-        String id = UUIDUtil.getOneUUID();
-        map.put("id",id);
-        //创建时间
-        Date date = DateUtil.getCreateTime();
-        map.put("creationDate",date);
-        map.put("lastUpdateDate",date);
-        //创建人
-        String user = "admin";
-        map.put("createdBy",user);
-        map.put("lastUpdatedBy",user);
-        //前台传入的时间戳转换
-        String startTimeStr = map.get("startTime").toString();
-        String endTimeStr = map.get("stopTime").toString();
-        Date startTime = DateUtil.getMyTime(startTimeStr);
-        Date endTime = DateUtil.getMyTime(endTimeStr);
-        map.put("startTime",startTime);
-        map.put("stopTime",endTime);
-
+    public int addUserInfo(Map<Object,Object> redisMap, String user) throws ParseException {
+        Map<String, Object> map = new HashMap<String, Object>();
+        DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+        map.put("username",user);
+        map.put("password",redisMap.get("password"));
+        map.put("id",redisMap.get("id"));
+        map.put("createdBy",redisMap.get("createdBy"));
+        map.put("lastUpdatedBy",redisMap.get("lastUpdatedBy"));
+        map.put("status",redisMap.get("status"));
+        map.put("startTime",dateFormat.parse(redisMap.get("startTime").toString()));
+        map.put("stopTime",dateFormat.parse(redisMap.get("stopTime").toString()));
+        map.put("creationDate",dateFormat.parse(redisMap.get("creationDate").toString()));
+        map.put("lastUpdateDate",dateFormat.parse(redisMap.get("lastUpdateDate").toString()));
         int result = userEntityMapper.addUserInfo(map);
         return result;
     }
@@ -90,19 +81,35 @@ public class UserService {
      * @param map
      * @return
      */
-    public int modifyUserInfo(Map<String, Object> map) {
-        
-        return 0;
+    public int modifyUserInfo(Map<Object,Object> redisMap, String user) throws ParseException {
+        Map<String, Object> map = new HashMap<String, Object>();
+        DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+        map.put("username",user);
+        map.put("password",redisMap.get("password"));
+        map.put("id",redisMap.get("id"));
+        map.put("lastUpdatedBy",redisMap.get("lastUpdatedBy"));
+        map.put("startTime",dateFormat.parse(redisMap.get("startTime").toString()));
+        map.put("stopTime",dateFormat.parse(redisMap.get("stopTime").toString()));
+        map.put("lastUpdateDate",dateFormat.parse(redisMap.get("lastUpdateDate").toString()));
+        int result = userEntityMapper.modifyUserInfo(map);
+        return result;
     }
 
     /**
      * 修改用户状态
      * @param map
      * @return
+     * @throws ParseException
      */
-    public int modifyUserStatus(Map<String, Object> map) {
-    
-        return 0;
+    public int modifyUserStatus(Map<Object, Object> redisMap) throws ParseException {
+        Map<String, Object> map = new HashMap<String, Object>();
+        DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+        map.put("id",redisMap.get("id"));
+        map.put("lastUpdatedBy",redisMap.get("lastUpdatedBy"));
+        map.put("lastUpdateDate",dateFormat.parse(redisMap.get("lastUpdateDate").toString()));
+        map.put("status",redisMap.get("status"));
+        int result = userEntityMapper.modifyUserStatus(map);
+        return result;
     }
 
     /**
@@ -130,7 +137,7 @@ public class UserService {
      * @return
      */
     public int deteleUserInfoById(UserEntity userEntity) {
-
+        userEntityMapper.deteleUserInfoById(userEntity);
         return 0;
     }
 }

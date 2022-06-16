@@ -163,29 +163,36 @@ window.operateEvents = {
 function addFunctionAlty(value, row, index) {
     var btnText = '';
 
-    btnText += "<button type=\"button\" id=\"btn_look\" onclick=\"resetPassword(" + "'" + row.id + "'" + ")\" style='width: 77px;' class=\"btn btn-default-g ajax-link\">重置密码</button>&nbsp;&nbsp;";
+    btnText += "<button type=\"button\" id=\"btn_look\" onclick=\"resetPassword(" + "'" + row.id + "'," + "'" + row.username + "'," + "'重置密码'" + ")\" style='width: 77px;' class=\"btn btn-default-g ajax-link\">重置密码</button>&nbsp;&nbsp;";
 
-    btnText += "<button type=\"button\" id=\"btn_look\" onclick=\"editUserPage(" + "'" + row.id + "')\" class=\"btn btn-default-g ajax-link\">编辑</button>&nbsp;&nbsp;";
+    btnText += "<button type=\"button\" id=\"btn_look\" onclick=\"editUserPage(" + "'" + row.id + "'," + "'" + row.username + "'," + "'编辑'" + ")\" class=\"btn btn-default-g ajax-link\">编辑</button>&nbsp;&nbsp;";
 
     if (row.status == "1") {
-        btnText += "<button type=\"button\" id=\"btn_stop" + row.id + "\" onclick=\"changeStatus(" + "'" + row.id + "'" + ")\" class=\"btn btn-danger-g ajax-link\">关闭</button>&nbsp;&nbsp;";
+        btnText += "<button type=\"button\" id=\"btn_stop" + row.id + "\" onclick=\"changeStatus(" + "'" + row.id + "'," + "'" + row.username + "'," + "'关闭'" + ")\" class=\"btn btn-danger-g ajax-link\">关闭</button>&nbsp;&nbsp;";
     } else if (row.status == "0") {
-        btnText += "<button type=\"button\" id=\"btn_stop" + row.id + "\" onclick=\"changeStatus(" + "'" + row.id + "'" + ")\" class=\"btn btn-success-g ajax-link\">开启</button>&nbsp;&nbsp;"
+        btnText += "<button type=\"button\" id=\"btn_stop" + row.id + "\" onclick=\"changeStatus(" + "'" + row.id + "'," + "'" + row.username + "'," + "'开启'" + ")\" class=\"btn btn-success-g ajax-link\">开启</button>&nbsp;&nbsp;"
     }
-    btnText += "<button type=\"button\" id=\"btn_stop" + row.id + "\" onclick=\"deleteUser(" + "'" + row.id + "'" + ")\" class=\"btn btn-danger-g ajax-link\">删除</button>&nbsp;&nbsp;";
+    btnText += "<button type=\"button\" id=\"btn_stop" + row.id + "\" onclick=\"deleteUser(" + "'" + row.id + "'," + "'" + row.username + "'," + "'删除'" + ")\" class=\"btn btn-danger-g ajax-link\">删除</button>&nbsp;&nbsp;";
 
     return btnText;
 }
 
 //重置密码
-function resetPassword(id) {
-    alert("重置密码")
+function resetPassword(id, username, value) {
+    deleteCookie("userTitle");
+    deleteCookie("editUserName")
+    setCookie("userTitle", value);
+    setCookie("editUserName", username);
+    if (id != '') {
+        deleteCookie("userId");
+        setCookie("userId", id);
+    }
+    window.location.href = 'createNewUser.html';
 
 }
 
 // 打开创建用户页
 function openCreateUserPage(id, value) {
-
     deleteCookie("userTitle");
     setCookie("userTitle", value);
     if (id != '') {
@@ -195,18 +202,80 @@ function openCreateUserPage(id, value) {
     window.location.href = 'createNewUser.html';
 }
 
-function editUserPage() {
-
-    alert("编辑用户")
+function editUserPage(id, username, value) {
+    deleteCookie("userTitle");
+    deleteCookie("editUserName")
+    setCookie("userTitle", value);
+    setCookie("editUserName", username);
+    if (id != '') {
+        deleteCookie("userId");
+        setCookie("userId", id);
+    }
+    window.location.href = 'createNewUser.html';
 }
 // 修改用户状态（禁用、开启）
-function changeStatus(index) {
-
-    alert("修改用户状态")
+function changeStatus(id, username, value) {
+    var url = '/redis/modifyUserStatus';
+    var data = {}
+    var message = ""
+    if (value == '开启') {
+        data = {
+            'username': username,
+            'status': 1,
+            'lastUpdatedBy': getCookie("userName")
+        };
+        message = "开启成功"
+    } else {
+        data = {
+            'username': username,
+            'status': 0,
+            'lastUpdatedBy': getCookie("userName")
+        };
+        message = "关闭成功"
+    }
+    console.log(data)
+    console.log(value)
+    commonAjaxPost(true, url, data, function(result) {
+        console.log(result)
+        if (result.code == "666") {
+            commonAjaxPost(true, '/admin/modifyUserStatus', data, function(result) {})
+            layer.msg(message, { icon: 1 });
+            setTimeout(function() {
+                location.reload();
+            }, 500)
+        } else if (result.code == "333") {
+            layer.msg(result.message, { icon: 2 });
+            setTimeout(function() {
+                window.location.href = 'login.html';
+            }, 1000)
+        } else {
+            layer.msg(result.message, { icon: 2 })
+        }
+    })
 }
 
 //删除用户
-function deleteUser(id) {
-
-    alert("删除用户")
+function deleteUser(id, username, value) {
+    var url = '/redis/deleteUserInfoByUserName';
+    var data = {
+        'id': id,
+        'username': username
+    };
+    commonAjaxPost(true, url, data, function(result) {
+        console.log(result)
+        if (result.code == "666") {
+            commonAjaxPost(true, '/admin/deleteUserInfoById', data, function(result) {})
+            layer.msg(result.message, { icon: 1 });
+            setTimeout(function() {
+                location.reload();
+            }, 500)
+        } else if (result.code == "333") {
+            layer.msg(result.message, { icon: 2 });
+            setTimeout(function() {
+                window.location.href = 'login.html';
+            }, 1000)
+        } else {
+            layer.msg(result.message, { icon: 2 })
+        }
+    })
 }

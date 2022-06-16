@@ -1,7 +1,10 @@
 package com.aim.questionnaire.controller;
 
+import java.text.ParseException;
 import java.util.List;
 import java.util.Map;
+
+import javax.annotation.Resource;
 
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.*;
@@ -22,7 +25,7 @@ import com.aim.questionnaire.dao.UserEntityMapper;
 import com.aim.questionnaire.dao.entity.UserEntity;
 import com.aim.questionnaire.service.UserService;
 import com.github.pagehelper.PageInfo;
-
+import com.aim.questionnaire.common.utils.RedisUtil;
 
 /**
  * Created by wln on 2018\8\9 0009.
@@ -32,7 +35,9 @@ import com.github.pagehelper.PageInfo;
 public class UserController {
 
     private final Logger logger = LoggerFactory.getLogger(UserController.class);
-    
+    @Resource
+    private RedisUtil redisUtil; 
+
     @Autowired
     private UserService userService;
 
@@ -86,24 +91,17 @@ public class UserController {
      * 创建用户的基本信息
      * @param map
      * @return
+     * @throws ParseException
      */
     @RequestMapping(value = "/addUserInfo",method = RequestMethod.POST, headers = "Accept=application/json")
-    public HttpResponseEntity addUserInfo(@RequestBody Map<String,Object> map) {
+    public HttpResponseEntity addUserInfo(@RequestBody Map<String,Object> map) throws ParseException {
         HttpResponseEntity httpResponseEntity = new HttpResponseEntity();
-        try {
-                int result = userService.addUserInfo(map);
-                if(result == 3) {
-                    httpResponseEntity.setCode(Constans.USER_USERNAME_CODE);
-                    httpResponseEntity.setMessage(Constans.USER_USERNAME_MESSAGE);
-                }else {
-                    httpResponseEntity.setCode(Constans.SUCCESS_CODE);
-                    httpResponseEntity.setMessage(Constans.ADD_MESSAGE);
-                }
-        } catch (Exception e) {
-            logger.info("addUserInfo 创建用户的基本信息>>>>>>>>>>>" + e.getLocalizedMessage());
-            httpResponseEntity.setCode(Constans.EXIST_CODE);
-            httpResponseEntity.setMessage(Constans.EXIST_MESSAGE);
-        }
+        String username = map.get("username").toString();
+        Map<Object,Object> redisMap = redisUtil.getHashEntries(username);
+        userService.addUserInfo(redisMap, username);
+        httpResponseEntity.setCode(Constans.SUCCESS_CODE);
+        httpResponseEntity.setMessage(Constans.ADD_MESSAGE);
+
         return httpResponseEntity;
     }
 
@@ -111,11 +109,16 @@ public class UserController {
      * 编辑用户的基本信息
      * @param map
      * @return
+     * @throws ParseException
      */
     @RequestMapping(value = "/modifyUserInfo",method = RequestMethod.POST, headers = "Accept=application/json")
-    public HttpResponseEntity modifyUserInfo(@RequestBody Map<String,Object> map) {
+    public HttpResponseEntity modifyUserInfo(@RequestBody Map<String,Object> map) throws ParseException {
         HttpResponseEntity httpResponseEntity = new HttpResponseEntity();
-        
+        String username = map.get("username").toString();
+        Map<Object,Object> redisMap = redisUtil.getHashEntries(username);
+        userService.modifyUserInfo(redisMap, username);
+        httpResponseEntity.setCode(Constans.SUCCESS_CODE);
+        httpResponseEntity.setMessage(Constans.UPDATE_MESSAGE);
         return httpResponseEntity;
     }
 
@@ -138,11 +141,16 @@ public class UserController {
      * 修改用户状态
      * @param map
      * @return
+     * @throws ParseException
      */
     @RequestMapping(value = "/modifyUserStatus",method = RequestMethod.POST, headers = "Accept=application/json")
-    public HttpResponseEntity modifyUserStatus(@RequestBody Map<String,Object> map) {
+    public HttpResponseEntity modifyUserStatus(@RequestBody Map<String,Object> map) throws ParseException {
         HttpResponseEntity httpResponseEntity = new HttpResponseEntity();
-        
+        String username = map.get("username").toString();
+        Map<Object,Object> redisMap = redisUtil.getHashEntries(username);
+        userService.modifyUserStatus(redisMap);
+        httpResponseEntity.setCode(Constans.SUCCESS_CODE);
+        httpResponseEntity.setMessage(Constans.UPDATE_MESSAGE);
         return httpResponseEntity;
     }
     /**
@@ -153,7 +161,9 @@ public class UserController {
     @RequestMapping(value = "/deleteUserInfoById",method = RequestMethod.POST, headers = "Accept=application/json")
     public HttpResponseEntity deteleUserInfoById(@RequestBody UserEntity userEntity) {
         HttpResponseEntity httpResponseEntity = new HttpResponseEntity();
-        
+        userService.deteleUserInfoById(userEntity);
+        httpResponseEntity.setCode(Constans.SUCCESS_CODE);
+        httpResponseEntity.setMessage(Constans.DELETE_MESSAGE);
         return httpResponseEntity;
     }
 

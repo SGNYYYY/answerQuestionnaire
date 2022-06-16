@@ -5,6 +5,7 @@ import com.aim.questionnaire.common.Constans;
 import com.aim.questionnaire.dao.UserEntityMapper;
 import com.aim.questionnaire.dao.entity.ProjectEntity;
 import com.aim.questionnaire.service.ProjectService;
+import com.aim.questionnaire.service.RedisService;
 import com.aim.questionnaire.service.UserService;
 import com.fasterxml.jackson.annotation.OptBoolean;
 import com.github.pagehelper.PageInfo;
@@ -18,7 +19,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import com.aim.questionnaire.dao.entity.UserEntity;
+import com.aim.questionnaire.common.utils.DateUtil;
 import com.aim.questionnaire.common.utils.RedisUtil;
+import com.aim.questionnaire.common.utils.UUIDUtil;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -38,6 +41,7 @@ import javax.swing.text.DefaultStyledDocument.ElementSpec;
 public class RedisController {
 
     //private final RedisTemplate redisTemplate;
+    private final Logger logger = LoggerFactory.getLogger(RedisController.class);
 
     @Resource
     private RedisUtil redisUtil; 
@@ -46,60 +50,34 @@ public class RedisController {
     private UserService userService;
 
     @Autowired
-    private UserEntityMapper userEntityMapper;
+    private RedisService redisService;
 
-    @RequestMapping(value="/test",method= RequestMethod.POST, headers = "Accept=application/json")
-    public HttpResponseEntity test() {
-        HttpResponseEntity httpResponseEntity = new HttpResponseEntity();
-        Map<String,String> map = new HashMap<String,String>();
-        map.put("1","one");
-        map.put("2","two");
-        redisUtil.add("test", map);
-        httpResponseEntity.setData(1);
-        return httpResponseEntity;
-    }
+    @Autowired
+    private UserEntityMapper userEntityMapper;
+    // 测试redis
+    // @RequestMapping(value="/test",method= RequestMethod.POST, headers = "Accept=application/json")
+    // public HttpResponseEntity test() {
+    //     HttpResponseEntity httpResponseEntity = new HttpResponseEntity();
+    //     Map<String,String> map = new HashMap<String,String>();
+    //     map.put("1","one");
+    //     map.put("2","two");
+    //     redisUtil.add("test", map);
+    //     httpResponseEntity.setData(1);
+    //     return httpResponseEntity;
+    // }
     @RequestMapping(value="/userLogin",method= RequestMethod.POST, headers = "Accept=application/json")
     public HttpResponseEntity userLogin(@RequestBody UserEntity userEntity){
         HttpResponseEntity httpResponseEntity = new HttpResponseEntity();
-        String username = userEntity.getUsername();
-        boolean haskey = redisUtil.hasKey(username);
-        if(!haskey){
-            UserEntity resultUserEntity = userService.selectAllByName(username);
-            Map<String,String> map = new HashMap<String,String>();
-            DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
-            if(resultUserEntity == null){
-                httpResponseEntity.setCode(Constans.EXIST_CODE);
-                httpResponseEntity.setData(null);
-                httpResponseEntity.setMessage(Constans.LOGIN_USERNAME_PASSWORD_MESSAGE);
-                return httpResponseEntity;
-            }
-            map.put("id",resultUserEntity.getId());
-            map.put("password",resultUserEntity.getPassword());
-            map.put("startTime",dateFormat.format(resultUserEntity.getStartTime()));
-            dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
-            map.put("stopTime",dateFormat.format(resultUserEntity.getStopTime()));
-            map.put("createdBy",resultUserEntity.getCreatedBy());
-            dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
-            map.put("creationDate",dateFormat.format(resultUserEntity.getCreationDate()));
-            map.put("lastUpdatedBy",resultUserEntity.getLastUpdatedBy());
-            dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
-            map.put("lastUpdateDate",dateFormat.format(resultUserEntity.getLastUpdateDate()));
-            map.put("status",resultUserEntity.getStatus());
-            redisUtil.add(username, map);
-        }
-        //String result2 = redisUtil.getMapString("admin","password").toString();
-        Map<Object,Object> map = redisUtil.getHashEntries(username);
-        String password = map.get("password").toString();
-        if(password.equals(userEntity.getPassword())){
-            httpResponseEntity.setCode(Constans.SUCCESS_CODE);
-            httpResponseEntity.setData(map);
-            httpResponseEntity.setMessage(Constans.LOGIN_MESSAGE);
-        }else{
+        Map<Object,Object> resultMap = redisService.userLogin(userEntity);
+        if(resultMap == null){
             httpResponseEntity.setCode(Constans.EXIST_CODE);
             httpResponseEntity.setData(null);
             httpResponseEntity.setMessage(Constans.LOGIN_USERNAME_PASSWORD_MESSAGE);
+        }else {
+            httpResponseEntity.setCode(Constans.SUCCESS_CODE);
+            httpResponseEntity.setData(resultMap);
+            httpResponseEntity.setMessage(Constans.LOGIN_MESSAGE);
         }
-        //httpResponseEntity.setData(map);
         return httpResponseEntity;
     }
 
@@ -125,4 +103,184 @@ public class RedisController {
         httpResponseEntity.setMessage(Constans.STATUS_MESSAGE);
         return httpResponseEntity;
     }
+
+    /**
+     * 通过用户名查找用户信息
+     * @param userEntity
+     * @return
+     */
+    @RequestMapping(value="/selectUserInfoByUserName",method= RequestMethod.POST, headers = "Accept=application/json")
+    public HttpResponseEntity selectUserInfoByUserName(@RequestBody UserEntity userEntity){
+        HttpResponseEntity httpResponseEntity = new HttpResponseEntity();
+        String username = userEntity.getUsername();
+        Map<Object,Object> map = redisUtil.getHashEntries(username);
+        map.put("username",username);
+        httpResponseEntity.setCode(Constans.SUCCESS_CODE);
+        httpResponseEntity.setData(map);
+        httpResponseEntity.setMessage(Constans.STATUS_MESSAGE);
+        return httpResponseEntity;
+    }
+
+    /**
+     * 创建用户的基本信息
+     * @param map
+     * @return
+     */
+    @RequestMapping(value = "/addUserInfo",method = RequestMethod.POST, headers = "Accept=application/json")
+    public HttpResponseEntity addUserInfo(@RequestBody Map<String,Object> map) {
+        HttpResponseEntity httpResponseEntity = new HttpResponseEntity();
+        if(map.get("username") != null) {
+            String username = map.get("username").toString();
+            if(redisUtil.hasKey(username)) {
+                httpResponseEntity.setCode(Constans.USER_USERNAME_CODE);
+                httpResponseEntity.setMessage(Constans.USER_USERNAME_MESSAGE);
+            }else{
+                Map<String,String> redisMap = new HashMap<String,String>();
+                DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+                String id = UUIDUtil.getOneUUID();
+                redisMap.put("id",id);
+                //密码
+                String password = map.get("password").toString();
+                redisMap.put("password",password);
+                //创建时间
+                Date date = DateUtil.getCreateTime();
+                redisMap.put("creationDate",dateFormat.format(date));
+                redisMap.put("lastUpdateDate",dateFormat.format(date));
+                //创建人
+                String user = map.get("createdBy").toString();
+                redisMap.put("createdBy",user);
+                redisMap.put("lastUpdatedBy",user);
+                //前台传入的时间戳转换
+                String startTimeStr = map.get("startTime").toString();
+                String endTimeStr = map.get("stopTime").toString();
+                Date startTime = DateUtil.getMyTime(startTimeStr);
+                Date endTime = DateUtil.getMyTime(endTimeStr);
+                redisMap.put("startTime",dateFormat.format(startTime));
+                redisMap.put("stopTime",dateFormat.format(endTime));
+                redisMap.put("status","1");
+                redisUtil.add(username, redisMap);
+                httpResponseEntity.setCode(Constans.SUCCESS_CODE);
+                httpResponseEntity.setMessage(Constans.ADD_MESSAGE);
+            }  
+        }
+        return httpResponseEntity;
+    }
+
+    /**
+     * 编辑用户的基本信息
+     * @param map
+     * @return
+     */
+    @RequestMapping(value = "/modifyUserInfo",method = RequestMethod.POST, headers = "Accept=application/json")
+    public HttpResponseEntity modifyUserInfo(@RequestBody Map<String,Object> map) {
+        HttpResponseEntity httpResponseEntity = new HttpResponseEntity();
+        String username = map.get("username").toString();
+        //如果更新了用户名
+        if(map.get("oldUserName") != null) {
+            if(redisUtil.hasKey(username)) {
+                httpResponseEntity.setCode(Constans.USER_USERNAME_CODE);
+                httpResponseEntity.setMessage(Constans.USER_USERNAME_MESSAGE);
+            }else{
+                Map<Object,Object> oldMap = redisUtil.getHashEntries(map.get("oldUserName").toString());
+                redisUtil.deleteByPrex(map.get("oldUserName").toString());
+                Map<String,String> redisMap = new HashMap<String,String>();
+                DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+                redisMap.put("id",oldMap.get("id").toString());
+                //密码
+                if(map.get("password")!=null){
+                    String password = map.get("password").toString();
+                    redisMap.put("password",password);
+                }else{
+                    redisMap.put("password",oldMap.get("password").toString());
+                }
+
+                //创建时间
+                Date date = DateUtil.getCreateTime();
+                redisMap.put("creationDate",oldMap.get("creationDate").toString());
+                //更新时间
+                redisMap.put("lastUpdateDate",dateFormat.format(date));
+                //创建人
+                String user = map.get("lastUpdatedBy").toString();
+                redisMap.put("createdBy",oldMap.get("createdBy").toString());
+                redisMap.put("lastUpdatedBy",user);
+                //前台传入的时间戳转换
+                String startTimeStr = map.get("startTime").toString();
+                String endTimeStr = map.get("stopTime").toString();
+                Date startTime = DateUtil.getMyTime(startTimeStr);
+                Date endTime = DateUtil.getMyTime(endTimeStr);
+                redisMap.put("startTime",dateFormat.format(startTime));
+                redisMap.put("stopTime",dateFormat.format(endTime));
+                redisMap.put("status",oldMap.get("status").toString());
+                redisUtil.add(username, redisMap);
+                httpResponseEntity.setCode(Constans.SUCCESS_CODE);
+                httpResponseEntity.setMessage(Constans.ADD_MESSAGE);
+            }  
+        }else{
+            Map<String,String> redisMap = new HashMap<String,String>();
+            DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+            //密码
+            if(map.get("password")!=null){
+                String password = map.get("password").toString();
+                redisMap.put("password",password);
+            }
+
+            //更新时间
+            Date date = DateUtil.getCreateTime();
+            redisMap.put("lastUpdateDate",dateFormat.format(date));
+            //创建人
+            String user = map.get("lastUpdatedBy").toString();
+            redisMap.put("lastUpdatedBy",user);
+            //前台传入的时间戳转换
+            String startTimeStr = map.get("startTime").toString();
+            String endTimeStr = map.get("stopTime").toString();
+            Date startTime = DateUtil.getMyTime(startTimeStr);
+            Date endTime = DateUtil.getMyTime(endTimeStr);
+            redisMap.put("startTime",dateFormat.format(startTime));
+            redisMap.put("stopTime",dateFormat.format(endTime));
+            redisUtil.add(username, redisMap);
+            httpResponseEntity.setCode(Constans.SUCCESS_CODE);
+            httpResponseEntity.setMessage(Constans.UPDATE_MESSAGE);
+        }
+        return httpResponseEntity;
+    }
+
+    /**
+     * 修改用户状态
+     * @param map
+     * @return
+     */
+    @RequestMapping(value = "/modifyUserStatus",method = RequestMethod.POST, headers = "Accept=application/json")
+    public HttpResponseEntity modifyUserStatus(@RequestBody Map<String,Object> map) {
+        HttpResponseEntity httpResponseEntity = new HttpResponseEntity();
+        if(map.get("username") != null) {
+            String username = map.get("username").toString();
+            Map<String,String> redisMap = new HashMap<String,String>();
+            DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+            //更新时间
+            Date date = DateUtil.getCreateTime();
+            redisMap.put("lastUpdateDate",dateFormat.format(date));
+            //创建人
+            String user = map.get("lastUpdatedBy").toString();
+            redisMap.put("lastUpdatedBy",user);
+            redisMap.put("status",map.get("status").toString());
+            redisUtil.add(username, redisMap);
+            httpResponseEntity.setCode(Constans.SUCCESS_CODE);
+            httpResponseEntity.setMessage(Constans.UPDATE_MESSAGE);
+        }
+        return httpResponseEntity;
+    }
+    /**
+     *  删除用户信息
+     * @param userEntity
+     * @return
+     */
+    @RequestMapping(value = "/deleteUserInfoByUserName",method = RequestMethod.POST, headers = "Accept=application/json")
+    public HttpResponseEntity deteleUserInfoById(@RequestBody UserEntity userEntity) {
+        HttpResponseEntity httpResponseEntity = new HttpResponseEntity();
+        redisUtil.deleteByPrex(userEntity.getUsername());
+        httpResponseEntity.setCode(Constans.SUCCESS_CODE);
+        httpResponseEntity.setMessage(Constans.DELETE_MESSAGE);
+        return httpResponseEntity;
+    }
+
 }

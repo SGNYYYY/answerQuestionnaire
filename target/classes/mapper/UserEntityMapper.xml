@@ -152,12 +152,45 @@
 
   <!--编辑用户的基本信息-->
   <update id="modifyUserInfo" parameterType="map">
-
+    update user_info
+    <set>
+      <if test="username != null">
+        username = #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        password = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="startTime != null">
+        start_time = #{startTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="stopTime != null">
+        stop_time = #{stopTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastUpdatedBy != null">
+        last_updated_by = #{lastUpdatedBy,jdbcType=CHAR},
+      </if>
+      <if test="lastUpdateDate != null">
+        last_update_date = #{lastUpdateDate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
   </update>
 
   <!--修改用户状态-->
   <update id="modifyUserStatus">
-
+    update user_info
+    <set>
+      <if test="status != null">
+        status = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="lastUpdatedBy != null">
+        last_updated_by = #{lastUpdatedBy,jdbcType=CHAR},
+      </if>
+      <if test="lastUpdateDate != null">
+        last_update_date = #{lastUpdateDate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
   </update>
 
   <!--根据id查找用户全部信息-->
@@ -182,7 +215,8 @@
 
   <!--删除用户信息-->
   <delete id="deteleUserInfoById">
-
+    DELETE FROM user_info
+    WHERE id = #{id,jdbcType=VARCHAR}
   </delete>
 
   <!--查询用户密码-->

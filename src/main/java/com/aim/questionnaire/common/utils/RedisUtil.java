@@ -70,6 +70,15 @@ public class RedisUtil {
     public boolean persist(String key) {
         return redisTemplate.boundValueOps(key).persist();
     }
+
+    /**
+     * 删除指定key
+     * @param prex
+     */
+    public void deleteByPrex(String key) {
+        redisTemplate.delete(key);
+
+    }
  
     //- - - - - - - - - - - - - - - - - - - - -  String类型 - - - - - - - - - - - - - - - - - - - -
  
